@@ -65,7 +65,7 @@ if(type === 'posts')
           )}
       <p className='email' >{name}</p>
       {conf ? (
-            <img src={'http://localhost:8000/images/' + conf} alt='' />
+            <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
           ) : (
             <></>
           )}
@@ -134,7 +134,7 @@ else if(type === 'friends')
           
           <div className='gallery' key={conf}>
           <Link to={'/view/' + url}>
-          <img src={'http://localhost:8000/images/' + conf} alt='' />
+          <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
           </Link>
           </div>
           

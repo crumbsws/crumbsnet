@@ -347,6 +347,9 @@ button:active {
   font-weight: 600;
   text-decoration: 2px underline;
 }
+#navigator {
+  height: 30px;
+}
 #menu {
   height: 40px;
   padding-bottom: 0px;

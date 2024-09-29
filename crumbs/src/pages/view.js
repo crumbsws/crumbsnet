@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import BackNav from '../components/backnav.js';
 import Loading from '../components/loading.js';
 import Comments from '../components/comments.js';
 function View() { 
@@ -43,7 +44,7 @@ function View() {
 
     return  (
         <>
-        
+        <BackNav/>
         {data.map(({ name, title, url, body, date, conf, collect, parent }) =>(
       <>
       <div className='post' id='view' key={url}>
