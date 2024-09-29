@@ -67,7 +67,7 @@ function Comments(props) {
 
   return (
     <>
-    <div className='comment post'>
+    <div className='publish post'>
     <form method="post" onSubmit={handleSubmit}>
     <input type="text" name="comment" onChange={handlePostBody} placeholder='Leave a sprinkle...' required/>
     {displayPicture == null ? (<><input type="file" name="conf" id="conf" onChange={handlePostPicture}/><label htmlFor='conf' ><i class="fa-solid fa-image "></i></label></>) : (<><button id="conf" onClick={removeDisplayPicture}/><label htmlFor='conf' ><i class="fa-solid fa-xmark "></i></label></>)}

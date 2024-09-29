@@ -8,7 +8,7 @@ function Publish() {
     const [postCollect, setPostCollect] = useState('');
     const [postPhoto, setPostPhoto] = useState(null);
     const [displayPhoto, setDisplayPhoto] = useState(null);
-    const [message, setMessage] = useState('');
+    const [value, setValue] = useState('Submit');
 
 
     function removePostPhoto(){
@@ -37,7 +37,7 @@ function Publish() {
       }
       const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessage(<Loading />);
+        setValue(<Loading />);
 
         const formData = new FormData();
         formData.append('title', postTitle)
@@ -57,14 +57,14 @@ function Publish() {
             window.location.href = "/view/" + data.id;
           }
           else if(data.state === 'failed1'){
-            setMessage('Check your network, error code: 1');
+            setValue('Check your network, error code: 1');
           }
           else{
-            setMessage('Check your network, error code: 2');        
+            setValue('Check your network, error code: 2');        
           }
         }catch(err){
           console.log(err);
-          setMessage('An error occured');
+          setValue('An error occured');
 
         }
       }
@@ -73,6 +73,7 @@ function Publish() {
     <>
 
 <h2><i class="fa-solid fa-pen-to-square"></i> Publish Post</h2>
+  <div className='publish post'>
   <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
   <input type="text" name="title" id="title" placeholder="Post title" minLength="6" maxLength="28" onChange={handlePostTitle} required /><br/>
   <input type="text" name="body" id="body" placeholder="Post itself" minLength="10" maxLength="90"  onChange={handlePostBody} required /><br/>
@@ -81,10 +82,9 @@ function Publish() {
   <div>
   <img src={displayPhoto} alt=' ' />
   </div><br/>
-  <input type="submit" value="Submit"/>
+  <input type="submit" value={value}/>
   </form>
-  <p className='result'>{message}</p>
-  
+  </div>
 
 
 

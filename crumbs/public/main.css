@@ -520,19 +520,22 @@ font-size: larger;
 display: block;
 }
 
-.comment, .box {
+.publish, .box {
   margin: 20px;
   border-bottom: 1px solid var(--froutline);
   width: 450px;
   padding: 5px;
 }
-.comment input[type="text"], .box input[type="text"] {
+.publish:hover, .box:hover {
+  filter: opacity(1);
+}
+.publish input[type="text"], .box input[type="text"] {
   border: none;
   background: var(--bgmain);
   font-size: medium;
   width: 400px;
 }
-.comment input[type="submit"], .box input[type="submit"]{
+.publish input[type="submit"], .box input[type="submit"]{
   width: 450px;
 }
 .border-left {
@@ -546,10 +549,10 @@ display: block;
   .info {
     display: none;
   }
-  .comment input[type="text"], .box input[type="text"] {
+  .publish input[type="text"], .box input[type="text"] {
     width: 320px;
   }
-  .comment input[type="submit"], .box input[type="submit"] {
+  .publish input[type="submit"], .box input[type="submit"] {
     width: 320px;
   }
 
@@ -605,7 +608,7 @@ display: block;
 
     height: 360px;
   }
-  .comment input[type="text"] {
+  .publish input[type="text"] {
     width: 280px;
   }
   input[type="text"] {
@@ -645,7 +648,7 @@ display: block;
     border-left: 1px solid #1b1b1b;
     width: 320px;
   }
-  .comment {
+  .publish {
     width: 320px;
   }
 
