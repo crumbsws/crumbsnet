@@ -15,11 +15,11 @@ function setResponse($state, $url){
 }
 
 
-if (!empty($_POST['title']) && !empty($_POST['body']) && !empty($_POST['collect']) && !empty($_SESSION['user']) && !empty($_SESSION['user'])) {
+if (isset($_POST['title']) && !empty($_POST['body']) && isset($_POST['collect']) && !empty($_SESSION['user']) && !empty($_SESSION['user'])) {
 
 $directory = $_SERVER["DOCUMENT_ROOT"] . "/images/";
 
-if (!empty($_FILES['conf'])) {
+if (isset($_FILES['conf'])) {
     $file = $directory . basename($_FILES["conf"]["name"]);
     if (move_uploaded_file($_FILES["conf"]["tmp_name"], $file)) {
         $conf = $_FILES["conf"]["name"];
