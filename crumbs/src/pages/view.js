@@ -13,7 +13,7 @@ function View() {
     const getPostData = async () => {
         try
         {
-            const response = await fetch('http://localhost:8000/getpost.php', {
+            const response = await fetch(process.env.REACT_APP_API_URL + '/getpost.php', {
                 credentials: 'include',
                 method: 'POST',
                 credentials: 'include',
@@ -55,7 +55,7 @@ function View() {
       
       <Link to={'../people/' + name}><p>by <strong>{name}</strong></p></Link> <h4 className='email'><strong>{name}</strong> • {date} • {collect}</h4>
       {conf ? (
-            <img src={'http://localhost:8000/images/' + conf} alt='' />
+            <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
           ) : (
             <></>
           )}

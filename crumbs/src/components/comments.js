@@ -41,7 +41,7 @@ function Comments(props) {
       formData.append('parent', props.parent)
       formData.append('conf', postPicture)
       try{
-        const response = await fetch('http://localhost:8000/publish.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/publish.php', {
           credentials: 'include',
           method: 'POST',
           body: formData

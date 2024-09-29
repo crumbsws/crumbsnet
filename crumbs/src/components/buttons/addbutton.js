@@ -10,7 +10,7 @@ function AddButton(props) {
     setValue(<Loading />);
 
     try{
-      const response = await fetch('http://localhost:8000/adduser.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/adduser.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({

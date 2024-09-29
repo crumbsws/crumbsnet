@@ -23,7 +23,7 @@ function Login() {
     setMessage(<Loading />);
 
     try{
-      const response = await fetch('http://localhost:8000/login-m.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/login-m.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({

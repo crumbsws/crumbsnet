@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { getItem } from './utils.js';
 import Loading from './loading.js';
  function Display(props) {
-    const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
     const [data, setData] = useState([]);
     const [user, setUser] = useState('');
     const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ import Loading from './loading.js';
     async function fetchData() {
 
       try {
-        const response = await fetch( REACT_APP_API_URL+ '/display.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/display.php', {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify({

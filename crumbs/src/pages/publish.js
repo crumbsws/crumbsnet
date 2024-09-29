@@ -45,7 +45,7 @@ function Publish() {
         formData.append('collect', postCollect)
         formData.append('conf', postPhoto)
         try{
-          const response = await fetch('http://localhost:8000/publish.php', {
+          const response = await fetch(process.env.REACT_APP_API_URL + '/publish.php', {
             credentials: 'include',
             method: 'POST',
             body: formData

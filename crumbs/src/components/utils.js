@@ -2,7 +2,7 @@
 export async function fetchProfile(user, setData) {
     
     try{
-      const response = await fetch('http://localhost:8000/getprofile.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getprofile.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
@@ -23,7 +23,7 @@ export async function doSearch(query, type, setData) {
   try
   {
       
-      const response = await fetch('http://localhost:8000/search.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/search.php', {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify({
@@ -45,7 +45,7 @@ export async function getItem(item, setItem, setLoading){
   try
   {
       
-      const response = await fetch('http://localhost:8000/get.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/get.php', {
           credentials: 'include',
           method: 'POST',
           credentials: 'include',
@@ -68,7 +68,7 @@ export async function getRequests(type, setData){
   try
   {
       
-      const response = await fetch('http://localhost:8000/getrequests.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getrequests.php', {
           credentials: 'include',
           method: 'POST',
           credentials: 'include',

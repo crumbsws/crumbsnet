@@ -12,7 +12,7 @@ function Sidebar() {
 
     const fetchTrends = async () => {
       try {
-        const response = await fetch('http://localhost:8000/trends.php');
+        const response = await fetch(process.env.REACT_APP_API_URL + '/trends.php');
         const json = await response.json();
         setTrends(json);
       } catch (error) {

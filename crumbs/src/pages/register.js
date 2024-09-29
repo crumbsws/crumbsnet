@@ -18,7 +18,7 @@ function Login() {
     setMessage(<Loading />);
 
     try{
-      const response = await fetch('http://localhost:8000/register-m.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/register-m.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({

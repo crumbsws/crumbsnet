@@ -10,7 +10,7 @@ import Loading from '../loading';
     async function fetchdata() {
       let type = 'clubs';
       try {
-        const response = await fetch('http://localhost:8000/display.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/display.php', {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify({

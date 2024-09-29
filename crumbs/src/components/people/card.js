@@ -10,7 +10,7 @@ import Loading from '../loading.js';
     var user = props.user;
     async function fetchClub() {
       try {
-        const response = await fetch('http://localhost:8000/getclub.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/getclub.php', {
           method: 'POST',
           credentials: 'include',
           body: JSON.stringify({

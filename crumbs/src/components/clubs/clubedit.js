@@ -31,7 +31,7 @@ function ClubEdit() {
       formData.append('description', clubDescription)
       formData.append('card', clubCard)
       try{
-        const response = await fetch('http://localhost:8000/updateclub.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/updateclub.php', {
           method: 'POST',
           credentials: 'include',
           body: formData
