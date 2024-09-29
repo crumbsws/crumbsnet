@@ -28,66 +28,59 @@ import Main from './pages/people/main.js';
 import Cards from './pages/people/cards.js';
 import Friends from './pages/people/friends.js';
 
+import PrivateRoute from './privateroute.js';
 
 export default function App() {
   const state = sessionStorage.getItem('loggedin');
-if(state === null){//bypassable, use a name instead
+//bypassable, use a name instead
     return(
-      
+ <>     
     <BrowserRouter>
         <Routes>
         <Route path="/" element={<Header />}>
-        <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Err />} />
         <Route path="/contributors" element={<Contributors />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/center" element={<Login />} />
         <Route path="/tos" element={<Tos />} />
-        </Route>
-        </Routes>
-      </BrowserRouter>
-      );
-    }
-    else {
-    return(
+
       
-    <BrowserRouter>
-        <Routes>
-        <Route path="/" element={<Header />}>
-        <Route index element={<Center />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Err />} />
-        <Route path="/contributors" element={<Contributors />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/publish" element={<Publish />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/view/:id" element={<View />} />
-        <Route path="/notifications" element={<Notifications />} />
+    
+    
+    
+      
 
-        <Route path="/people/:people" element={<People />} >
-          <Route index element={<Main />} />
-          <Route path='cards' element={<Cards />} />
-          <Route path='friends' element={<Friends />} />    
+        
+        <Route index element={<PrivateRoute><Center /></PrivateRoute>} />
+        <Route path="/publish" element={<PrivateRoute><Publish /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/view/:id" element={<PrivateRoute><View /></PrivateRoute>} />
+        <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
+
+        <Route path="/people/:people" element={<PrivateRoute><People /></PrivateRoute>} >
+          <Route index element={<PrivateRoute><Main /></PrivateRoute>} />
+          <Route path='cards' element={<PrivateRoute><Cards /></PrivateRoute>} />
+          <Route path='friends' element={<PrivateRoute><Friends /></PrivateRoute>} />    
         </Route>
 
-        <Route path="/discover/:value?" element={<Discover />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tos" element={<Tos />} />
+        <Route path="/discover/:value?" element={<PrivateRoute><Discover /></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
 
-        <Route path="/clubs/:club?" element={<Clubs />} >
-          <Route index element={<Club />} />
-          <Route path='box' element={<Box />} />
-          <Route path='gallery' element={<ClubGallery />} />
+        <Route path="/clubs/:club?" element={<PrivateRoute><Clubs /></PrivateRoute>} >
+          <Route index element={<PrivateRoute><Club /></PrivateRoute>} />
+          <Route path='box' element={<PrivateRoute><Box /></PrivateRoute>} />
+          <Route path='gallery' element={<PrivateRoute><ClubGallery /></PrivateRoute>} />
         </Route>
 
         </Route>
+        
         </Routes>
       </BrowserRouter>
-      );
+      </>
+    );
     }
   
-  }
+  
 
 
 
