@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Login from './pages/login.js';
 import Header from './pages/header.js';
 import Contributors from './pages/contributors.js';
-import Home from './pages/home.js';
 import Err from './pages/404.js';
 import Register from './pages/register.js';
 import Center from './pages/center.js';
@@ -31,7 +30,6 @@ import Friends from './pages/people/friends.js';
 import PrivateRoute from './privateroute.js';
 
 export default function App() {
-  const state = sessionStorage.getItem('loggedin');
 //bypassable, use a name instead
     return(
  <>     

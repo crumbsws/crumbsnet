@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../redux/reducers/user.js';
 import store from '../redux/store.js';
 import Loading from '../components/loading.js';
+import Home from '../components/home.js';
 
 function Login() {
   const dispatch = useDispatch();
@@ -48,9 +49,7 @@ function Login() {
 
   }
     return  <>
-    <h2>
-      <i className="fa-solid fa-pen-to-square" /> Login
-    </h2>
+    <Home/>
     <form method="post" onSubmit={handleSubmit} >
       <input
         type="text"
@@ -64,7 +63,7 @@ function Login() {
       <br />
       <input type="password" name="password" placeholder="Password" value={userPass} onChange={handleUserPass}/>
       <br />
-      <input type="submit" placeholder="Login" />
+      <input type="submit" value="Login" />
     </form>
     <p className='result'>{message}</p>
     <p>New to crumbs? | <Link to="/register">Register</Link></p>

@@ -1,6 +1,8 @@
 import Loading from '../components/loading.js';
 import React, { useState } from "react";
 import{ Link } from "react-router-dom";
+import Home from '../components/home.js';
+
 
 function Login() {
   const [userPass, setUserPass] = useState('');
@@ -42,14 +44,12 @@ function Login() {
 
   }
     return  <>
-    <h2>
-      <i className="fa-solid fa-pen-to-square" /> Register
-    </h2>
+    <Home />
     <form method="post" onSubmit={handleSubmit} >
       <input
         type="text"
         name="user"
-        placeholder="Username / Mail"
+        placeholder="Username"
         minLength={3}
         maxLength={16}
         value={userName}
@@ -60,7 +60,7 @@ function Login() {
       <br />
       <p>I accept the <Link to="/tos"><strong>Terms of Service</strong></Link> of Crumbs</p>
       <br />
-      <input type="submit" placeholder="Register" />
+      <input type="submit" value="Register" />
     </form>
       <p className='result'>{message}</p>
     <p>Have an account? | <Link to="/login">Login</Link></p>

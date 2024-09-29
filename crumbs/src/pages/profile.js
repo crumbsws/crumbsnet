@@ -116,7 +116,7 @@ return (
 </form><br/>
 <Link to='/dashboard'><p className='call-to-act'>Club Dashboard </p></Link><br/>
 <Link to='/tos'><p className='call-to-act'>Terms of Service</p></Link><br/>
-<p>Running <strong>Crumbs PrimeraVista v1.0.0</strong></p>
+<p>Running <strong>{process.env.REACT_APP_VERSION}</strong></p>
 </>
   ))}
   </>

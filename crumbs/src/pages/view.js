@@ -48,8 +48,16 @@ function View() {
         {data.map(({ name, title, url, body, date, conf, collect, parent }) =>(
       <>
       <div className='post' id='view' key={url}>
+
+
+      
+      <meta name="author" content={name} />
+
+
       {title !== '' ? (
+              <>
               <h2 id='big'>{title}</h2> 
+              </>
           ) : (
             <></>
           )}
