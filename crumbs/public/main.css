@@ -351,9 +351,13 @@ button:active {
   height: 30px;
 }
 #menu {
-  height: 40px;
+  height: 50px;
   padding-bottom: 0px;
   display: flex;
+  position: sticky;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  top: 0;
+  z-index: 1;
   justify-content: center;
   background: var(--bgmain);
   gap: 80px;
