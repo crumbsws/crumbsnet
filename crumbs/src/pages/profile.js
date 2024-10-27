@@ -101,7 +101,7 @@ return (
 <img id='rounded' src={displayPhoto} alt=' ' />
 <br/>
 
-      {Uploader(displayPhoto, handleProfilePhoto, removeProfilePhoto)}
+      {Uploader(displayPhoto, handleProfilePhoto, removeProfilePhoto)}<br />
 
 <input type="text" placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription}/><br/>
 <input type="text" placeholder={home === '' ? ('School / College / University') : (home)} onChange={handleHome}/><br/>

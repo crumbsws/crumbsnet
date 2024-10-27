@@ -54,6 +54,10 @@ export async function getItem(item, setItem, setLoading){
             })
         });
       const data = await response.json();
+      const state = sessionStorage.getItem('loggedin');
+      if(item === 'user' && data.length > 0 && state === null){
+	sessionStorage.setItem('loggedin', true);
+	}
       setItem(data);
       setLoading(false);
      

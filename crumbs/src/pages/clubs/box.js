@@ -35,7 +35,8 @@ function Box() {
         
 
         if(data.state === 'success') {
-          setValue('Note Added')
+          setValue('Note Added');
+	  setNote('');
         }
       }catch(err){
         console.log(err);

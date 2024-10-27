@@ -27,6 +27,10 @@ function SideNav() {
         Crumbs 
         </Link>
 
+        <Link to='/direct'>
+        <i class="fa-solid fa-message"></i> Messages
+        </Link>
+
         <Link to='/clubs/'>
         <i class="fa-solid fa-clipboard"></i> Explore Clubs
         </Link>

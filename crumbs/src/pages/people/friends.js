@@ -17,7 +17,9 @@ function Friends() {
     getItem('requests', setData, setLoadingSent);
   }, [people])
 
- 
+  const hasSentRequest = data.some(request => 
+    (request[1] === user && request[2] === people) || (request[1] === people && request[2] === user)
+  ); 
 
   if( loadingUser || loadingSent ){
     return (
@@ -28,7 +30,7 @@ function Friends() {
   {
   return  (
   <>
-  {user === people || data.length !== 0 ? (<></>) : (
+  {user === people || hasSentRequest ? (<></>) : (
     
     <div className='post'>
     <p>Send a friend request to this user.</p>

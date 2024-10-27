@@ -7,9 +7,23 @@ import SideBar from '../components/sidebar.js';
 import { getItem } from '../components/utils.js';
 const Header = () => {
   const [user, setUser] = useState('');
+  const [data, setData] = useState([]);
+
+
+   function getRequests(data){
+        var requests = Number.parseInt(localStorage.getItem('requests'));
+        if(data.length > requests){
+        return true;
+	} else {
+	return false;
+	}}
+
   useEffect(() => {
     getItem('user', setUser);
+    getItem('requests', setData);
   }, [])
+
+
   const state = sessionStorage.getItem('loggedin');
   if(state === null){
     return (
@@ -48,10 +62,10 @@ Crumbs
                 <Outlet />
                   </div>
                   </>
-			   );
-			}
-	else {
-	return (
+                           );
+                        }
+        else {
+        return (
     <>
 <div className="header" id="header">
 <ul>
@@ -76,9 +90,18 @@ Crumbs
  Discover
  </Link>
  <Link to="/notifications">
+{!getRequests(data) ? (
 <i class="fa-solid fa-heart"></i>
+) : (
+<i class="fa-solid fa-heart fa-bounce"></i>
+)
+}
  Notifications
 </Link>
+<Link to="/direct">
+<i class="fa-solid fa-message"/>
+ Messages
+ </Link>
 <Link to="/">
 <i className="fa-solid fa-house"></i>
  Home
@@ -87,17 +110,17 @@ Crumbs
           </li>
           </ul>
           </div>
-       
+
         <BottomNav />
         <div className="main" id="main">
         <SideBar />
       <Outlet />
         </div>
           </>
-	);
+        );
   }
 
-        
+
     
 };
 export default Header;

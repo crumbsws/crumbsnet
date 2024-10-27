@@ -6,7 +6,7 @@ function Discover() {
   const { value } = useParams();
   const [type, setType] = useState('post');
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState(value);
+  const [query, setQuery] = useState(value || "");
   useEffect(() => {
       doSearch(query, type, setData)
     }, [query, type])
@@ -38,7 +38,7 @@ function Discover() {
           </select>
         </form>
     
-        {data.length === 0 ? (
+        {data.length === 0 || query === '' ? (
           <Display type='posts' parent='public' />
         ) : (
           <>
@@ -67,7 +67,7 @@ function Discover() {
                         <strong>{name}</strong> • {date} • {collect}
                       </h4>
                       {conf && (
-                        <img src={`http://localhost:8000/images/${conf}`} alt='' />
+                        <img src={process.env.REACT_APP_API_URL + `/images/${conf}`} alt='' />
                       )}
                       <p>{body}</p>
                     </div>

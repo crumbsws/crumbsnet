@@ -18,6 +18,7 @@ import Clubs from './pages/clubs.js';
 import Tos from './pages/tos.js';
 import Dashboard from './pages/dashboard.js';
 import Notifications from './pages/notifications.js';
+import Direct from './pages/direct.js';
 
 import Club from './pages/clubs/club.js';
 import ClubGallery from './pages/clubs/clubgallery.js';
@@ -54,7 +55,7 @@ export default function App() {
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/view/:id" element={<PrivateRoute><View /></PrivateRoute>} />
         <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
-
+        <Route path="/direct/:channel?" element={<PrivateRoute><Direct /></PrivateRoute>} />
         <Route path="/people/:people" element={<PrivateRoute><People /></PrivateRoute>} >
           <Route index element={<PrivateRoute><Main /></PrivateRoute>} />
           <Route path='cards' element={<PrivateRoute><Cards /></PrivateRoute>} />

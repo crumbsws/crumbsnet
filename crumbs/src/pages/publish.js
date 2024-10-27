@@ -6,6 +6,7 @@ function Publish() {
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
     const [postCollect, setPostCollect] = useState('');
+    const [postAccess, setPostAccess] = useState('');
     const [postPhoto, setPostPhoto] = useState(null);
     const [displayPhoto, setDisplayPhoto] = useState(null);
     const [value, setValue] = useState('Submit');
@@ -24,6 +25,11 @@ function Publish() {
       function handlePostCollect(e){
         setPostCollect(e.target.value);
       }
+
+      function handlePostAccess(e){
+        setPostAccess(e.target.value);
+      }
+
       function handlePostPhoto(e){
         const file = e.target.files[0];
         if(file) {
@@ -43,6 +49,7 @@ function Publish() {
         formData.append('title', postTitle)
         formData.append('body', postBody)
         formData.append('collect', postCollect)
+        formData.append('access', postAccess)
         formData.append('conf', postPhoto)
         try{
           const response = await fetch(process.env.REACT_APP_API_URL + '/publish.php', {
@@ -75,10 +82,17 @@ function Publish() {
 <h2><i class="fa-solid fa-pen-to-square"></i> Publish Post</h2>
   <div className='publish post'>
   <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-  <input type="text" name="title" id="title" placeholder="Post title" minLength="6" maxLength="28" onChange={handlePostTitle} required /><br/>
-  <input type="text" name="body" id="body" placeholder="Post itself" minLength="10" maxLength="90"  onChange={handlePostBody} required /><br/>
+  <input type="text" name="title" id="title" placeholder="Post title" minLength="3" maxLength="28" onChange={handlePostTitle} required /><br/>
+  <input type="text" name="body" id="body" placeholder="Post itself" minLength="10" maxLength="120"  onChange={handlePostBody} required /><br/>
   <input type="text" name="collect" id="collect" placeholder="Collection Name" maxLength="16"  onChange={handlePostCollect} required /><br/>
-  {Uploader(displayPhoto, handlePostPhoto, removePostPhoto)}<br/><br/><br/>
+  {Uploader(displayPhoto, handlePostPhoto, removePostPhoto)}
+
+  <select onChange={handlePostAccess} id='access'> 
+<option value="public">Public</option>
+<option value="friends">Friends</option>
+</select>
+
+
   <div>
   <img src={displayPhoto} alt=' ' />
   </div><br/>

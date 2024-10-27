@@ -18,7 +18,7 @@ function Center() {
                   <Link to="/publish"><button>Publish</button></Link>
                   </div>
 
-                <Display type='posts'/>
+                <Display type='posts' />
               </>
             )
         

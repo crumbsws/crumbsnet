@@ -59,11 +59,14 @@ if(type === 'posts')
       <Link to={"/view/" + url} key={url}>
       <div className='post'>
       {title !== '' ? (
+		<>
               <h2>{title}</h2> 
+              <p className='email' >{name}</p>
+		</>
           ) : (
-            <Link to={"/people/" + name} ><p>Reply from <strong>{name}</strong></p></Link>
+            <p className='email' >Reply from {name}</p>
           )}
-      <p className='email' >{name}</p>
+      
       {conf ? (
             <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
           ) : (

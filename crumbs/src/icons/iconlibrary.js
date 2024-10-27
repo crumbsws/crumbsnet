@@ -5,7 +5,7 @@ function Icons(props) {
     const icon = props.icon;
     if(icon === 'point')
     return (
-              <img src='http://localhost:8000/site-images/point.png' className="font"/>
+              <img src={process.env.REACT_APP_API_URL + '/site-images/point.png'} className="font"/>
             )
         
     };
