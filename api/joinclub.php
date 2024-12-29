@@ -24,7 +24,7 @@ if(!empty($data['club']) && !empty($_SESSION['user']))
     $club = $data['club'];
     $user = $_SESSION['user'];
     setClub($conn, $user, $club);
-    $state = 'success' . $club;
+    $state = 'success' ;
     $message = 'Joined' ;
     setResponse($state, $club, $message);
     

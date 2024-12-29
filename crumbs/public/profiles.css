@@ -1,0 +1,23 @@
+.rounded {
+    border-radius: 50% !important;
+    border: 2px solid var(--bgthird);
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  #xs {
+    width: 35px;
+    height: 35px;
+  }
+#s {
+    width: 70px;
+    height: 70px;
+  }
+#m {
+    width: 100px;
+    height: 100px;
+  }
+#l {
+    width: 145px;
+    height: 145px;
+  }

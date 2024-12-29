@@ -1,26 +1,42 @@
 import { useState } from "react";
-function Popup(props) {
+import ReactDOM from 'react-dom';
+export function Popup(props) {
+
+    const { children, status, bottom, Change } = props;
+
+      //finish this first, then reply and socket notifications for messages
+      if (!status) return null;
+
+      return ReactDOM.createPortal(
+          <div className='modal' id="modal" onClick={() => Change()}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                  {children}
+                  <p className="email">{bottom}</p>
+              </div>
+          </div>,
+          document.body // This renders the modal directly in the body
+      );
+
+    
+};
+
+export function PopupTrigger(props) {
+
+    const { children, content, bottom } = props;
+
     const [status, setStatus] = useState(false);
-    const toggle = localStorage.getItem(props.id);
     function Change(){
         setStatus(!status);
     }
-    
-      
-if(toggle === 'false' && status === true) {
+     
     return (
-        <div className='modal' id="modal" style={status ? ({ display:'block'}) : ({display : 'none'})}>
-            <div className="modal-content">
-                <span onClick={Change}><i class="fa-solid fa-xmark"></i></span>
-                <p>{props.children}</p>
-                <img src={props.src} />
-                <button onClick={Change}>Alright</button>
-                <p className="email">{props.bottom}</p>
-            </div>
+        <>
+        <div onClick={Change}>
+            { children }
         </div>
-    );
-
-    }
+        <Popup status={status} Change={Change} bottom={bottom}>{content}</Popup>
+        </>
+        )
+   
 };
 
-export default Popup;

@@ -1,5 +1,5 @@
 
-export async function fetchProfile(user, setData) {
+export async function getProfile(user, setData) {
     
     try{
       const response = await fetch(process.env.REACT_APP_API_URL + '/getprofile.php', {
@@ -41,24 +41,18 @@ catch(err)
 } 
 }
 
-export async function getItem(item, setItem, setLoading){
+export async function getClub(setData, setLoading){
   try
   {
       
-      const response = await fetch(process.env.REACT_APP_API_URL + '/get.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getClub.php', {
           credentials: 'include',
           method: 'POST',
-          credentials: 'include',
-          body: JSON.stringify({
-              item: item
-            })
+          credentials: 'include'
         });
       const data = await response.json();
-      const state = sessionStorage.getItem('loggedin');
-      if(item === 'user' && data.length > 0 && state === null){
-	sessionStorage.setItem('loggedin', true);
-	}
-      setItem(data);
+      setData(data);
+      
       setLoading(false);
      
 }
@@ -68,20 +62,40 @@ catch(err)
 } 
 }
 
-export async function getRequests(type, setData){
+export async function getOwnedClub(setData, setLoading){
+  try
+  {
+      
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getClub.php?ownedBy=true', {
+          credentials: 'include',
+          method: 'POST',
+          credentials: 'include'
+        });
+      const data = await response.json();
+      setData(data);
+      
+      setLoading(false);
+     
+}
+catch(err)
+{
+  console.log(err);
+} 
+}
+
+export async function getRequests( setData, setLoading){
   try
   {
       
       const response = await fetch(process.env.REACT_APP_API_URL + '/getrequests.php', {
           credentials: 'include',
           method: 'POST',
-          credentials: 'include',
-          body: JSON.stringify({
-              type: type
-            })
+          credentials: 'include'
         });
       const data = await response.json();
       setData(data);
+
+      setLoading(false);
      
 }
 catch(err)

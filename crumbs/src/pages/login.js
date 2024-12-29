@@ -1,17 +1,17 @@
 
 import React, { useState } from "react";
-import{ Link } from "react-router-dom";
+import{ Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../redux/reducers/user.js';
-import store from '../redux/store.js';
 import Loading from '../components/loading.js';
-import Home from '../components/home.js';
+import { store } from "../redux/store.js";
+import { setUserData, setUserClubs } from '../redux/reducers/user.js';
 
 function Login() {
   const dispatch = useDispatch();
   const [userPass, setUserPass] = useState('');
   const [userName, setUserName] = useState('');
   const [message, setMessage] = useState('');
+  let navigate = useNavigate();
 
   function handleUserName(e){
     setUserName(e.target.value);
@@ -35,8 +35,9 @@ function Login() {
       const data = await response.json();
       if(data.state === 'loggedin'){
         sessionStorage.setItem('loggedin', true);
-        dispatch(setUser(userName));
-        window.location.href = "/";
+        store.dispatch(setUserData(data.data));
+        store.dispatch(setUserClubs(data.clubs));
+        navigate('/');
       }
       else {
         setMessage(data.message);
@@ -49,7 +50,8 @@ function Login() {
 
   }
     return  <>
-    <Home/>
+    
+    <h1>Login</h1>
     <form method="post" onSubmit={handleSubmit} >
       <input
         type="text"

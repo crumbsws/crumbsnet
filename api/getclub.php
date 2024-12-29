@@ -5,15 +5,18 @@ include('connector.php');
 session_start();
 include('library.php');
 
-$json = file_get_contents('php://input');
-$data = json_decode($json, true);
-
-if(isset($data['user']))
-{
-    $user = $data['user'];
+    $user = $_SESSION['user'];
+  if(isset($_GET['ownedBy']) && $_GET['ownedBy'] === 'true') {
+    $data = getOwnedClub($conn, $user);
+  }
+  else if(isset($_GET['user'])){
+    $user = $_GET['user'];
     $data = getClub($conn, $user);
-
+  }
+  else {
+$data = getClub($conn, $user);
 }
+
 echo (json_encode($data));
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Display from '../components/display.js';
 import { getItem } from '../components/utils.js';
-import Popup from '../components/popup.js';
+
 import { Link } from 'react-router-dom';
 
 function Center() {

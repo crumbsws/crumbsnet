@@ -24,7 +24,7 @@ if(isset($data['user']))
       $sql = "SELECT * FROM requests WHERE sender = '$sender' AND receiver = '$receiver'";
       $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) === 0) {
-      $sql = "INSERT INTO requests (sender, receiver, status, date) VALUES ('$sender', '$receiver', 'pending', '$date')";
+      $sql = "INSERT INTO requests (sender, receiver, status, date) VALUES ('$sender', '$receiver', 'unseen', '$date')";
       mysqli_query($conn, $sql);
       $message = 'Sent to ' . $sender;
       $state = 'success';

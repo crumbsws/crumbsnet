@@ -1,34 +1,41 @@
 import Display from './display.js';
-import { useState, useEffect } from 'react'
-import { getItem } from '../components/utils.js';
+import { useState} from 'react'
+import Uploader from './buttons/uploader.js';
 import Loading from '../components/loading.js';
+import { useNavigate } from 'react-router-dom';
 function Comments(props) {
 {
   
-  const [postPicture, setPostPicture] = useState(null);
+  const [postPhoto, setPostPhoto] = useState(null);
   const [message, setMessage] = useState('');
   const [postBody, setPostBody] = useState('');
-  const [displayPicture, setDisplayPicture] = useState(null);
+  const [displayPhoto, setDisplayPhoto] = useState(null);
+  const [postAccess, setPostAccess] = useState('');
+  let navigate = useNavigate();
 
-    function removeDisplayPicture(){
-      setDisplayPicture(null);
-      setPostPicture(null);
+    function removePostPhoto(){
+      setDisplayPhoto(null);
+      setPostPhoto(null);
     }
     function handlePostBody(e){
       setPostBody(e.target.value);
     }
-    function handlePostPicture(e){
+    function handlePostAccess(e){
+      setPostAccess(e.target.value);
+    }
+    function handlePostPhoto(e){
       const file = e.target.files[0];
       if(file) {
           const reader = new FileReader();
           reader.onloadend = () => {
-              setDisplayPicture(reader.result);
+              setDisplayPhoto(reader.result);
           }
           reader.readAsDataURL(file);
-          setPostPicture(file);
+          setPostPhoto(file);
           
       }
     }
+    
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -38,8 +45,9 @@ function Comments(props) {
       formData.append('title', '')
       formData.append('body', postBody)
       formData.append('collect', props.collect)
+      formData.append('access', postAccess)
       formData.append('parent', props.parent)
-      formData.append('conf', postPicture)
+      formData.append('conf', postPhoto)
       try{
         const response = await fetch(process.env.REACT_APP_API_URL + '/publish.php', {
           credentials: 'include',
@@ -50,7 +58,8 @@ function Comments(props) {
         
 
         if(data.state === 'success') {
-          window.location.href = "/view/" + data.id;
+          navigate('/view/' + data.id);
+          setMessage('');
         }
         else if(data.state === 'failed1'){
           setMessage('Check your network, error code: 1');
@@ -68,10 +77,23 @@ function Comments(props) {
   return (
     <>
     <div className='publish post'>
-    <form method="post" onSubmit={handleSubmit}>
-    <input type="text" name="comment" onChange={handlePostBody} placeholder='Leave a sprinkle...' required/>
-    {displayPicture == null ? (<><input type="file" name="conf" id="conf" onChange={handlePostPicture}/><label htmlFor='conf' ><i class="fa-solid fa-image "></i></label></>) : (<><button id="conf" onClick={removeDisplayPicture}/><label htmlFor='conf' ><i class="fa-solid fa-xmark "></i></label></>)}
-    <img src={displayPicture} alt=' ' />
+    <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
+    <input type="text" name="comment" onChange={handlePostBody} value={postBody} placeholder='Leave a sprinkle...' required/>
+
+    <div>
+  {Uploader(displayPhoto, handlePostPhoto, removePostPhoto)}
+            <select onChange={handlePostAccess} id='access'>
+            
+              <option value="public">Public</option>
+              <option value="friends">Friends</option>
+            </select>
+            </div>
+
+          <div>
+            {displayPhoto ? <img src={displayPhoto} alt=' ' /> : <></>}
+          </div>
+
+
     <input type="submit" name="" value="Post" />
     </form>
     <p className='result'>{message}</p>

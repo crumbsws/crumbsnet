@@ -3,12 +3,12 @@ include('connector.php');
 include('library.php');
 session_start();
 
-function setResponse($state, $message, $user = []){
+function setResponse($state, $message, $data){
     $response = 
     [
         'state' => $state,
         'message' => $message,
-        'user' => $user
+        'data' => $data
     ];
     echo (json_encode($response)); 
 }
@@ -30,7 +30,14 @@ if(!empty($data['user']) && !empty($data['password']))
     $_SESSION['user'] = $user;
     $message = 'Created account';
     $state = 'loggedin';
-    setResponse($state, $message, $_SESSION['user']);
+
+    $sql = "SELECT * FROM profile WHERE name='$user'";
+    if($result = mysqli_query($conn, $sql)){
+      while ($row = mysqli_fetch_assoc($result)) {
+          $data[] = $row;
+      }}
+
+    setResponse($state, $message, $data);
 
 
   }

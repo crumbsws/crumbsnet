@@ -48,7 +48,7 @@ $user = $_SESSION['user'];
 
 $url = uniqid();
 $body = mysqli_real_escape_string($conn, $_POST['body']);
-$date = date("Y-m-d h:i:sa");
+$date = date("Y-m-d h:i");
 if(!empty($_POST['parent'])){
     $parent = $_POST['parent'];
 }

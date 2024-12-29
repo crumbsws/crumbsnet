@@ -1,16 +1,16 @@
 import Loading from "../loading.js";
-import { useEffect, useState } from 'react'
-import { getItem } from "../utils.js";
-function ClubButton(props) {
-    const [loading, setLoading] = useState(true);
-    const [club, setClub] = useState('');
-    const [value, setValue] = useState('Switch');
-    useEffect(() => {
-        getItem('club', setClub, setLoading);
-      }, [])
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
 
-    const clubProp = props.club;
-    const name = club.length > 0 ? club[0].name : null;
+
+function ClubButton(props) {
+    const [value, setValue] = useState('Join');
+
+    const club = props.club;
+    
+    const currentClubs =  useSelector((state) => state.user.clubs);
+    const dispatch = useDispatch();
+    const isClubJoined = Object.values(currentClubs).some(obj => obj.name === club);
 
     async function handleJoin() {
         setValue(<Loading />);
@@ -20,12 +20,14 @@ function ClubButton(props) {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
-              club: clubProp
+              club: club
             })
           });
           const data = await response.json();
           if(data.state === 'success'){
+
             setValue('Joined');
+            
           }
           else {
             setValue(data.message);
@@ -37,18 +39,18 @@ function ClubButton(props) {
         }
     }
 
-if(!loading) {
+
 return (
     <>
-    {clubProp === name && club.length !== 0 ? (<></>) : (
+    {isClubJoined  ? (<></>) : (
     <div className='post'>
-    <p>Is <strong>{clubProp}</strong> the right club for you?</p>
+    <p>Is <strong>{club}</strong> the right club for you?</p>
     <button onClick={handleJoin}>{value}</button>
     </div>
     )}
     </>
 )
-}
+
 };
 
 export default ClubButton;

@@ -11,13 +11,14 @@ function setResponse($state, $message){
     echo (json_encode($response));
   }
 
-if(!empty($_POST['note'])) 
+if(!empty($_POST['note']) && !empty($_POST['club'])) 
 {
     $user = $_SESSION['user'];
     $amount = 1;
-    $date = date("Y-m-d h:i:sa");
+    $date = date("Y-m-d h:i");
     $note = mysqli_real_escape_string($conn, $_POST['note']);
-    $sql = "INSERT INTO gossip (name, note, date) VALUES ('$user', '$note', '$date')";
+    $club = mysqli_real_escape_string($conn, $_POST['club']);
+    $sql = "INSERT INTO gossip (name, note, club, date) VALUES ('$user', '$note', '$club', '$date')";
     if(mysqli_query($conn, $sql)){
     $state= 'success';
     $message= 'Note Sent';

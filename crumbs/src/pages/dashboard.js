@@ -1,24 +1,20 @@
 import ClubSetup from '../components/clubs/clubsetup.js';
 import { useEffect, useState } from 'react';
-import { getItem } from '../components/utils.js';
-import Popup from '../components/popup.js';
+import { getOwnedClub } from '../components/utils.js';
 import Loading from '../components/loading.js';
 import ClubEdit from '../components/clubs/clubedit.js';
+import { useSelector } from 'react-redux';
 
 function Dashboard() {
-    const [loadingClub, setLoadingClub] = useState(true);
-    const [loadingUser, setLoadingUser] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [club, setClub] = useState([]);
-    const [user, setUser] = useState('');
+    const user =  useSelector((state) => state.user.data[0].name);
     useEffect(() => {
-        getItem('club', setClub, setLoadingClub);
-        getItem('user', setUser, setLoadingUser);
+        getOwnedClub(setClub, setLoading);
       }, [])
 
 
-    const founder = club.length > 0 ? club[0].founder : null;
-
-    if( loadingClub || loadingUser){
+    if( loading ){
       return (
         <Loading />
           
@@ -29,14 +25,14 @@ function Dashboard() {
     { 
   return  (
   <>
-    {user === founder ? //its null getItem only brings the club name -f
+    {club.length !== 0 ? //its null getItem only brings the club name -f
         (
             <>
-            <ClubEdit />
+            <ClubEdit club={club} />
             </>
         ) : (
             <>
-            <Popup heading='New Feature' content='We added the clubs feature' bottom='Crumbs Dev Team' source='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmdyYzJkNGk2bWV2MmZtODNnZGUwNGhtZ2Y4eHlvZmZ1NWJ0M3NtbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/b2VxjMhx8nnjy/giphy.gif'/>
+           
             <ClubSetup/>
             {console.log(club)}
             

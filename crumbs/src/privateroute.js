@@ -5,7 +5,7 @@ const PrivateRoute = ({ children }) => {
   // Replace with actual auth logic
   const isAuthenticated = sessionStorage.getItem('loggedin');
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/welcome" />;
 };
 
 export default PrivateRoute;

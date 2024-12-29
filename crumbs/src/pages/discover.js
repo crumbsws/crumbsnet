@@ -38,8 +38,16 @@ function Discover() {
           </select>
         </form>
     
-        {data.length === 0 || query === '' ? (
-          <Display type='posts' parent='public' />
+        {data.length === 0 ? (
+          <>
+          {query === '' ? (
+            <Display type = 'posts' parent = 'public' />
+          ) : (
+            <></>
+          )
+          }
+          
+          </>
         ) : (
           <>
             {type === 'people' ? (

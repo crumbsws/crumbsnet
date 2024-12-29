@@ -1,6 +1,7 @@
 import{ useState } from "react";
 import Loading from '../components/loading.js';
 import Uploader from "../components/buttons/uploader.js";
+import { useNavigate } from "react-router-dom";
 
 function Publish() {
     const [postTitle, setPostTitle] = useState('');
@@ -10,7 +11,7 @@ function Publish() {
     const [postPhoto, setPostPhoto] = useState(null);
     const [displayPhoto, setDisplayPhoto] = useState(null);
     const [value, setValue] = useState('Submit');
-
+    let navigate = useNavigate();
 
     function removePostPhoto(){
       setDisplayPhoto(null);
@@ -61,7 +62,7 @@ function Publish() {
           
 
           if(data.state === 'success') {
-            window.location.href = "/view/" + data.id;
+            navigate('/view/' + data.id);
           }
           else if(data.state === 'failed1'){
             setValue('Check your network, error code: 1');
@@ -79,23 +80,26 @@ function Publish() {
     return (
     <>
 
-<h2><i class="fa-solid fa-pen-to-square"></i> Publish Post</h2>
+<h2><i class="fa-solid fa-wand-magic-sparkles"></i> Publish Post</h2>
   <div className='publish post'>
   <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-  <input type="text" name="title" id="title" placeholder="Post title" minLength="3" maxLength="28" onChange={handlePostTitle} required /><br/>
-  <input type="text" name="body" id="body" placeholder="Post itself" minLength="10" maxLength="120"  onChange={handlePostBody} required /><br/>
-  <input type="text" name="collect" id="collect" placeholder="Collection Name" maxLength="16"  onChange={handlePostCollect} required /><br/>
-  {Uploader(displayPhoto, handlePostPhoto, removePostPhoto)}
+  <input type="text" name="title" id="title" value={postTitle} placeholder="Post title" minLength="3" maxLength="28" onChange={handlePostTitle} required />
+  <input type="text" name="body" id="body" value={postBody} placeholder="Post itself" minLength="10" maxLength="120"  onChange={handlePostBody} required />
+  <input type="text" name="collect" id="collect" value={postCollect} placeholder="Collection Name" maxLength="16"  onChange={handlePostCollect} required />
 
-  <select onChange={handlePostAccess} id='access'> 
-<option value="public">Public</option>
-<option value="friends">Friends</option>
-</select>
+  <div>
+  {Uploader(displayPhoto, handlePostPhoto, removePostPhoto)}
+            <select onChange={handlePostAccess} id='access'>
+            
+              <option value="public">Public</option>
+              <option value="friends">Friends</option>
+            </select>
+            </div>
 
 
   <div>
-  <img src={displayPhoto} alt=' ' />
-  </div><br/>
+  {displayPhoto ? <img src={displayPhoto} alt=' ' /> : <></>}
+  </div>
   <input type="submit" value={value}/>
   </form>
   </div>

@@ -1,17 +1,15 @@
 <?php
 function createProfile($conn, $user, $points){
     $image = 'default.png';
-    $sql = "INSERT INTO profile (name, point, description, home, relation, club, photo) VALUES ('$user', '$points', '', '', '', '', '$image')";
+    $sql = "INSERT INTO profile (name, point, description, home, relation, photo) VALUES ('$user', '$points', '', '', '', '$image')";
     mysqli_query($conn, $sql);
   }
-  function getProfile($conn, $user, $element){
-    if($element === '*'){
-      $sql = "SELECT * FROM profile WHERE name='$user'";
-    }
-    else {
-      $sql = "SELECT '$element' FROM profile WHERE name='$user'";
-    }
-
+  function addPoint($conn, $user, $amount){
+    $sql = "UPDATE profile SET point = point + '$amount' WHERE name='$user'";
+    mysqli_query($conn, $sql);
+  }
+  function getClub($conn, $user){
+    $sql = "SELECT * FROM clubs WHERE name IN(SELECT club FROM club_user WHERE user='$user')";
     $result = mysqli_query($conn, $sql);
     $data = array();
     while($row = mysqli_fetch_array($result)) {
@@ -19,12 +17,8 @@ function createProfile($conn, $user, $points){
     }
     return $data;
   }
-  function addPoint($conn, $user, $amount){
-    $sql = "UPDATE profile SET point = point + '$amount' WHERE name='$user'";
-    mysqli_query($conn, $sql);
-  }
-  function getClub($conn, $user){
-    $sql = "SELECT * FROM clubs WHERE name=(SELECT club FROM profile WHERE name='$user')";
+  function getOwnedClub($conn, $user){
+    $sql = "SELECT * FROM clubs WHERE founder='$user'";
     $result = mysqli_query($conn, $sql);
     $data = array();
     while($row = mysqli_fetch_array($result)) {
@@ -33,7 +27,7 @@ function createProfile($conn, $user, $points){
     return $data;
   }
   function setClub($conn, $user, $club){
-    $sql = "UPDATE profile SET club='$club' WHERE name='$user'";
+    $sql = "INSERT IGNORE INTO club_user (user, club) VALUES ('$user', '$club')";
     mysqli_query($conn, $sql);
   }
   function createClub($conn, $name, $founder, $description, $card, $point){
@@ -59,6 +53,10 @@ function createProfile($conn, $user, $points){
     }
     return $data;
   }
+  function updateRequests($conn, $user){
+    $sql = "UPDATE requests SET status='pending' WHERE status='unseen' AND receiver='$user'";
+    mysqli_query($conn, $sql);
+  }
   function checkFriends($conn, $friend_1, $friend_2){  
   $sql = "SELECT * FROM friends WHERE (user_1='$friend_1' OR user_2='$friend_1') AND (user_1='$friend_2' OR user_2='$friend_2')";
   $result = mysqli_query($conn, $sql);
@@ -68,5 +66,14 @@ function createProfile($conn, $user, $points){
   else {
    return true;
   }
+}
+function getContacts($conn, $user){  
+  $sql = "SELECT url FROM channel_user WHERE user='$user'";
+  $result = mysqli_query($conn, $sql);
+  $data = array();
+  while($row = mysqli_fetch_array($result)) {
+    $data[] = $row;
+  }
+  return $data;
 }
 ?>

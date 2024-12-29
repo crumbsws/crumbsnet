@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react'
-import { fetchProfile } from '../components/utils.js';
-import { getItem } from '../components/utils.js';
+import { getProfile } from '../components/utils.js';
 import { Link } from 'react-router-dom';
-import Popup from '../components/popup.js';
+import { useNavigate } from 'react-router-dom';
+
 import Loading from '../components/loading.js';
 import Uploader from '../components/buttons/uploader.js';
+import { useSelector } from 'react-redux';
+import ProfilePicture from '../components/profilepicture.js';
+import { PopupTrigger } from '../components/popup.js';
+import { store } from '../redux/store.js';
+import { setUserData, setUserClubs } from '../redux/reducers/user.js';
+
+
 
 function Profile() {
   const [profileDescription, setProfileDescription] = useState('');
@@ -13,14 +20,31 @@ function Profile() {
   const [displayPhoto, setDisplayPhoto] = useState(null);
   const [profileRelationship, setProfileRelationship] = useState('');
   const [data, setData] = useState([]);
-  const [user, setUser] = useState('');
   const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+
+  const user =  useSelector((state) => state.user.data[0].name);
+  const userPhoto =  useSelector((state) => state.user.data[0].photo);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchProfile(user, setData);
-    getItem('user', setUser, setLoading);
+    getProfile(user, setData);
   }, [user])//olmaz bu böyle
+
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try{
+      await fetch(process.env.REACT_APP_API_URL + '/logout-m.php', {
+        credentials: 'include'
+      });
+      sessionStorage.clear();
+      store.dispatch(setUserData(null));
+      store.dispatch(setUserClubs(null));
+      navigate('/login');
+    }catch(err){
+      console.log(err);
+    }
+  }
 
 
   function handleDescription(e) {
@@ -78,8 +102,9 @@ function Profile() {
         setMessage('Check your network.')
       }
     }
+
 //Input defaultValue almıyor, veritabanı boşa çekiyor -çözdüm
-if( loading || data.length === 0){
+if(data.length === 0){
   return (
     <Loading />
       
@@ -98,24 +123,48 @@ return (
 
 
 <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-<img id='rounded' src={displayPhoto} alt=' ' />
-<br/>
+{displayPhoto ? <ProfilePicture src={displayPhoto} size='l' /> : <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + photo} size='l' />}
 
-      {Uploader(displayPhoto, handleProfilePhoto, removeProfilePhoto)}<br />
 
-<input type="text" placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription}/><br/>
-<input type="text" placeholder={home === '' ? ('School / College / University') : (home)} onChange={handleHome}/><br/>
+{Uploader(displayPhoto, handleProfilePhoto, removeProfilePhoto)}
+<p className='email'>Your profile image, gifs are allowed.</p>
+
+<input type="text" placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription}/>
+
+<p className='email'>Edit the description that will be displayed to people that are viewing your profile.</p>
+
+<input type="text" placeholder={home === '' ? ('School / College / University') : (home)} onChange={handleHome}/>
+
+<p className='email'>Which organisation you take place in. Displayed to filter out people with a similar name.</p>
+
 <select onChange={handleRelationship}>
 <option id='none' value="0">Relationship</option>
 <option value="yes">Single</option>
 <option value="no">In Relationship</option>
 <option value="weee">I have no idea</option>  
 </select>
+
+<p className='email'>Just an indicator to display if you are interested or not. No big deal.</p>
+
 <p className='result'>{message}</p>
 <input type='submit' value='Save'/>
-</form><br/>
-<Link to='/dashboard'><p className='call-to-act'>Club Dashboard </p></Link><br/>
-<Link to='/tos'><p className='call-to-act'>Terms of Service</p></Link><br/>
+</form>
+<Link to='/dashboard'><p className='call-to-act'>Club Dashboard </p></Link>
+<Link to='/tos'><p className='call-to-act'>Terms of Service</p></Link>
+
+    <PopupTrigger
+    content={
+      <>
+      <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + userPhoto} size='l' />
+      <h3>{user}</h3>
+      <p onClick={handleLogout} className='danger-zone'>Logout</p>
+      </>
+    }
+    bottom="You can log back in anytime">
+
+    <p className='danger-zone'>Logout</p>
+    </PopupTrigger>
+
 <p>Running <strong>{process.env.REACT_APP_VERSION}</strong></p>
 </>
   ))}

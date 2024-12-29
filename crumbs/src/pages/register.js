@@ -1,13 +1,17 @@
 import Loading from '../components/loading.js';
 import React, { useState } from "react";
 import{ Link } from "react-router-dom";
-import Home from '../components/home.js';
+import { store } from '../redux/store.js';
+import { setUserData } from '../redux/reducers/user.js';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Login() {
   const [userPass, setUserPass] = useState('');
   const [userName, setUserName] = useState('');
   const [message, setMessage] = useState('');
+  let navigate = useNavigate();
 
   function handleUserName(e){
     setUserName(e.target.value);
@@ -29,9 +33,10 @@ function Login() {
         })
       });
       const data = await response.json();
-      if(data.state === 'loggedin'){
+      if(data.state === 'loggedin'){//dispatch
         sessionStorage.setItem('loggedin', true)
-        window.location.href = "/";
+        store.dispatch(setUserData(data.data));
+        navigate('/');
       }
       else {
         setMessage(data.message);
@@ -44,7 +49,7 @@ function Login() {
 
   }
     return  <>
-    <Home />
+    <h1>Register</h1>
     <form method="post" onSubmit={handleSubmit} >
       <input
         type="text"
@@ -55,11 +60,8 @@ function Login() {
         value={userName}
         onChange={handleUserName}
       />
-      <br />
       <input type="password" name="password" placeholder="Password" value={userPass} onChange={handleUserPass}/>
-      <br />
       <p>I accept the <Link to="/tos"><strong>Terms of Service</strong></Link> of Crumbs</p>
-      <br />
       <input type="submit" value="Register" />
     </form>
       <p className='result'>{message}</p>

@@ -1,12 +1,14 @@
 <?php
 session_start();
 include('connector.php');
-function setResponse($state, $message, $user = []){
+include('library.php');
+function setResponse($state, $message, $data, $clubs){
   $response = 
   [
       'state' => $state,
       'message' => $message,
-      'user' => $user
+      'data' => $data,
+      'clubs' => $clubs
   ];
   echo (json_encode($response));
 
@@ -30,18 +32,25 @@ if(!empty($data['user']) && !empty($data['password']))
     $_SESSION['user'] = $user;
     $message = 'Logged in';
     $state = 'loggedin';
-    setResponse($state, $message, $_SESSION['user']);
+    $clubs = getClub($conn, $user);
+    $sql = "SELECT * FROM profile WHERE name='$user'";
+    if($result = mysqli_query($conn, $sql)){
+      while ($row = mysqli_fetch_assoc($result)) {
+          $data[] = $row;
+      }}
+
+    setResponse($state, $message, $data, $clubs);
     }
     else
     {
       $message = 'Wrong password, try again.';
-      setResponse('error', $message, []);
+      setResponse('error', $message, [], []);
     }
   }
   else
   {
     $message = 'Account not found, try again.';
-    setResponse('error', $message, []);
+    setResponse('error', $message, [], []);
   }
 
 }
@@ -49,7 +58,7 @@ else
 {
   $state = 'error';
   $message = 'Please fill everything.';
-  setResponse($state, $message, []);
+  setResponse($state, $message, [], []);
 }
 
 ?>

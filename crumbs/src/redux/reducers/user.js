@@ -1,22 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    username: '',
-    club: ''
-}
+
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState,
-    reducers: {
-        setUser: (state, action) => {
-            state.username = action.payload;
+    initialState: {
+        
+        data: {
+          id: null,
+          name: null,
+          point: null,
+          description: null,
+          home: null,
+          relation: null,
+          photo: null,
         },
-        setClub: (state, action) => {
-            state.club = action.payload;
+        clubs: {
+          
         }
+      },
+    reducers: {
+        setUserData: (state, action) => {
+            state.data = { ...state.data, ...action.payload };
+        },
+        setUserClubs: (state, action) => {
+          state.clubs = { ...state.clubs, ...action.payload };
+      }
     }
 })
 
-export const { setUser } = userSlice.actions;
+export const { setUserData, setUserClubs } = userSlice.actions;
 export default userSlice.reducer;

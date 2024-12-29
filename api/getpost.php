@@ -7,7 +7,7 @@ $data = json_decode($json, true);
 
 if(isset($data['id'])){
     $id = $data['id'];
-    $sql = "SELECT * FROM paths WHERE url='$id'";
+    $sql = "SELECT paths.*, profile.photo FROM paths INNER JOIN profile on profile.name=paths.name WHERE url='$id'";
     $result = mysqli_query($conn, $sql);
     $response = array();
     

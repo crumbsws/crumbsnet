@@ -2,21 +2,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loading from '../loading.js';
-import { fetchProfile, getItem } from '../utils.js';
+import { getProfile } from '../utils.js';
 import Icons from "../../icons/iconlibrary.js";
-
+import ProfilePicture from "../profilepicture.js";
+import { useSelector } from "react-redux";
 
 function Profilecard(props) {
   const [data, setData] = useState([]);
-  const [user, setUser] = useState('');
-  const [loading, setLoading] = useState(true);
+  const user =  useSelector((state) => state.user.data[0].name);
       useEffect(() => {
-        fetchProfile(props.user, setData);
-        getItem('user', setUser, setLoading);
+        getProfile(props.user, setData);
       }, [props.user])
 
       
-      if( loading || data.length === 0){
+      if(data.length === 0){
         return (
           <Loading />
             
@@ -27,10 +26,10 @@ function Profilecard(props) {
       {
     return ( 
       
-    data.map(({ name, point, description, home, relation, photo }) =>(
+    data.map(({ name, point, description, home, relation, photo, message }) =>(
     <div className='post' id='profile'>
         <div className="center-text">
-        <img id='rounded' src={process.env.REACT_APP_API_URL + '/profiles/' + photo} alt=' ' /><br/>
+        <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + photo} size='l' />
         <h2>{name}︱{point} <Icons icon='point' /></h2>
         </div>
         {name === user ? (
@@ -40,6 +39,16 @@ function Profilecard(props) {
           )}
         <p className='email'>{home} • {relation}</p>
         <p>{description}</p>
+
+        {message ? (
+        <div className="ticker">
+        <p><strong>Last Entry ︱ </strong> {message}</p>
+        </div>
+          ) : (
+            <></>
+          )}
+
+
         
     </div>
         )))

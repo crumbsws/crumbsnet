@@ -13,37 +13,36 @@ if(isset($data['type']) && $data['type'] === 'posts')
         if(isset($data['user']))
         {
             $user = $data['user'];
-            $sql = "SELECT * FROM paths WHERE parent='$parent' AND name='$user' AND (access = 'public' 
-                         OR (access = 'friends' AND name IN 
+            $sql = "SELECT paths.*, profile.photo FROM paths INNER JOIN profile ON profile.name = paths.name WHERE paths.parent='$parent' AND paths.name='$user' AND (paths.access = 'public' 
+                         OR (paths.access = 'friends' AND paths.name IN 
                             (SELECT CASE 
                                     WHEN user_2 = '$name' THEN user_1 
                                     ELSE user_2 
                                     END AS friend 
                              FROM friends 
                              WHERE user_1 = '$name' 
-                             OR user_2 = '$name'))) OR ('$user' = '$name' AND name='$name')  ORDER BY date DESC";
+                             OR user_2 = '$name'))) OR ('$user' = '$name' AND paths.name='$name')  ORDER BY date DESC";
         }
         else if(isset($data['club']))
         {
             $club = $data['club'];
-            $sql = "SELECT * FROM paths WHERE parent='$parent' AND access='public' AND name IN (SELECT name FROM profile WHERE club='$club') ORDER BY date DESC";
+            $sql = "SELECT paths.*, profile.photo FROM paths INNER JOIN profile ON profile.name = paths.name WHERE paths.parent='$parent' AND paths.access='public' AND profile.name IN(SELECT user FROM club_user WHERE club='$club') ORDER BY date DESC";
         }
         else 
         {
-            $sql = "SELECT * FROM paths WHERE parent='$parent' AND (access = 'public' 
-                         OR (access = 'friends' AND name IN 
+            $sql = "SELECT paths.*, profile.photo FROM paths INNER JOIN profile ON profile.name = paths.name WHERE paths.parent='$parent' AND (paths.access = 'public' 
+                         OR (paths.access = 'friends' AND paths.name IN 
                             (SELECT CASE 
                                     WHEN user_2 = '$name' THEN user_1 
                                     ELSE user_2 
                                     END AS friend 
                              FROM friends 
                              WHERE user_1 = '$name' 
-                             OR user_2 = '$name')))  ORDER BY date DESC";
+                             OR user_2 = '$name'))) ORDER BY date DESC";
         }
     }
     else {
-        $club = getClub($conn, $name);
-        $sql = "SELECT * FROM paths WHERE name IN (SELECT CASE 
+        $sql = "SELECT paths.*, profile.photo FROM paths INNER JOIN profile ON profile.name = paths.name WHERE paths.name IN (SELECT CASE 
         WHEN user_2 = '$name' THEN user_1 
         ELSE user_2 
         END AS friend FROM friends WHERE user_1='$name' OR user_2='$name') ORDER BY date DESC";
@@ -69,19 +68,45 @@ else if($data['type'] === 'gossip')
 {
     if(isset($data['club'])) {
         $club = $data['club'];
-        $sql = "SELECT * FROM gossip WHERE STR_TO_DATE(date, '%Y-%m-%d %h:%i:%s%p') >= NOW() - INTERVAL 8 HOUR AND name IN (SELECT name FROM profile WHERE club='$club')";
+        $sql = "SELECT * FROM gossip WHERE club='$club' AND date >= NOW() - INTERVAL 1 DAY";
     }
 }
 else if($data['type'] === 'gallery')
 {
     if(isset($data['club'])) {
         $club = $data['club'];
-        $sql = "SELECT conf, url FROM paths WHERE conf!='' AND name IN (SELECT name FROM profile WHERE club='$club')";
+        $sql = "SELECT conf, url FROM paths WHERE conf!='' AND name IN(SELECT user FROM club_user WHERE club='$club')";
     }
     else if(isset($data['user'])) {
         $user = $data['user'];
         $sql = "SELECT conf, url FROM paths WHERE conf!='' AND name='$user'";
     }
+}
+else if($data['type'] === 'diary')
+{
+
+        $sql = "SELECT 
+    profile.*,
+    diary.message,
+    diary.date
+FROM profile
+INNER JOIN diary ON profile.name = diary.name
+WHERE (
+    profile.name = '$name'
+    OR profile.name IN (
+        SELECT 
+            CASE
+                WHEN friends.user_2 = '$name' THEN friends.user_1
+                ELSE friends.user_2
+            END
+        FROM friends
+        WHERE friends.user_1 = '$name' 
+        OR friends.user_2 = '$name'
+    )
+)
+AND diary.date >= NOW() - INTERVAL 1 DAY
+ORDER BY diary.date DESC;";
+    
 }
 
 

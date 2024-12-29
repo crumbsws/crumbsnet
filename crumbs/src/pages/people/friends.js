@@ -1,27 +1,27 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getItem } from '../../components/utils.js';
+import { getRequests } from '../../components/utils.js';
+import { useSelector } from 'react-redux';
 import Loading from '../../components/loading.js';
 import AddButton from '../../components/buttons/addbutton.js';
 import Display from '../../components/display.js';
 function Friends() {
-  const [user, setUser] = useState('');
-  const [loadingUser, setLoadingUser] = useState(true);
-  const [loadingSent, setLoadingSent] = useState(true);
+  const user =  useSelector((state) => state.user.data[0].name);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   
   const {people} = useParams();
 
   useEffect(() => {
-    getItem('user', setUser, setLoadingUser);
-    getItem('requests', setData, setLoadingSent);
+
+    getRequests(setData, setLoading);
   }, [people])
 
   const hasSentRequest = data.some(request => 
     (request[1] === user && request[2] === people) || (request[1] === people && request[2] === user)
   ); 
 
-  if( loadingUser || loadingSent ){
+  if( loading ){
     return (
       <Loading /> 
     );
@@ -37,8 +37,11 @@ function Friends() {
     <AddButton user={people} />
     </div>
   )}
-  
-  <Display type='friends' user={people}/>
+
+      <div className='post container' >
+        <Display type='friends' user={people} />
+      </div>
+
   </>
   );
 }};

@@ -44,15 +44,15 @@ if(!empty($_POST['relationship']) && $_POST['relationship'] != '')
 if(!empty($_POST['description']) && $_POST['description'] != '')
 {
  
-    $description = $_POST['description'];
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
     $sql = "UPDATE profile SET description='$description' WHERE name='$user'"; 
     $result = mysqli_query($conn, $sql);
-
+    
 }
 if(!empty($_POST['home']) && $_POST['home'] != '')
 {
  
-    $home = $_POST['home'];
+    $home = mysqli_real_escape_string($conn, $_POST['home']);
     $sql = "UPDATE profile SET home='$home' WHERE name='$user'"; 
     $result = mysqli_query($conn, $sql);
 

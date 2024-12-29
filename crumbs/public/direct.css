@@ -1,0 +1,103 @@
+ 
+.chatbox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+	  flex-direction: column;
+    justify-content: space-between;
+  } 
+  .chatcontainer {
+    margin-bottom: 10px;
+  } 
+
+  .chat {
+    padding: 0.1rem 1rem;
+    width: fit-content;
+    max-width: 66%;
+    min-height: 2.25rem;
+    line-height: normal;
+  }
+
+  
+  .reply{
+ 
+    max-height: 60px;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    line-height: normal;
+  }
+
+  .reply-container{
+    padding: 5px;
+  }
+
+  #sent{
+    background: rgb(255, 251, 234);
+    border-left: 4px solid var(--froutline);
+  }
+  #received{
+    background: rgb(34, 33, 33);
+    border-left: 4px solid var(--brand);
+  }
+
+  .received {
+    box-sizing: border-box;
+    margin: 1rem;
+    background: var(--froutline);
+    border-radius: 1.125rem 1.125rem 1.125rem 0;
+  }  
+
+  .sent {
+    margin: 1rem 1rem 1rem auto ;
+    border-radius: 1.125rem 1.125rem 0 1.125rem;
+    background: var(--brand);
+    color: var(--bgmain);
+
+  }
+
+  .chat:hover, .chat:active{
+    span{
+      display: block;
+    }
+  }
+  .chat span{
+    color: grey;
+    margin: 2px;
+    display: none;
+  }
+  .chat p {
+    line-height: 1.2rem;
+  }
+
+.sendform {
+    bottom: 0px;
+    position: sticky;
+    background: var(--bgmain);
+    z-index: 1;
+    width: 100%;
+}
+#sendsubmit {
+    width: 45px;
+    height: 45px;
+    border-radius: 9999px;
+  }
+#sendtext {
+  max-width: 85%;
+  }
+  @media (max-width: 1024px) { 
+    .sendform {
+      bottom: 70px;
+  }
+
+    }
+  @media (max-width: 768px) {
+    .reply{
+ 
+      max-height: 80px;
+    }
+    #sendtext {
+      max-width: 80%;
+      }
+
+    }

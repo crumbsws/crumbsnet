@@ -7,16 +7,12 @@ import Loading from '../loading.js';
       fetchClub()
     }, [props.user])
 
-    var user = props.user;
+    const user = props.user;
     async function fetchClub() {
       try {
-        const response = await fetch(process.env.REACT_APP_API_URL + '/getclub.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/getClub.php?user=' + user, {
           method: 'POST',
-          credentials: 'include',
-          body: JSON.stringify({
-            user: user,
-
-            })
+          credentials: 'include'
         });
         const json = await response.json();
         setData(json);

@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
-import { getItem } from "../../components/utils";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/loading";
 import Display from "../../components/display";
 function Box() {
-  const [loading, setLoading] = useState(true);
-  const [clubCurrent, setClubCurrent] = useState([]);
+
   const [value, setValue] = useState('Publish');
   const [note, setNote] = useState('');
 
   const {club} = useParams();
 
-  useEffect(() => {
-      getItem('club', setClubCurrent, setLoading);
-    }, [club])
+  const user =  useSelector((state) => state.user.data[0].name);
 
     function handleNote(e) {
       setNote(e.target.value);
@@ -25,6 +22,7 @@ function Box() {
 
       const formData = new FormData();
       formData.append('note', note)
+      formData.append('club', club)
       try{
         const response = await fetch(process.env.REACT_APP_API_URL + '/note.php', {
           credentials: 'include',
@@ -36,7 +34,7 @@ function Box() {
 
         if(data.state === 'success') {
           setValue('Note Added');
-	  setNote('');
+	        setNote('');
         }
       }catch(err){
         console.log(err);
@@ -47,23 +45,26 @@ function Box() {
 
 
 
-  const name = clubCurrent.length > 0 ? clubCurrent[0].name : null;
+    const currentClubs =  useSelector((state) => state.user.clubs);
+    const isClubJoined = Object.values(currentClubs).some(obj => obj.name === club);
 
   return (
       <>
-        <div className="post tip">
-          <h1>Drop Notes</h1>
-          <p>But your name will stay hidden.</p>
-
-          
-        </div>
-        {club === name && clubCurrent.length !== 0 && !loading ? (
+        {isClubJoined ? (
+          <>
+                  <div className="post tip">
+                  <h1>Drop Notes</h1>
+                  <p>But your name will stay hidden.</p>
+        
+                  
+                </div>
           <div className='box post'>
             <form method="post">
-              <input type="text" onChange={handleNote} placeholder="Drop a new note..." maxLength='25' required/>
+              <input type="text" onChange={handleNote} value={note} placeholder="Drop a new note..." maxLength='25' required/>
               <input type="submit" value={value} onClick={handleSubmit}/>
             </form>
           </div>
+          </>
         ) : (<></>)}
         
         <div className='post container' >  

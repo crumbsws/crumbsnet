@@ -1,18 +1,17 @@
-import { useState, useEffect } from 'react'
-import { getItem } from '../utils.js';
-import Loading from '../loading.js';
-import { Link } from 'react-router-dom';
+import { useState} from 'react'
 
-function ClubEdit() {
+import Loading from '../loading.js';
+import BackNav from '../navigation/backnav.js';
+
+function ClubEdit(props) {
+  const club = props.club;
   const [clubDescription, setClubDescription] = useState('');
   const [clubCard, setClubCard] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [club, setClub] = useState([]);
   const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    getItem('club', setClub, setLoading);
-  }, [])//olmaz bu böyle
+
+
+
 
 
 
@@ -50,16 +49,10 @@ function ClubEdit() {
       }
     }
 //Input defaultValue almıyor, veritabanı boşa çekiyor -çözdüm
-if(loading){
-  return (
-    <Loading />
-  );
-} 
-else
-{
+
 return (
 <>
-
+<BackNav />
 {club.map(({ name, founder, description, point }) =>(
 <>
 <h2>{name}</h2>
@@ -71,8 +64,14 @@ return (
 <p className='email'>Cheese points</p>
 </div>
 </div>
+
+<p className='email'>Given to the top 100 in the Crumbs Club Awards. On creation, it is set to one.</p>
+
 <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-<input type="text" placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription}/><br/>
+<input type="text" placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription} />
+
+<p className='email'>Edit the description that will be displayed to people that are searching for the club.</p>
+
 <select onChange={handleCard}> 
 <option id='none' value="0">Select Card</option>
 <option value="crumbs">Crumbs</option>
@@ -81,6 +80,9 @@ return (
 <option value="night">Night</option>
 <option value="pacific">Pacific</option>
 </select>
+
+<p className='email'>The theme color of the club. Displayed in the club browser.</p>
+
 <p className='result'>{message}</p>
 <input type='submit' value='Save'/>
 </form>
@@ -88,6 +90,6 @@ return (
   ))}
   </>
   );
-}};
+};
 
 export default ClubEdit;
