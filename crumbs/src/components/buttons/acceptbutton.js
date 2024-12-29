@@ -10,7 +10,7 @@ function AcceptButton(props) {
     setValue(<Loading />);
 
     try{
-      const response = await fetch(process.env.REACT_APP_API_URL + '/acceptuser.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/acceptUser.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({

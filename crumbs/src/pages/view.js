@@ -21,7 +21,7 @@ function View() {
   const getPostData = async () => {
     setLoading(true)
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + '/getpost.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getPost.php', {
         credentials: 'include',
         method: 'POST',
         credentials: 'include',

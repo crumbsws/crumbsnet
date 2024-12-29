@@ -94,7 +94,7 @@ export default function App() {
       try
       {
           
-          const response = await fetch(process.env.REACT_APP_API_URL + '/getdata.php?', {
+          const response = await fetch(process.env.REACT_APP_API_URL + '/getData.php?', {
               credentials: 'include',
               method: 'GET',
             });

@@ -17,7 +17,7 @@ const handleSubmit = async (e) => {
   const formData = new FormData();
   formData.append('name', clubName)
   try{
-    const response = await fetch(process.env.REACT_APP_API_URL + '/createclub.php', {
+    const response = await fetch(process.env.REACT_APP_API_URL + '/createClub.php', {
       credentials: 'include',
       method: 'POST',
       body: formData

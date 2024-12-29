@@ -2,7 +2,7 @@
 export async function getProfile(user, setData) {
     
     try{
-      const response = await fetch(process.env.REACT_APP_API_URL + '/getprofile.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getProfile.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
@@ -87,7 +87,7 @@ export async function getRequests( setData, setLoading){
   try
   {
       
-      const response = await fetch(process.env.REACT_APP_API_URL + '/getrequests.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getRequests.php', {
           credentials: 'include',
           method: 'POST',
           credentials: 'include'

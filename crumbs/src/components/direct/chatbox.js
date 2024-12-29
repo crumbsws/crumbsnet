@@ -58,7 +58,7 @@ function identToText(ident){
 async function fetchMessages() {
 
   try {
-    const response = await fetch(process.env.REACT_APP_API_URL + '/getmessages.php', {
+    const response = await fetch(process.env.REACT_APP_API_URL + '/getMessages.php', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({

@@ -30,7 +30,7 @@ function ClubEdit(props) {
       formData.append('description', clubDescription)
       formData.append('card', clubCard)
       try{
-        const response = await fetch(process.env.REACT_APP_API_URL + '/updateclub.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/updateClub.php', {
           method: 'POST',
           credentials: 'include',
           body: formData

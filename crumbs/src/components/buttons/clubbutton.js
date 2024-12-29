@@ -16,7 +16,7 @@ function ClubButton(props) {
         setValue(<Loading />);
 
         try{
-          const response = await fetch(process.env.REACT_APP_API_URL + '/joinclub.php', {
+          const response = await fetch(process.env.REACT_APP_API_URL + '/joinClub.php', {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({
