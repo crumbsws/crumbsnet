@@ -84,7 +84,7 @@ function Profile() {
       formData.append('photo', profilePhoto)
       formData.append('user', user)
       try{
-        const response = await fetch(process.env.REACT_APP_API_URL + '/updateprofile.php', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/updateProfile.php', {
           method: 'POST',
           credentials: 'include',
           body: formData
