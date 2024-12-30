@@ -1,7 +1,7 @@
 <?php
-$clubInitial = 1;
+$clubInitial = 5;
 $postPoint = 1;
-$dbHost = getenv('ENV_DB_HOST');
-$dbUser = getenv('ENV_DB_USER');
-$dbPass = getenv('ENV_DB_PASS');
+$dbHost ='db-mysql-fra1-51403-do-user-17164387-0.f.db.ondigitalocean.com:25060';
+$dbUser = 'doadmin';
+$dbPass = 'AVNS_4ar3mUrmBSvDyBAiynU';
 ?>

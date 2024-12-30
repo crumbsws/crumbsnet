@@ -34,7 +34,7 @@ function Direct() {
   const navigate = useNavigate();
   async function prepareChannel(user){
     try{
-      const response = await fetch(process.env.REACT_APP_API_URL + '/preparechannel.php', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/prepareChannel.php', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
