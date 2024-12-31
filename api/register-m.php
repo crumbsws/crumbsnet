@@ -27,6 +27,7 @@ if(!empty($data['user']) && !empty($data['password']))
     $sql = "INSERT INTO account (user, password) VALUES ('$user', '$hashedPassword')";
     mysqli_query($conn, $sql);
     createProfile($conn, $user, 1);
+    createToken($conn, $user);
     $_SESSION['user'] = $user;
     $message = 'Created account';
     $state = 'loggedin';

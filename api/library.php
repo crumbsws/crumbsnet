@@ -76,4 +76,28 @@ function getContacts($conn, $user){
   }
   return $data;
 }
+
+
+function createToken($conn, $name){
+  $token = bin2hex(random_bytes(16));
+  $expiry = date('Y-m-d h:i', strtotime('+30 days'));
+  $sql = "INSERT INTO auth_token (user, token, expiry) VALUES ('$name', '$token', '$expiry')";
+  setcookie('auth_token', $token, time() + (30 * 24 * 60 * 60), "/", "", true, true);
+
+  mysqli_query($conn, $sql);
+}
+
+function checkToken($conn){
+  if(isset($_COOKIE['auth_token'])){
+    $token = $_COOKIE['auth_token'];
+    $date = date('Y-m-d h:i');
+    $sql = "SELECT user FROM auth_token WHERE token='$token' AND expiry > '$date'";
+    $result = mysqli_query($conn, $sql);
+  while($row = mysqli_fetch_array($result)) {
+    return $row['user'];
+  }}
+  
+  return null;
+
+}
 ?>

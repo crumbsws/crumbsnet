@@ -18,32 +18,52 @@ $data = json_decode($json, true);
 
     if(!empty($_SESSION['user'])){
     $user = $_SESSION['user'];
+    } else {
+    $user = checkToken($conn);
+    }
+
+if (isset($user)) {
     $sql = "SELECT * FROM profile WHERE name='$user'";
     if($result = mysqli_query($conn, $sql)){
-    if(mysqli_num_rows($result) === 1) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;  
-    }
-    $contacts = getContacts($conn, $user);
-    $clubs = getClub($conn, $user);
-    $state = 'success';
-    setResponse($state, $data, $clubs, $contacts);
-    }
-    else {
+        if(mysqli_num_rows($result) === 1) {
+            if(!isset($_SESSION['user'])){
+                $_SESSION['user'] = $user;
+            }
+            while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;  
+            }
+            $contacts = getContacts($conn, $user);
+            $clubs = getClub($conn, $user);
+            $state = 'success';
+            setResponse($state, $data, $clubs, $contacts);
+        }
+        else {
+        
         $state = 'error';
         $data = [];
         $clubs = [];
         $contacts = [];
         setResponse($state, $data, $clubs, $contacts);       
+        } 
     }
-    }
-    } else {
+    else {
+        
         $state = 'error';
         $data = [];
         $clubs = [];
         $contacts = [];
-        setResponse($state, $data, $clubs, $contacts);  
+        setResponse($state, $data, $clubs, $contacts);       
+        }         
     }
+    else {
+        
+        $state = 'error';
+        $data = [];
+        $clubs = [];
+        $contacts = [];
+        setResponse($state, $data, $clubs, $contacts);       
+        } 
+    
 
 
 

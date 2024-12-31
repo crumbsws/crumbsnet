@@ -30,6 +30,7 @@ if(!empty($data['user']) && !empty($data['password']))
     if(password_verify($password, $row['password']))
     {
     $_SESSION['user'] = $user;
+    createToken($conn, $user);
     $message = 'Logged in';
     $state = 'loggedin';
     $clubs = getClub($conn, $user);
