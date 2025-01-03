@@ -1,4 +1,4 @@
-# Crumbs Social Netowrk
+# Crumbs Social Network
 ## Altugsalt - Crumbs
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
