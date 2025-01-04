@@ -31,7 +31,8 @@ function createProfile($conn, $user, $points){
     mysqli_query($conn, $sql);
   }
   function createClub($conn, $name, $founder, $description, $card, $point){
-    $sql = "INSERT INTO clubs (name, founder, description, card, point) VALUES ('$name', '$founder', '$description', '$card','$point')";//points will be set to the points of the user
+    $sql = "INSERT INTO clubs (name, founder, description, card, point) VALUES ('$name', '$founder', '$description', '$card','$point')";
+    //points will be set to the points of the user
     mysqli_query($conn, $sql);
   }
 
@@ -99,5 +100,13 @@ function checkToken($conn){
   
   return null;
 
+}
+
+function clearToken($conn){
+  if(isset($_COOKIE['auth_token'])){
+    $token = $_COOKIE['auth_token'];
+    $sql = "DELETE FROM auth_token WHERE token='$token'";
+    $result = mysqli_query($conn, $sql);
+  }
 }
 ?>
