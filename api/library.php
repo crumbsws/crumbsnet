@@ -31,7 +31,8 @@ function createProfile($conn, $user, $points){
     mysqli_query($conn, $sql);
   }
   function createClub($conn, $name, $founder, $description, $card, $point){
-    $sql = "INSERT INTO clubs (name, founder, description, card, point) VALUES ('$name', '$founder', '$description', '$card','$point')";//points will be set to the points of the user
+    $sql = "INSERT INTO clubs (name, founder, description, card, point) VALUES ('$name', '$founder', '$description', '$card','$point')";
+    //points will be set to the points of the user
     mysqli_query($conn, $sql);
   }
 
