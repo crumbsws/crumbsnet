@@ -100,4 +100,12 @@ function checkToken($conn){
   return null;
 
 }
+
+function clearToken($conn){
+  if(isset($_COOKIE['auth_token'])){
+    $token = $_COOKIE['auth_token'];
+    $sql = "DELETE FROM auth_token WHERE token='$token'";
+    $result = mysqli_query($conn, $sql);
+  }
+}
 ?>

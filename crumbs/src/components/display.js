@@ -12,6 +12,7 @@ import Reaction from './interactions/reaction.js';
 function Display(props) {
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchData()
   }, [props.parent, props.user])
@@ -37,13 +38,14 @@ function Display(props) {
       });
       const json = await response.json();
       setData(json);
+      setLoading(false);
     } catch (error) {
       console.log(error);
 
 
     }
   }
-  if (data.length === 0) {
+  if (loading) {
     return (
       <Loading />
 
