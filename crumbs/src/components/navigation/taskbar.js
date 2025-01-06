@@ -30,6 +30,7 @@ function TaskBar() {
 
       if(data.state === 'success') {
         setMessage('');
+        setValue(<i class="fa-solid fa-check"></i>);
         triggerUpdate((prev) => prev + 1);
       }
       else{

@@ -11,7 +11,8 @@ import TaskBar from "./taskbar.js";
 
 const Header = () => {
 
-  const active = useSelector((state) => state.inbox.active);
+  const directActive = useSelector((state) => state.inbox.directActive);
+  const requestsActive = useSelector((state) => state.inbox.requestsActive);
   const userData = useSelector((state) => state.user.data);
   
   // Use optional chaining and fallback to a default value if name is undefined
@@ -89,12 +90,17 @@ Crumbs
  Discover
  </Link>
  <Link to="/notifications">
-<i class="fa-solid fa-heart"></i>
+ {!requestsActive  ? (
+  <i class="fa-solid fa-heart"></i>
+) : (
+  <i class="fa-solid fa-heart danger-zone"></i>
+)
+}
 
  Notifications
 </Link>
 <Link to="/direct">
-{!active  ? (
+{!directActive  ? (
   <i class="fa-solid fa-inbox"></i>
 ) : (
   <i class="fa-solid fa-inbox danger-zone"></i>

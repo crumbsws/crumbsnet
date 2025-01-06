@@ -37,7 +37,7 @@ import PrivateRoute from './privateroute.js';
 
 
 import FirstLoader from './components/firstloader.js';
-import { setActive } from './redux/reducers/inbox.js';
+import { setDirectActive, setRequestsActive } from './redux/reducers/inbox.js';
 import { socket } from './socket.js';
 
 export default function App() {
@@ -53,7 +53,7 @@ export default function App() {
       // Only notify if message is from a different channel
       if (newMessage.channel !== currentChannel) {
         if (!active) {
-          store.dispatch(setActive());
+          store.dispatch(setDirectActive());
         }
         
         if (!document.hasFocus()) {
@@ -85,10 +85,25 @@ export default function App() {
 
   useEffect(() => {
       getUserData();
-      
+      getUnseen()
     }, [])
 
-
+    async function getUnseen() {
+      try {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/getRequests.php?status=unseen', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        const data = await response.json();
+        if(data.length > 0){
+          store.dispatch(setRequestsActive());
+        }
+      } catch (error) {
+        console.log(error);
+        
+        
+      }
+    }
 
     async function getUserData(){
       try

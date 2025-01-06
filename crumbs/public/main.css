@@ -192,7 +192,7 @@ li {
 .outlet-wrapper {
   padding-left: 20px;
   padding-right: 20px;
-  width: 450px;
+  width:450px;
   border-left: 1px solid var(--froutline);
   display: flex;
   flex-direction: column;

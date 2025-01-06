@@ -17,7 +17,8 @@ $user = $_POST['user'];
 if (!empty($_FILES['photo'])) {
 
     $directory = $_SERVER["DOCUMENT_ROOT"] . "/profiles/";
-    $file = $directory . basename($_FILES["photo"]["name"]);
+    $newName = basename($user . '-' . $_FILES["photo"]["name"]);
+    $file = $directory . $newName;
     $filetype = strtolower(pathinfo($file,PATHINFO_EXTENSION));
     if ($_FILES["photo"]["size"] < 1200000) {
         if(in_array($filetype, ['jpg', 'png', 'jpeg', 'gif', 'webp'])) {
@@ -26,7 +27,7 @@ if (!empty($_FILES['photo'])) {
       
             if (move_uploaded_file($_FILES["photo"]["tmp_name"], $file)) {
         
-            $photo = $_FILES["photo"]["name"];
+            $photo = $newName;
             $sql = "UPDATE profile SET photo='$photo' WHERE name='$user'";
             $result = mysqli_query($conn, $sql);
             }

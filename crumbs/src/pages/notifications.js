@@ -2,16 +2,21 @@
 import { getRequests } from "../components/utils";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { store } from "../redux/store";
+import { setRequestsActive } from "../redux/reducers/inbox";
 import Loading from "../components/loading";
 import AcceptButton from "../components/buttons/acceptbutton";
 
 function Notifications() {
   const [data, setData] = useState([]);
   const user = useSelector((state) => state.user.data[0].name);
+  const requestsActive = useSelector((state) => state.inbox.requestsActive);
   const [loading, setLoading] = useState(true);
 
-  function UpdateRequests(current) {
-    localStorage.setItem('requests', current);
+  function UpdateRequests() {
+    if(requestsActive){
+      store.dispatch(setRequestsActive())
+    }
   }
 
   useEffect(() => {
@@ -20,7 +25,7 @@ function Notifications() {
 
   useEffect(() => {
     if (!loading) {
-      UpdateRequests(data.length);
+      UpdateRequests();
     }
   }, [data, loading]);
 

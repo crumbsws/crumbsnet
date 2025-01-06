@@ -17,12 +17,15 @@ function setResponse($state, $url){
 
 if (isset($_POST['title']) && !empty($_POST['body']) && isset($_POST['collect']) && !empty($_SESSION['user']) && !empty($_SESSION['user'])) {
 
+$url = uniqid();
+
 $directory = $_SERVER["DOCUMENT_ROOT"] . "/images/";
 
 if (isset($_FILES['conf'])) {
-    $file = $directory . basename($_FILES["conf"]["name"]);
+    $newName = basename($url . '-' . $_FILES["conf"]["name"]);
+    $file = $directory . $newName;
     if (move_uploaded_file($_FILES["conf"]["tmp_name"], $file)) {
-        $conf = $_FILES["conf"]["name"];
+        $conf = $newName;
     }
 }
 else {
@@ -46,7 +49,7 @@ $title = mysqli_real_escape_string($conn, $_POST['title']);
 $collect = mysqli_real_escape_string($conn, $_POST['collect']);
 $user = $_SESSION['user'];
 
-$url = uniqid();
+
 $body = mysqli_real_escape_string($conn, $_POST['body']);
 $date = date("Y-m-d h:i");
 if(!empty($_POST['parent'])){

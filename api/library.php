@@ -54,6 +54,15 @@ function createProfile($conn, $user, $points){
     }
     return $data;
   }
+  function getUnseenRequests($conn, $user){
+    $sql = "SELECT * FROM requests WHERE status='unseen' AND receiver='$user'";
+    $result = mysqli_query($conn, $sql);
+    $data = array();
+    while($row = mysqli_fetch_array($result)) {
+      $data[] = $row;
+    }
+    return $data;
+  }
   function updateRequests($conn, $user){
     $sql = "UPDATE requests SET status='pending' WHERE status='unseen' AND receiver='$user'";
     mysqli_query($conn, $sql);

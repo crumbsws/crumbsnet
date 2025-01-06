@@ -42,7 +42,10 @@ function ClubButton(props) {
 
 return (
     <>
-    {isClubJoined  ? (<></>) : (
+    {isClubJoined  ? (
+    <>
+    </>
+    ) : (
     <div className='post'>
     <p>Is <strong>{club}</strong> the right club for you?</p>
     <button onClick={handleJoin}>{value}</button>
