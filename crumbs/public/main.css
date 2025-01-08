@@ -218,7 +218,7 @@ li {
 }
 
 
-input[type="text"], input[type="password"], input[type="search"], select, textarea, .statistics {
+input[type="text"], input[type="email"], input[type="password"], input[type="search"], select, textarea, .statistics {
   width: 100%;
   border-radius: 8px;
   min-height: 55px;
@@ -327,6 +327,7 @@ input[type="file"]::-webkit-file-upload-button {
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
+input[type="email"]:focus,
 textarea:focus {
   border: 2px solid var(--brand);
   

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [userPass, setUserPass] = useState('');
   const [userName, setUserName] = useState('');
+  const [userMail, setUserMail] = useState('');
   const [message, setMessage] = useState('');
   let navigate = useNavigate();
 
@@ -18,6 +19,9 @@ function Login() {
   }
   function handleUserPass(e){
     setUserPass(e.target.value);
+  }
+  function handleUserMail(e){
+    setUserMail(e.target.value);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +33,8 @@ function Login() {
         credentials: 'include',
         body: JSON.stringify({
           user: userName,
-          password: userPass
+          password: userPass,
+          email: userMail
         })
       });
       const data = await response.json();
@@ -51,15 +56,22 @@ function Login() {
     return  <>
     <h1>Register</h1>
     <form method="post" onSubmit={handleSubmit} >
-      <input
-        type="text"
-        name="user"
-        placeholder="Username"
-        minLength={3}
-        maxLength={16}
-        value={userName}
-        onChange={handleUserName}
-      />
+        <input
+          type="text"
+          name="user"
+          placeholder="Username"
+          minLength={3}
+          maxLength={16}
+          value={userName}
+          onChange={handleUserName}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="E-mail"
+          value={userMail}
+          onChange={handleUserMail}
+        />
       <input type="password" name="password" placeholder="Password" value={userPass} onChange={handleUserPass}/>
       <p>I accept the <Link to="/tos"><strong>Terms of Service</strong></Link> of Crumbs</p>
       <input type="submit" value="Register" />
