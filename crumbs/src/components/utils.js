@@ -83,6 +83,27 @@ catch(err)
 } 
 }
 
+export async function getOtherClub(club, setData, setLoading){
+  try
+  {
+      
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getClub.php?name=' + club, {
+          credentials: 'include',
+          method: 'POST',
+          credentials: 'include'
+        });
+      const data = await response.json();
+      setData(data);
+      
+      setLoading(false);
+     
+}
+catch(err)
+{
+  console.log(err);
+} 
+}
+
 export async function getRequests( setData, setLoading){
   try
   {

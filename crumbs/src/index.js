@@ -35,10 +35,13 @@ import Friends from './pages/people/friends.js';
 
 import PrivateRoute from './privateroute.js';
 
+import EnterInput from './pages/resetPassword/enterInput.js';
+import ResetPassword from './pages/resetPassword/resetPassword.js';
 
 import FirstLoader from './components/firstloader.js';
 import { setDirectActive, setRequestsActive } from './redux/reducers/inbox.js';
 import { socket } from './socket.js';
+
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -149,7 +152,10 @@ export default function App() {
         <Route path="/welcome" element={<Welcome />} />
 
       
-    
+        <Route path="/resetPassword/" >
+          <Route index element={<EnterInput />} />
+          <Route path='resetPassword' element={<ResetPassword/>} />
+        </Route>
     
     
       
@@ -169,7 +175,7 @@ export default function App() {
         </Route>
 
         <Route path="/discover/:value?" element={<PrivateRoute><Discover /></PrivateRoute>} />
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/dashboard/:club?" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
 
         <Route path="/clubs/:club?" element={<PrivateRoute><Clubs /></PrivateRoute>} >
           <Route index element={<PrivateRoute><Club /></PrivateRoute>} />

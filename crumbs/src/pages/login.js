@@ -69,6 +69,7 @@ function Login() {
     </form>
     <p className='result'>{message}</p>
     <p>New to crumbs? | <Link to="/register">Register</Link></p>
+    <p>Forgot password? | <Link to="/resetPassword">Reset</Link></p>
   </>;
   
 };

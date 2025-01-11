@@ -23,7 +23,7 @@ if(!empty($data['user']) && !empty($data['password']) && !empty($data['email']))
   $email = $data['email'];
   $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-  $sql = "SELECT * FROM account WHERE user = '$user'";
+  $sql = "SELECT * FROM account WHERE user = '$user' OR email = '$sanitizedEmail'";
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) === 0) {
     $sql = "INSERT INTO account (user, email, password) VALUES ('$user', '$sanitizedEmail', '$hashedPassword')";
@@ -47,7 +47,7 @@ if(!empty($data['user']) && !empty($data['password']) && !empty($data['email']))
   else
   {
     $state = 'error';
-    $message = 'An account with that name already exists.';
+    $message = 'An account with that name/mail already exists.';
     setResponse($state, $message, []);
   }
 
