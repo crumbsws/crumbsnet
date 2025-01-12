@@ -8,9 +8,7 @@ import { useSelector } from 'react-redux';
 
 function EnterInput() {
 
-  const user = useSelector((state) => state.user.data[0].name);
-
-  const [userIdentifier, setUserIdentifier] = useState('' || user);
+  const [userIdentifier, setUserIdentifier] = useState('');
   const [message, setMessage] = useState('');
   let navigate = useNavigate();
 
