@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 include('config.php');
-=======
->>>>>>> development
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
