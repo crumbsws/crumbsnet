@@ -1,5 +1,5 @@
-import { useState} from 'react'
-
+import { useState, useEffect} from 'react'
+import { getOtherClub } from '../utils.js';
 import Loading from '../loading.js';
 import BackNav from '../navigation/backnav.js';
 
@@ -9,8 +9,12 @@ function ClubEdit(props) {
   const [clubCard, setClubCard] = useState('');
   const [message, setMessage] = useState('');
 
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-
+  useEffect(() => {
+    getOtherClub(club, setData, setLoading)
+  }, [])
 
 
 
@@ -29,6 +33,7 @@ function ClubEdit(props) {
       const formData = new FormData();
       formData.append('description', clubDescription)
       formData.append('card', clubCard)
+      formData.append('club', club)
       try{
         const response = await fetch(process.env.REACT_APP_API_URL + '/updateClub.php', {
           method: 'POST',
@@ -50,25 +55,34 @@ function ClubEdit(props) {
     }
 //Input defaultValue almıyor, veritabanı boşa çekiyor -çözdüm
 
+if( loading){
+  return (
+    <Loading />
+      
+    
+  );
+} 
+else
+{
 return (
 <>
 <BackNav />
-{club.map(({ name, founder, description, point }) =>(
+{data.map(({ name, founder, description, point }) =>(
 <>
 <h2>{name}</h2>
 <p className='email'>Permanent</p>
 
 <div className='statistics'>
 <div className='statistics-content'>
-<h1>{point}🧀</h1>
-<p className='email'>Cheese points</p>
+<h1>{point}</h1>
+<p className='email'>Points</p>
 </div>
 </div>
 
-<p className='email'>Given to the top 100 in the Crumbs Club Awards. On creation, it is set to one.</p>
+<p className='email'>Given to the top 100 in the Crumbs Club Awards. On creation, it is set to five.</p>
 
 <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-<input type="text" placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription} />
+<input type="text" id='description' placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription} />
 
 <p className='email'>Edit the description that will be displayed to people that are searching for the club.</p>
 
@@ -90,6 +104,7 @@ return (
   ))}
   </>
   );
+}
 };
 
 export default ClubEdit;

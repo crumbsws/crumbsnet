@@ -51,9 +51,10 @@ function ExploreClubs() {
 
             <div className='post container'>
           {Object.values(club).map(({ name, founder, description, card }) => (          
-              <div className='contained' key={name}>
+              <div id="club-container" className='contained' key={name}>
                 <Link to={`/clubs/${name}`} >
                 <p>{name}</p>
+                <p className="email">{description}</p>
                 </Link>
               </div>
           ))}

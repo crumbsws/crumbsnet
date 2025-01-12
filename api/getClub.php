@@ -9,6 +9,10 @@ include('library.php');
   if(isset($_GET['ownedBy']) && $_GET['ownedBy'] === 'true') {
     $data = getOwnedClub($conn, $user);
   }
+  else if(isset($_GET['name'])) {
+    $name = $_GET['name'];
+    $data = getOtherClub($conn, $name);
+  }
   else if(isset($_GET['user'])){
     $user = $_GET['user'];
     $data = getClub($conn, $user);

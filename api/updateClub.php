@@ -14,6 +14,13 @@ function setResponse($state, $message){
   }
 
 $user = $_SESSION['user'];
+if(!empty($_POST['club']))
+{
+$club = $_POST['club']; 
+$sql = "SELECT * FROM clubs WHERE name='$club' AND founder='$user'";
+$result = mysqli_query($conn, $sql);
+if(mysqli_num_rows($result) === 1) {
+  
 if(!empty($_POST['card']))
 {
     if($_POST['card'] === 'pumpkin'){
@@ -31,7 +38,7 @@ if(!empty($_POST['card']))
     else {
         $card = 'crumbs';
     }
-    $sql = "UPDATE clubs SET card='$card' WHERE founder='$user'"; //IMPROVE THIS OPTIOAL, BUT HANDLE PARAMETERS IN SEARCH
+    $sql = "UPDATE clubs SET card='$card' WHERE founder='$user' AND name='$club'"; //IMPROVE THIS OPTIOAL, BUT HANDLE PARAMETERS IN SEARCH
     $result = mysqli_query($conn, $sql);
 
 }
@@ -39,11 +46,19 @@ if(!empty($_POST['description']))
 {
  
     $description = mysqli_real_escape_string($conn, $_POST['description']);
-    $sql = "UPDATE clubs SET description='$description' WHERE founder='$user'"; //IMPROVE THIS OPTIOAL, BUT HANDLE PARAMETERS IN SEARCH
+    $sql = "UPDATE clubs SET description='$description' WHERE founder='$user' AND name='$club'"; //IMPROVE THIS OPTIOAL, BUT HANDLE PARAMETERS IN SEARCH
     $result = mysqli_query($conn, $sql);
 
 }
 $state= 'success';
 $message = 'Club updated.';//Imp
 setResponse($state, $message);
+}
+else {
+    $state= 'error';
+    $message = 'You can only edit your clubs.';//Imp
+    setResponse($state, $message);
+}
+}
+
 ?>

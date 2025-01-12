@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 include('config.php');
+=======
+>>>>>>> development
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -15,15 +18,26 @@ function sendPRCode($code, $receiver, $alias) {
     try {
         //Server settings
         $mail->isSMTP();                                            // Set mailer to use SMTP
+<<<<<<< HEAD
         $mail->Host = $smtpServ;                               // Set the SMTP server to send through
         $mail->SMTPAuth = true;                                       // Enable SMTP authentication
         $mail->Username = $smtpUser;                     // SMTP username
         $mail->Password = $smtpPassword;                        // SMTP password (use an app password for Gmail if 2FA is enabled)
+=======
+        $mail->Host = 'smtp.gmail.com';                               // Set the SMTP server to send through
+        $mail->SMTPAuth = true;                                       // Enable SMTP authentication
+        $mail->Username = 'altugjakal@gmail.com';                     // SMTP username
+        $mail->Password = 'mwtj vmig ermp tuom';                        // SMTP password (use an app password for Gmail if 2FA is enabled)
+>>>>>>> development
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           // Enable TLS encryption
         $mail->Port = 587;                                            // TCP port to connect to
     
         //Recipients
+<<<<<<< HEAD
         $mail->setFrom($smtpUser, 'Crumbsnet');          // Sender's email
+=======
+        $mail->setFrom('altugjakal@gmail.com', 'crumbsnet');          // Sender's email
+>>>>>>> development
         $mail->addAddress($receiver); // Add a recipient
     
         // Content

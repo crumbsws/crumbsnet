@@ -5,6 +5,8 @@ import Loading from '../components/loading.js';
 import Comments from '../components/comments.js';
 import ProfilePicture from '../components/profilepicture.js';
 import Reaction from '../components/interactions/reaction.js';
+import { Linkify } from '../components/utils.js';
+
 function View() {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -82,7 +84,7 @@ function View() {
               ) : (
                 <></>
               )}
-              <p>{body}</p>
+              <p>{Linkify(body)}</p>
               {parent === 'public' ? (
                 <></>
               ) : (

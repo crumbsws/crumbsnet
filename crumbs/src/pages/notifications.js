@@ -38,7 +38,7 @@ function Notifications() {
   }
   else {
     return (
-      data.map(({ type, sender, receiver, status, date }) => (
+      data.map(({ sender, receiver, status, date }) => (
         <>
           {receiver === user ? (
             <div className="post" key={date}>

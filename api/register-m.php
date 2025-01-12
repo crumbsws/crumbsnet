@@ -16,15 +16,17 @@ function setResponse($state, $message, $data){
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-if(!empty($data['user']) && !empty($data['password']))
+if(!empty($data['user']) && !empty($data['password']) && !empty($data['email']))
 {
   $user = str_replace(' ', '', $data['user']);
   $password = $data['password'];
+  $email = $data['email'];
+  $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-  $sql = "SELECT * FROM account WHERE user = '$user'";
+  $sql = "SELECT * FROM account WHERE user = '$user' OR email = '$sanitizedEmail'";
   $result = mysqli_query($conn, $sql);
   if(mysqli_num_rows($result) === 0) {
-    $sql = "INSERT INTO account (user, password) VALUES ('$user', '$hashedPassword')";
+    $sql = "INSERT INTO account (user, email, password) VALUES ('$user', '$sanitizedEmail', '$hashedPassword')";
     mysqli_query($conn, $sql);
     createProfile($conn, $user, 1);
     createToken($conn, $user);
@@ -45,7 +47,7 @@ if(!empty($data['user']) && !empty($data['password']))
   else
   {
     $state = 'error';
-    $message = 'An account with that name already exists.';
+    $message = 'An account with that name/mail already exists.';
     setResponse($state, $message, []);
   }
 

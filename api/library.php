@@ -26,6 +26,17 @@ function createProfile($conn, $user, $points){
     }
     return $data;
   }
+
+  function getOtherClub($conn, $name){
+    $sql = "SELECT * FROM clubs WHERE name='$name'";
+    $result = mysqli_query($conn, $sql);
+    $data = array();
+    while($row = mysqli_fetch_array($result)) {
+      $data[] = $row;
+    }
+    return $data;
+  }
+
   function setClub($conn, $user, $club){
     $sql = "INSERT IGNORE INTO club_user (user, club) VALUES ('$user', '$club')";
     mysqli_query($conn, $sql);
@@ -118,4 +129,22 @@ function clearToken($conn){
     $result = mysqli_query($conn, $sql);
   }
 }
+
+function resetToken($conn, $user){
+
+    $sql = "DELETE FROM auth_token WHERE user='$user'";
+    $result = mysqli_query($conn, $sql);
+}
+
+function createResetCode($conn, $name, $code){
+  $expiry = date('Y-m-d h:i', strtotime('+2 days'));
+  $sql = "INSERT INTO reset_code (user, code, expiry) VALUES ('$name', '$code', '$expiry')";
+
+  mysqli_query($conn, $sql);
+}
+function resetResetCode($conn, $name, $code){
+  $sql = "DELETE FROM reset_code WHERE user='$name'";
+  mysqli_query($conn, $sql);
+}
+
 ?>

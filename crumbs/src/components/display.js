@@ -8,6 +8,7 @@ import Comment from './interactions/comment.js';
 import ExclusiveTag from './tags/exclusivetag.js';
 import SelfTag from './tags/selftag.js';
 import Reaction from './interactions/reaction.js';
+import { Linkify } from './utils.js';
 
 function Display(props) {
 
@@ -22,6 +23,8 @@ function Display(props) {
   const parent = props.parent;
   const username = props.user;
   const club = props.club;
+
+
 
   async function fetchData() {
 
@@ -93,7 +96,7 @@ function Display(props) {
                 ) : (
                   <></>
                 )}
-                <p>{body}</p>
+                <p>{Linkify(body)}</p>
                 <div className='interaction-menu' >
                   <Comment />
                   <Reaction url={url} />
