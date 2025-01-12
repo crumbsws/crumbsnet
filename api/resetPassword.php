@@ -3,6 +3,7 @@ session_start();
 include('connector.php');
 include('library.php');
 include('mail-library.php');
+include('config.php');
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 function setResponse($state, $message){
@@ -28,7 +29,7 @@ function setResponse($state, $message){
         createResetCode($conn, $input, $code);
 
 
-        sendPRCode($code, $email, $alias);
+        sendPRCode($code, $email, $alias, $smtpUser, $smtpPassword, $smtpServ);
 
 
 

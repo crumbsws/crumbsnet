@@ -9,7 +9,7 @@ require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
 
-function sendPRCode($code, $receiver, $alias) {
+function sendPRCode($code, $receiver, $alias, $smtpUser, $smtpPassword, $smtpServ) {
     global $mail;  // Make the $mail object accessible inside the function
     
     try {
