@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 export async function getProfile(user, setData) {
     
@@ -123,4 +124,25 @@ catch(err)
 {
   console.log(err);
 } 
+}
+
+export function Linkify(text) {
+  const urlRegex = /https?:\/\/[^\s]+/g;
+
+  const parts = text.split(urlRegex);
+  const links = [...text.matchAll(urlRegex)];
+
+  return parts.reduce((acc, part, index) => {
+    acc.push(part);
+    if (index < links.length) {
+      acc.push(
+        <Link target="_blank" key={index} to={links[index][0]}>
+          <p className='call-to-act'>
+          {links[index][0]}
+          </p>
+        </Link>
+      );
+    }
+    return acc;
+  }, []);
 }

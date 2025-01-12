@@ -48,6 +48,7 @@ function ResetPassword() {
   }
     return  <>
     <h1>Check your inbox</h1>
+    <p className='email'>We have sent a 6-digit reset code to your mail address.</p>
     <form method="post" onSubmit={handleSubmit} >
         <input
           type="text"
@@ -61,7 +62,7 @@ function ResetPassword() {
           value={newPassword}
           onChange={handleNewPassword}
         />
-      <input type="submit" value="Send Code" />
+      <input type="submit" value="Validate" />
     </form>
       <p className='result'>{message}</p>
   </>;

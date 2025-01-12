@@ -74,12 +74,12 @@ return (
 
 <div className='statistics'>
 <div className='statistics-content'>
-<h1>{point}🧀</h1>
-<p className='email'>Cheese points</p>
+<h1>{point}</h1>
+<p className='email'>Points</p>
 </div>
 </div>
 
-<p className='email'>Given to the top 100 in the Crumbs Club Awards. On creation, it is set to one.</p>
+<p className='email'>Given to the top 100 in the Crumbs Club Awards. On creation, it is set to five.</p>
 
 <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
 <input type="text" id='description' placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription} />

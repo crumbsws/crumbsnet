@@ -142,5 +142,9 @@ function createResetCode($conn, $name, $code){
 
   mysqli_query($conn, $sql);
 }
+function resetResetCode($conn, $name, $code){
+  $sql = "DELETE FROM reset_code WHERE user='$name'";
+  mysqli_query($conn, $sql);
+}
 
 ?>

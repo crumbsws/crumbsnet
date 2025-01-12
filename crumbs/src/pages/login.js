@@ -56,9 +56,7 @@ function Login() {
       <input
         type="text"
         name="user"
-        placeholder="Username / Mail"
-        minLength={3}
-        maxLength={16}
+        placeholder="Username"
         value={userName}
         onChange={handleUserName}
       />

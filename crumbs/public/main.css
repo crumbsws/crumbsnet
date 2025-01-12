@@ -10,6 +10,7 @@
   --cta: rgb(0, 149, 246);
   --dz: rgb(250, 7, 80);
 
+
   scrollbar-color: var(--froutline) var(--bgmain);
 }
 body {
@@ -308,6 +309,7 @@ select {
   font-weight: 600;
   cursor: pointer; 
 }
+
 .call-to-act:hover, .danger-zone:hover {
   text-decoration: underline;
 }

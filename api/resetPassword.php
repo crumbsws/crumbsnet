@@ -2,6 +2,7 @@
 session_start();
 include('connector.php');
 include('library.php');
+include('mail-library.php');
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 function setResponse($state, $message){
@@ -16,12 +17,24 @@ function setResponse($state, $message){
   
   if(isset($data['identifier']) && !empty($data['identifier'])) {
     $input = $data['identifier'];
-    $sql = "SELECT email FROM account WHERE user='$input' OR email='$input'";
+    $sql = "SELECT email, user FROM account WHERE user='$input' OR email='$input'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) === 1) {
 
-        $code = bin2hex(random_bytes(16));
+        $row = mysqli_fetch_array($result);
+        $email = $row['email'];
+        $alias = $row['user'];
+        $code = rand(100000, 999999);
         createResetCode($conn, $input, $code);
+
+
+        sendPRCode($code, $email, $alias);
+
+
+
+
+
+
         $state = 'success';
         $message = '';
         setResponse($state, $message);
@@ -29,7 +42,7 @@ function setResponse($state, $message){
     }
     else {
         $state = 'error';
-        $message = 'A weird error occured?';
+        $message = 'No accounts found with that address.';
         setResponse($state, $message);      
     }
 }
@@ -39,14 +52,15 @@ if(isset($data['code']) && !empty($data['code']) && isset($data['password']) && 
     $password = $data['password'];
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $date = date('Y-m-d h:i');
-    $sql = "SELECT user FROM reset_code WHERE code='$code' AND expiry > '$date'";
+    $sql = "SELECT user FROM reset_code WHERE code='$code' AND expiry > '$date' LIMIT 1";
     $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_array($result)) {
+    if(mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_array($result);
         $value = $row['user'];
-    }
-    if(mysqli_num_rows($result) >= 0) {
+        
         $sql = "UPDATE account SET password='$hashedPassword' WHERE user='$value' OR email='$value'";
         if(mysqli_query($conn, $sql)){
+        resetResetCode($conn, $value, $code);
         $state = 'success';
         $message = '';
         setResponse($state, $message);
