@@ -25,7 +25,8 @@ import Dashboard from './pages/dashboard.js';
 import Notifications from './pages/notifications.js';
 import Direct from './pages/direct.js';
 
-import Club from './pages/clubs/club.js';
+import Board from './pages/clubs/board.js';
+import Posts from './pages/clubs/posts.js';
 import ClubGallery from './pages/clubs/clubgallery.js';
 import Box from './pages/clubs/box.js';
 
@@ -178,7 +179,8 @@ export default function App() {
         <Route path="/dashboard/:club?" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
 
         <Route path="/clubs/:club?" element={<PrivateRoute><Clubs /></PrivateRoute>} >
-          <Route index element={<PrivateRoute><Club /></PrivateRoute>} />
+          <Route index element={<PrivateRoute><Board /></PrivateRoute>} />
+          <Route path='posts' element={<PrivateRoute><Posts/></PrivateRoute>} />
           <Route path='box' element={<PrivateRoute><Box /></PrivateRoute>} />
           <Route path='gallery' element={<PrivateRoute><ClubGallery /></PrivateRoute>} />
         </Route>
