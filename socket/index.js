@@ -6,7 +6,8 @@ const httpServer = require("http").createServer(app);
 const options = { 
     cors: {
         origin: process.env.CORS_ALLOWED,
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
+        credentials: true,
       }
 };
 const io = require("socket.io")(httpServer, options);
