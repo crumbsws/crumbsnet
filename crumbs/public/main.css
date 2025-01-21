@@ -260,10 +260,10 @@ label {
 
 input[type="color"] {
   width: 70px;
-  border-radius: 0px;
-  height: 40px;
-  border: 1px solid var(--bgmain);
-  margin: 5px;
+  border-radius: 5px;
+  height: 50px;
+  padding: 0;
+  border: 1px solid var(--froutline);
 }
 .slider {
   -webkit-appearance: none;
@@ -418,7 +418,7 @@ textarea:focus {
   z-index: 1;
   justify-content: center;
   background: var(--bgmain);
-  gap: 80px;
+  gap:15%;
 }
 #menu a {
   padding: 10px;
@@ -657,7 +657,7 @@ display: block;
   }
 
   #menu {
-    gap: 50px;
+    gap: 5%;
     top: 0px;
   }
   #menu a {
@@ -690,7 +690,7 @@ display: block;
   }
 
   .modal-content {
-    width: 300px;
+    width: 85%;
 
   }
   .sidebar, .taskbar {

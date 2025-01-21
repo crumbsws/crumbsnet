@@ -17,6 +17,9 @@ return (
 
 
     <NavLink to={'/clubs/' + clubProp}>
+    Pins
+    </NavLink>
+    <NavLink to={'/clubs/' + clubProp + '/posts'}>
     Posts
     </NavLink>
     <NavLink to={'/clubs/' + clubProp + '/box'}>
