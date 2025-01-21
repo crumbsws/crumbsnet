@@ -3,7 +3,8 @@ const crypto = require('crypto')
 
 const app = require("express")();
 const httpServer = require("http").createServer(app);
-const options = { 
+const options = {
+    path: process.env.SOCKET_PATH,
     cors: {
         origin: process.env.CORS_ALLOWED,
         methods: ["GET", "POST"],
