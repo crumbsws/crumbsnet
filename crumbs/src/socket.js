@@ -7,4 +7,4 @@ export const socket = io(url, {
     path: process.env.REACT_APP_SOCKET_PATH,
     transports: ["websocket"],
     withCredentials: true,
-}););
+});
