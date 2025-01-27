@@ -1,8 +1,8 @@
-import ClubSetup from '../components/clubs/clubsetup.js';
+import ClubSetup from '../components/clubs/clubSetup.js';
 import { useEffect, useState } from 'react';
 import { getOwnedClub } from '../components/utils.js';
 import Loading from '../components/loading.js';
-import ClubEdit from '../components/clubs/clubedit.js';
+import ClubEdit from '../components/clubs/clubEdit.js';
 import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 

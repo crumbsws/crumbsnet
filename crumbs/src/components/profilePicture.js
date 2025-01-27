@@ -5,7 +5,7 @@ function ProfilePicture(props) {
     const size = props.size;
     const src = props.src;
         return (
-            <img src={src} className="rounded" id={size} />
+            <img src={src} loading="lazy" className="rounded" id={size} />
         )
         }
 

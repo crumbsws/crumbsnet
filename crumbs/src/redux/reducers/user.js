@@ -6,18 +6,9 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: {
         
-        data: {
-          id: null,
-          name: null,
-          point: null,
-          description: null,
-          home: null,
-          relation: null,
-          photo: null,
-        },
-        clubs: {
-          
-        }
+        data: {},
+        clubs: {},
+        contacts: {}
       },
     reducers: {
         setUserData: (state, action) => {
@@ -25,9 +16,12 @@ export const userSlice = createSlice({
         },
         setUserClubs: (state, action) => {
           state.clubs = { ...state.clubs, ...action.payload };
-      }
+        },
+        setUserContacts: (state, action) => {
+          state.contacts = { ...state.contacts, ...action.payload };
+        }
     }
 })
 
-export const { setUserData, setUserClubs } = userSlice.actions;
+export const { setUserData, setUserClubs, setUserContacts } = userSlice.actions;
 export default userSlice.reducer;

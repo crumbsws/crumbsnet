@@ -5,7 +5,7 @@ import{ Outlet } from "react-router-dom";
 
 
 import BottomNav from "./bottomnav.js";
-import OutletWrapper from "../outletwrapper.js";
+import OutletWrapper from "../outletWrapper.js";
 import SideBar from './sidebar.js';
 import TaskBar from "./taskbar.js";
 

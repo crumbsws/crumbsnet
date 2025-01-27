@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './redux/store.js';
-import { setUserData, setUserClubs } from './redux/reducers/user.js';
-import { useEffect, useState } from 'react';
+import { setUserData, setUserClubs, setUserContacts } from './redux/reducers/user.js';
+import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import Welcome from './pages/welcome.js';
@@ -27,7 +27,7 @@ import Direct from './pages/direct.js';
 
 import Board from './pages/clubs/board.js';
 import Posts from './pages/clubs/posts.js';
-import ClubGallery from './pages/clubs/clubgallery.js';
+import ClubGallery from './pages/clubs/clubGallery.js';
 import Box from './pages/clubs/box.js';
 
 import Main from './pages/people/main.js';
@@ -39,7 +39,7 @@ import PrivateRoute from './privateroute.js';
 import EnterInput from './pages/resetPassword/enterInput.js';
 import ResetPassword from './pages/resetPassword/resetPassword.js';
 
-import FirstLoader from './components/firstloader.js';
+import FirstLoader from './components/firstLoader.js';
 import { setDirectActive, setRequestsActive } from './redux/reducers/inbox.js';
 import { socket } from './socket.js';
 
@@ -47,52 +47,67 @@ import { socket } from './socket.js';
 export default function App() {
   const [loading, setLoading] = useState(true);
   const currentChannel = useSelector((state) => state.inbox.currentChannel);
-  const active = useSelector((state) => state.inbox.active);
-  const userData = useSelector((state) => state.user.data);
+  const directActive = useSelector((state) => state.inbox.directActive);
+  const userData = useSelector((state) => state.user.data[0] || {});
   
-  const handleNotifications = (newMessage) => {
-    if (!userData || !userData.length) return;
+  useEffect(() => {
+    getUserData();
+    getUnseenRequests()
+    getUnseenMessages()
+  }, [])
+
+  const handleNotifications = useCallback((newMessage) => {
     // Only show notifications for messages not from current user
-    if (newMessage.user !== userData[0].name) {
+    if (loading) return;//active check wont work
+    if (userData?.name && newMessage.user !== userData.name) {
       // Only notify if message is from a different channel
       if (newMessage.channel !== currentChannel) {
-        if (!active) {
+        if (!directActive){
           store.dispatch(setDirectActive());
         }
-        
-        if (!document.hasFocus()) {
-          document.title = 'New Message 🛎️';
-          
-          const resetTitle = () => {
-            document.title = 'Crumbs';
-            window.removeEventListener('focus', resetTitle);
-          };
-          window.addEventListener('focus', resetTitle);
+        else {
+          console.log('skip notif logic')
         }
+          if (!document.hasFocus()) {
+            document.title = 'New Message 🛎️';
+            
+            const resetTitle = () => {
+              document.title = 'Crumbs';
+              window.removeEventListener('focus', resetTitle);
+            };
+            window.addEventListener('focus', resetTitle);
+          }        
+        
+
       }
     }
+    else {
+      console.log('user not set')
+    }
 
-  };
+  });
 
 
 
   useEffect(() => {
 
-    if (!userData || !userData.length) return;
-    socket.on('message', handleNotifications);
+    socket.on('message', (newMessages) => {
+          
+      handleNotifications(newMessages)
+
+    });
     //temp, broadcast the user from socketcontainer
 
     return () => {
-      socket.off('message', handleNotifications);
+      socket.off('message');
     };
-  }, [])
+  }, [currentChannel, loading, directActive])
 
-  useEffect(() => {
-      getUserData();
-      getUnseen()
-    }, [])
+  function joinChannel(channel) {
+    socket.emit('joinChannel', channel);
+  }
 
-    async function getUnseen() {
+    async function getUnseenRequests() {
       try {
         const response = await fetch(process.env.REACT_APP_API_URL + '/getRequests.php?status=unseen', {
           method: 'POST',
@@ -101,6 +116,22 @@ export default function App() {
         const data = await response.json();
         if(data.length > 0){
           store.dispatch(setRequestsActive());
+        }
+      } catch (error) {
+        console.log(error);
+        
+        
+      }
+    }
+    async function getUnseenMessages() {
+      try {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/getMessages.php?status=unseen', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        const data = await response.json();
+        if(data.length > 0){
+          store.dispatch(setDirectActive());
         }
       } catch (error) {
         console.log(error);
@@ -121,8 +152,13 @@ export default function App() {
           if(data.state === 'success'){
           store.dispatch(setUserData(data.data));
           store.dispatch(setUserClubs(data.clubs));
+          store.dispatch(setUserContacts(data.contacts));
+          
+          data.contacts.forEach((element) => joinChannel(element.url));
           sessionStorage.setItem('loggedin', true);
-        }
+          
+
+          }
           
           setLoading(false);
          

@@ -7,7 +7,7 @@ import { setCurrentChannel } from '../../redux/reducers/inbox';
 import BackNav from '../navigation/backnav';
 import SendBox from './sendbox';
 import ChatBox from './chatbox';
-import ProfilePicture from '../profilepicture';
+import ProfilePicture from '../profilePicture';
 
 function SocketContainer(props) {
   const [typing, setTyping] = useState(false);
@@ -16,7 +16,7 @@ function SocketContainer(props) {
   const [loading, setLoading] = useState(false);
   const [reply, setReply] = useState('');
   const name = useSelector((state) => state.user.data[0].name);
-  var channel = props.channel;
+  const channel = props.channel;
   const dispatch = useDispatch();
   const currentChannel = useSelector((state) => state.inbox.currentChannel);
   //fetch opposing details
@@ -44,16 +44,13 @@ function SocketContainer(props) {
   }
   //fetch opposing details
 
-  function joinChannel(channel) {
-    socket.emit('joinChannel', channel);
-  }
 
   useEffect(() => {
 
     if (!channel) return; 
-      joinChannel(channel);
+      
       store.dispatch(setCurrentChannel(channel));
-      console.log(channel)
+      console.log('Switched to ' + channel)
       fetchDetails();
 
       socket.on('typing_start', (typer) => {

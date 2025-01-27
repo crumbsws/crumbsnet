@@ -29,13 +29,13 @@ return (
 <div className="sidebar">
 <div className="info">
 </div>
-<h3><i class="fa-solid fa-microphone-lines"></i> Lounge </h3>
-<p>Pretty soon!</p>
+<h3>Lounge </h3>
+<p>Open for suggestions</p>
 <h3>Trending Collections</h3>
 {trends.map(({ collect, count }) =>(
         <Link to={'discover/' + collect}>
         <div class='trend'>
-        <h3>{collect}</h3>
+        <h3><i class="fa-solid fa-circle" aria-hidden="true"></i> {collect}</h3>
         <h4 className='email'><i class="fa-solid fa-thumbtack"></i> Trending  •  {count} New Posts</h4>
         </div>
         </Link>

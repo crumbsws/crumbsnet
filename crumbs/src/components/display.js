@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Loading from './loading.js';
-import ProfilePicture from './profilepicture.js';
+import ProfilePicture from './profilePicture.js';
 import { PopupTrigger } from './popup.js';
 import { useSelector } from 'react-redux';
 import Comment from './interactions/comment.js';
-import ExclusiveTag from './tags/exclusivetag.js';
-import SelfTag from './tags/selftag.js';
+import ExclusiveTag from './tags/exclusiveTag.js';
+import SelfTag from './tags/selfTag.js';
 import Reaction from './interactions/reaction.js';
 import { Linkify } from './utils.js';
 

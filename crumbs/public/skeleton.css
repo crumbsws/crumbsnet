@@ -1,0 +1,9 @@
+.skeleton {
+    background: var(--froutline) !important;
+    width: 100%;
+    height: auto;
+    color: transparent;
+    border-radius: 25px;
+  }
+  
+

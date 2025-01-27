@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../components/loading.js';
 import Uploader from '../components/buttons/uploader.js';
 import { useSelector } from 'react-redux';
-import ProfilePicture from '../components/profilepicture.js';
+import ProfilePicture from '../components/profilePicture.js';
 import { PopupTrigger } from '../components/popup.js';
 import { store } from '../redux/store.js';
 import { setUserData, setUserClubs } from '../redux/reducers/user.js';

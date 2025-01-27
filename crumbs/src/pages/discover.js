@@ -71,9 +71,6 @@ function Discover() {
                       ) : (
                         <p>Reply to <strong>{parent}</strong></p>
                       )}
-                      <h4 className='email'>
-                        <strong>{name}</strong> • {date} • {collect}
-                      </h4>
                       {conf && (
                         <img src={process.env.REACT_APP_API_URL + `/images/${conf}`} alt='' />
                       )}

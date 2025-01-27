@@ -3,8 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { doSearch } from '../components/utils';
+import { socket } from '../socket';
+import Conversations from '../components/direct/conversations';
 
-import SocketContainer from '../components/direct/socketcontainer';
+import SocketContainer from '../components/direct/socketContainer';
 function Direct() {
 
   const type = 'people';
@@ -22,6 +24,9 @@ function Direct() {
 
 
 
+  function joinChannel(channel) {
+    socket.emit('joinChannel', channel);
+  }
 
 
 
@@ -43,7 +48,9 @@ function Direct() {
       });
       const data = await response.json();
       if(data.state === 'success') {
+        joinChannel(data.url)
         navigate('/direct/' + data.url);
+
       }
         
     }catch(err){
@@ -77,7 +84,7 @@ function Direct() {
       </form>
         {!query ? (
           <>        
-          <p>Not Implemented</p>
+          <Conversations />
           </>
         ) : (<></>)}
       

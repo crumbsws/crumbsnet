@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 
-import ClubButton from '../buttons/clubbutton.js';
+import ClubButton from '../buttons/clubButton.js';
 function ClubMenu(props) {
 
 

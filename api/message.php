@@ -17,10 +17,10 @@ $data = json_decode($json, true);
 
 if(!empty($data['user']) && !empty($data['channel']) && !empty($data['message']) && !empty($data['url']))
 {
-$user = $data['user'];
-$channel = $data['channel'];
-$message = $data['message'];
-$url = $data['url'];
+$user = mysqli_real_escape_string($conn, $data['user']);
+$channel = mysqli_real_escape_string($conn, $data['channel']);
+$message = mysqli_real_escape_string($conn, $data['message']);
+$url = mysqli_real_escape_string($conn, $data['url']);
 $date = date("Y-m-d h:i");
 $amount = 1;
 addPoint($conn, $user, $amount);
@@ -35,7 +35,7 @@ else
 //media handling too pls
 
 
-$sql = "INSERT INTO messages (user, channel, url, message, reply, date) VALUES ('$user','$channel', '$url', '$message', '$reply', '$date')";
+$sql = "INSERT INTO messages (user, channel, url, message, reply, date, status) VALUES ('$user','$channel', '$url', '$message', '$reply', '$date', 'unseen')";
 if(mysqli_query($conn, $sql)) {
     $state= 'success';
     setResponse($state);

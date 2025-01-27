@@ -75,11 +75,11 @@ else if($data['type'] === 'gallery')
 {
     if(isset($data['club'])) {
         $club = $data['club'];
-        $sql = "SELECT conf, url FROM paths WHERE conf!='' AND name IN(SELECT user FROM club_user WHERE club='$club')";
+        $sql = "SELECT conf, url FROM paths WHERE conf!='' AND access='public' AND name IN(SELECT user FROM club_user WHERE club='$club')";
     }
     else if(isset($data['user'])) {
         $user = $data['user'];
-        $sql = "SELECT conf, url FROM paths WHERE conf!='' AND name='$user'";
+        $sql = "SELECT conf, url FROM paths WHERE conf!='' AND access='public' AND name='$user'";
     }
 }
 else if($data['type'] === 'diary')

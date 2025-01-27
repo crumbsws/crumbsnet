@@ -1,5 +1,5 @@
-import ClubMenu from '../components/clubs/clubmenu.js';
-import ExploreClubs from '../components/clubs/exploreclubs.js';
+import ClubMenu from '../components/clubs/clubMenu.js';
+import ExploreClubs from '../components/clubs/exploreClubs.js';
 import { useParams } from 'react-router-dom';
 
 function Clubs() {

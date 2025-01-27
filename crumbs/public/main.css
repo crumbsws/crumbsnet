@@ -5,7 +5,7 @@
   --bgmain: #09090B;
   --brand: #fffcf4;
   --bgthird: #09090a;
-  --froutline: #1d1d1f;
+  --froutline: #27272A;
   --email: #767b80;
   --cta: rgb(0, 149, 246);
   --dz: rgb(250, 7, 80);
@@ -193,7 +193,7 @@ li {
 .outlet-wrapper {
   padding-left: 20px;
   padding-right: 20px;
-  width:450px;
+  width:500px;
   border-left: 1px solid var(--froutline);
   display: flex;
   flex-direction: column;
@@ -558,11 +558,11 @@ textarea:focus {
   color: var(--brand);
   width: 300px;
   border: 1px solid var(--froutline);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top: none;
+  border-right: none;
   border-bottom: none;
-  padding: 5px;
-  text-align: center;
+  padding: 5px 5px 5px 20px;
+  text-align: left;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -573,6 +573,8 @@ textarea:focus {
   transition: 0.5s;
   overflow: hidden;
   line-height: 0.2rem;
+  border-radius: 10px;
+  padding: 5px;
 }
 .trend:hover {
   background: #0c0c0f;

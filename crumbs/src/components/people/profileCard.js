@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Loading from '../loading.js';
 import { getProfile } from '../utils.js';
 import Icons from "../../icons/iconlibrary.js";
-import ProfilePicture from "../profilepicture.js";
+import ProfilePicture from "../profilePicture.js";
 import { useSelector } from "react-redux";
 
 function Profilecard(props) {

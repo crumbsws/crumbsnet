@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { store } from "../redux/store";
 import { setRequestsActive } from "../redux/reducers/inbox";
 import Loading from "../components/loading";
-import AcceptButton from "../components/buttons/acceptbutton";
+import AcceptButton from "../components/buttons/acceptButton";
 
 function Notifications() {
   const [data, setData] = useState([]);

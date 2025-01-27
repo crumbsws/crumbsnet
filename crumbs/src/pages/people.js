@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import PeopleMenu from '../components/people/peoplemenu.js';
-import Profilecard from '../components/people/profilecard.js';
+import PeopleMenu from '../components/people/peopleMenu.js';
+import Profilecard from '../components/people/profileCard.js';
 
 function People() {
     const {people} = useParams();

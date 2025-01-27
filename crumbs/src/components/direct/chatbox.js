@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef} from 'react';
 import { socket } from '../../socket';
+import MessagesSkeleton from '../skeletons/messagesSkeleton';
 
 
 
 
 function ChatBox(props) {
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const channel = props.channel;
   const name = props.name;
@@ -29,8 +31,6 @@ useEffect(() => {
         fetchMessages();
         socket.on('message', (newMessages) => {
           
-          console.log(newMessages.channel);
-          console.log(channel)
 
           if(newMessages.channel === channel) {
             
@@ -67,6 +67,7 @@ async function fetchMessages() {
     });
     const data = await response.json();
     setMessages(data);
+    setLoading(false);
   } catch (error) {
     console.log(error);
     
@@ -79,9 +80,13 @@ async function fetchMessages() {
 
 
 //photo component not working//photo component not working//photo component not working
-return  <>
+if(loading) {
+  return(<MessagesSkeleton />)
+}
+return  (
+<>
 <div  className="chatbox">
-<div  className="chatcontainer">
+<div  className="chat-container">
 
 {messages.map(({ user, message, url, reply }) =>(
 <>
@@ -114,7 +119,8 @@ return  <>
 <div ref={messagesEndRef}/>
 </div>
 
-</>;
+</>
+);
   
 };
 

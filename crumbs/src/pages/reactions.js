@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import BackNav from '../components/navigation/backnav.js';
 import Loading from '../components/loading.js';
 import { useParams } from 'react-router-dom';
-import ProfilePicture from '../components/profilepicture.js';
+import ProfilePicture from '../components/profilePicture.js';
 
 
 function Reactions() {

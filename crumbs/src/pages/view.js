@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import BackNav from '../components/navigation/backnav.js';
 import Loading from '../components/loading.js';
 import Comments from '../components/comments.js';
-import ProfilePicture from '../components/profilepicture.js';
+import ProfilePicture from '../components/profilePicture.js';
 import Reaction from '../components/interactions/reaction.js';
 import { Linkify } from '../components/utils.js';
 
