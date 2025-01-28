@@ -94,7 +94,7 @@ function Board() {
             </div>
 
             <div className='post container' >
-                <Display type='pin' club={club} />
+            <p>In development</p>
             </div>
         </>
     )
