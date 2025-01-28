@@ -1,4 +1,40 @@
 import { Link } from "react-router-dom";
+import { setUserData, setUserClubs, setUserContacts } from '../redux/reducers/user.js';
+import { store } from "../redux/store";
+import { socket } from "../socket";
+  function joinChannel(channel) {
+    socket.emit('joinChannel', channel);
+  }
+
+  export async function getUserData(setLoading){
+      try
+      {
+          
+          const response = await fetch(process.env.REACT_APP_API_URL + '/getData.php?', {
+              credentials: 'include',
+              method: 'GET',
+            });
+          const data = await response.json();
+          if(data.state === 'success'){
+          store.dispatch(setUserData(data.data));
+          store.dispatch(setUserClubs(data.clubs));
+          store.dispatch(setUserContacts(data.contacts));
+          
+          data.contacts.forEach((element) => joinChannel(element.url));
+          sessionStorage.setItem('loggedin', true);
+          
+
+          }
+          
+          setLoading(false);
+          
+         
+    }
+    catch(err)
+    {
+      console.log(err);
+    } 
+    }
 
 export async function getProfile(user, setData) {
     

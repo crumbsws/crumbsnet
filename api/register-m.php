@@ -3,12 +3,11 @@ include('connector.php');
 include('library.php');
 session_start();
 
-function setResponse($state, $message, $data){
+function setResponse($state, $message){
     $response = 
     [
         'state' => $state,
-        'message' => $message,
-        'data' => $data
+        'message' => $message
     ];
     echo (json_encode($response)); 
 }
@@ -34,13 +33,8 @@ if(!empty($data['user']) && !empty($data['password']) && !empty($data['email']))
     $message = 'Created account';
     $state = 'loggedin';
 
-    $sql = "SELECT * FROM profile WHERE name='$user'";
-    if($result = mysqli_query($conn, $sql)){
-      while ($row = mysqli_fetch_assoc($result)) {
-          $data[] = $row;
-      }}
 
-    setResponse($state, $message, $data);
+    setResponse($state, $message);
 
 
   }
@@ -48,7 +42,7 @@ if(!empty($data['user']) && !empty($data['password']) && !empty($data['email']))
   {
     $state = 'error';
     $message = 'An account with that name/mail already exists.';
-    setResponse($state, $message, []);
+    setResponse($state, $message);
   }
 
 }
@@ -56,6 +50,6 @@ else
 {
   $state = 'error';
   $message = 'Please fill everything.';
-  setResponse($state, $message, []);
+  setResponse($state, $message);
 }
 ?>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import{ Link } from "react-router-dom";
 import { store } from '../redux/store.js';
 import { setUserData } from '../redux/reducers/user.js';
+import { getUserData } from '../components/utils.js';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -39,9 +40,8 @@ function Login() {
       });
       const data = await response.json();
       if(data.state === 'loggedin'){//dispatch
-        sessionStorage.setItem('loggedin', true)
-        store.dispatch(setUserData(data.data));
-        navigate('/');
+        await getUserData();
+        navigate('/');       
       }
       else {
         setMessage(data.message);

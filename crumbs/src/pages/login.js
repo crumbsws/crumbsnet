@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
 import{ Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Loading from '../components/loading.js';
 import { store } from "../redux/store.js";
-import { setUserData, setUserClubs } from '../redux/reducers/user.js';
+import { getUserData } from "../components/utils.js";
 
 function Login() {
   const dispatch = useDispatch();
@@ -12,6 +12,9 @@ function Login() {
   const [userName, setUserName] = useState('');
   const [message, setMessage] = useState('');
   let navigate = useNavigate();
+
+
+
 
   function handleUserName(e){
     setUserName(e.target.value);
@@ -34,10 +37,8 @@ function Login() {
       });
       const data = await response.json();
       if(data.state === 'loggedin'){
-        sessionStorage.setItem('loggedin', true);
-        store.dispatch(setUserData(data.data));
-        store.dispatch(setUserClubs(data.clubs));
-        navigate('/');
+        await getUserData();
+          navigate('/');
       }
       else {
         setMessage(data.message);

@@ -5,6 +5,7 @@ import { store } from './redux/store.js';
 import { setUserData, setUserClubs, setUserContacts } from './redux/reducers/user.js';
 import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { getUserData } from './components/utils.js';
 
 import Welcome from './pages/welcome.js';
 import Login from './pages/login.js';
@@ -51,7 +52,7 @@ export default function App() {
   const userData = useSelector((state) => state.user.data[0] || {});
   
   useEffect(() => {
-    getUserData();
+    getUserData(setLoading);
     getUnseenRequests()
     getUnseenMessages()
   }, [])
@@ -140,34 +141,7 @@ export default function App() {
       }
     }
 
-    async function getUserData(){
-      try
-      {
-          
-          const response = await fetch(process.env.REACT_APP_API_URL + '/getData.php?', {
-              credentials: 'include',
-              method: 'GET',
-            });
-          const data = await response.json();
-          if(data.state === 'success'){
-          store.dispatch(setUserData(data.data));
-          store.dispatch(setUserClubs(data.clubs));
-          store.dispatch(setUserContacts(data.contacts));
-          
-          data.contacts.forEach((element) => joinChannel(element.url));
-          sessionStorage.setItem('loggedin', true);
-          
 
-          }
-          
-          setLoading(false);
-         
-    }
-    catch(err)
-    {
-      console.log(err);
-    } 
-    }
 
 
 

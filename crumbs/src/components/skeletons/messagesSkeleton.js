@@ -29,6 +29,17 @@ function MessagesSkeleton() {
                     <div className="chat received skeleton">
                         <p>Rip you off for a solid buck</p>
                     </div>
+                    
+                    <div className="chat sent skeleton">
+                        <p>Internet is failing huh?</p>
+                    </div>
+
+                    <div className="chat received skeleton">
+                        <p>Yeah, look we are stuck in the loading screen</p>
+                    </div>
+                    <div className="chat received skeleton">
+                        <p>Can it get worse than this?</p>
+                    </div>
 
 
 
