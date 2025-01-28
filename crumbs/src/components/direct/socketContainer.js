@@ -3,6 +3,7 @@ import { socket } from '../../socket';
 import { useSelector, useDispatch } from 'react-redux';
 import { store } from '../../redux/store';
 import { setCurrentChannel } from '../../redux/reducers/inbox';
+import ChannelDetailSkeleton from '../skeletons/channelDetailSkeleton';
 
 import BackNav from '../navigation/backnav';
 import SendBox from './sendbox';
@@ -10,7 +11,7 @@ import ChatBox from './chatbox';
 import ProfilePicture from '../profilePicture';
 
 function SocketContainer(props) {
-  const [typing, setTyping] = useState(false);
+
   const [typer, setTyper] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -56,7 +57,6 @@ function SocketContainer(props) {
       socket.on('typing_start', (typer) => {
 
         if (typer.user !== name && typer.channel === currentChannel) {
-          setTyping(true);
           setTyper(typer);
         }
 
@@ -65,13 +65,12 @@ function SocketContainer(props) {
 
       socket.on('typing_stop', (typer) => {
 
-        setTyping(false);
+        setTyper('');
 
       });
     
       return () => { //not tested, must prevent leak between channels and messages stil received by the other socket channel
         dispatch(setCurrentChannel(null)); // Clear current channel on unmount
-        setTyping(false);
         setTyper('');
         setReply('');
       };
@@ -83,11 +82,12 @@ function SocketContainer(props) {
     <>
       <BackNav>
 
+      {loading ? (<ChannelDetailSkeleton />) : (<>
         {data.map(({ name, photo }) => (
 
           <>
             <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + photo} size='xs' />
-            {!typing ? (
+            {!typer ? (
               <p>{name}</p>
             ) : (
               <p className='email'>{typer} is typing...</p>
@@ -95,6 +95,7 @@ function SocketContainer(props) {
           </>
 
         ))}
+        </>)}
 
       </BackNav>
       <ChatBox channel={currentChannel} name={name} setReply={setReply} />

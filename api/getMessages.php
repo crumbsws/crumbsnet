@@ -8,7 +8,7 @@ $data = json_decode($json, true);
 
 $user = $_SESSION['user'];
 if(isset($_GET['status']) && $_GET['status'] === 'unseen') {
-    $sql = "SELECT * FROM messages WHERE channel IN(SELECT url FROM channel_user WHERE user='$user') AND status='unseen'";
+    $sql = "SELECT * FROM messages WHERE channel IN(SELECT url FROM channel_user WHERE user='$user') AND status='unseen' AND user!='$user'";
     $result = mysqli_query($conn, $sql);
     $data = array();
     
