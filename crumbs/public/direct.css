@@ -41,7 +41,7 @@
   }
 
   #sent{
-    background: rgb(255, 251, 234);
+    background: rgb(244, 244, 240);
     border-left: 4px solid var(--froutline);
   }
   #received{
@@ -76,6 +76,7 @@
   }
   .chat p {
     line-height: 1.2rem;
+    overflow-wrap: break-word;
   }
 
 .sendform {
