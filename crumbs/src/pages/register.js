@@ -1,8 +1,7 @@
 import Loading from '../components/loading.js';
 import React, { useState } from "react";
 import{ Link } from "react-router-dom";
-import { store } from '../redux/store.js';
-import { setUserData } from '../redux/reducers/user.js';
+import PageWrapper from '../components/pageWrapper.js';
 import { getUserData } from '../components/utils.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -53,7 +52,8 @@ function Login() {
     }
 
   }
-    return  <>
+    return  (
+      <PageWrapper>
     <h1>Register</h1>
     <form method="post" onSubmit={handleSubmit} >
         <input
@@ -78,7 +78,8 @@ function Login() {
     </form>
       <p className='result'>{message}</p>
     <p>Have an account? | <Link to="/login">Login</Link></p>
-  </>;
+    </PageWrapper>
+    );
   
 };
 

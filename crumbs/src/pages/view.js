@@ -6,6 +6,7 @@ import Comments from '../components/comments.js';
 import ProfilePicture from '../components/profilePicture.js';
 import Reaction from '../components/interactions/reaction.js';
 import { Linkify } from '../components/utils.js';
+import PageWrapper from '../components/pageWrapper.js';
 
 function View() {
   const { id } = useParams();
@@ -43,15 +44,16 @@ function View() {
   }
   if (loading) {
     return (
+    <PageWrapper>
       <Loading />
-
+    </PageWrapper>
 
     );
   }
   else {
 
     return (
-      <>
+      <PageWrapper>
         <BackNav />
         {data.map(({ photo, name, title, url, body, date, conf, collect, parent }) => (
           <>
@@ -100,7 +102,7 @@ function View() {
           </>
 
         ))}
-      </>
+      </PageWrapper>
     );
   }
 }

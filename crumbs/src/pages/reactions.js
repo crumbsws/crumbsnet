@@ -3,7 +3,7 @@ import BackNav from '../components/navigation/backnav.js';
 import Loading from '../components/loading.js';
 import { useParams } from 'react-router-dom';
 import ProfilePicture from '../components/profilePicture.js';
-
+import PageWrapper from '../components/pageWrapper.js';
 
 function Reactions() {
   const { id } = useParams();
@@ -49,7 +49,7 @@ function Reactions() {
   else {
 
     return (
-      <>
+      <PageWrapper>
         <BackNav ><p>Reactions</p></BackNav>
         {data.map(({ name, rating, photo }) => (
           <>
@@ -66,7 +66,7 @@ function Reactions() {
 
         ))}
 
-      </>
+      </PageWrapper>
     );
   }
 }

@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { doSearch } from '../components/utils.js';
+import PageWrapper from '../components/pageWrapper.js';
 import Display from '../components/display.js';
 function Discover() {
   const { value } = useParams();
@@ -24,7 +25,7 @@ function Discover() {
     
 
     return (
-      <>
+      <PageWrapper>
         <form  onSubmit={handleSubmit}>
           <input 
             type='search' 
@@ -82,7 +83,7 @@ function Discover() {
             )}
           </>
         )}
-      </>
+      </PageWrapper>
     );
     
 }

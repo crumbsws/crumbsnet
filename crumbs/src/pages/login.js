@@ -4,6 +4,7 @@ import{ Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Loading from '../components/loading.js';
 import { store } from "../redux/store.js";
+import PageWrapper from "../components/pageWrapper.js";
 import { getUserData } from "../components/utils.js";
 
 function Login() {
@@ -50,7 +51,8 @@ function Login() {
     }
 
   }
-    return  <>
+    return  (
+      <PageWrapper>
     
     <h1>Login</h1>
     <form method="post" onSubmit={handleSubmit} >
@@ -69,7 +71,8 @@ function Login() {
     <p className='result'>{message}</p>
     <p>New to crumbs? | <Link to="/register">Register</Link></p>
     <p>Forgot password? | <Link to="/resetPassword">Reset</Link></p>
-  </>;
+    </PageWrapper>
+  );
   
 };
 

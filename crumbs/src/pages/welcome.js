@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import PageWrapper from "../components/pageWrapper";
 function Welcome() {
-    return  <>
-
+    return  (
+<PageWrapper>
   <div className="welcome">
     
     <h1>
@@ -183,7 +184,7 @@ function Welcome() {
 
 
 
-</>;
+  </PageWrapper>);
   
 };
 

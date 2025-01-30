@@ -95,12 +95,13 @@
   max-width: 85%;
   }
   @media (max-width: 1024px) { 
-    .sendform {
-      bottom: 70px;
-  }
+
 
     }
   @media (max-width: 768px) {
+  .sendform {
+      bottom: 70px;
+  }
     .reply{
  
       max-height: 80px;

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getOwnedClub } from '../components/utils.js';
 import Loading from '../components/loading.js';
 import ClubEdit from '../components/clubs/clubEdit.js';
+import PageWrapper from '../components/pageWrapper.js';
 import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 
@@ -25,7 +26,7 @@ function Dashboard() {
   }
   else {
     return (
-      <>
+      <PageWrapper>
         {club ? //its null getItem only brings the club name -f
           (
             <>
@@ -52,7 +53,7 @@ function Dashboard() {
             </>
           )
         }
-      </>
+      </PageWrapper>
     )
   }
 

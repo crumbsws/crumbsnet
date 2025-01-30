@@ -1,6 +1,7 @@
-
+import PageWrapper from "../components/pageWrapper";
 function Err() {
-    return  <>
+    return  (
+      <PageWrapper>
 
 
     <h2>
@@ -12,7 +13,8 @@ function Err() {
     <div><iframe src="https://giphy.com/embed/Wq7qKYRTNXVew"   frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 
 
-</>;
+    </PageWrapper>
+    );
   
 };
 

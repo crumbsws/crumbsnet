@@ -1,6 +1,8 @@
 import BackNav from "../components/navigation/backnav";
+import PageWrapper from "../components/pageWrapper";
 function Tos() {
-    return  <>
+    return  (
+    <PageWrapper>
   <BackNav />
 <div className="tos">
 <h3>Terms of Service for Crumbs</h3>
@@ -41,7 +43,7 @@ function Tos() {
         </li>
     </ul>
 </div>
-  </>;
+</PageWrapper>);
   };
 
   export default Tos;

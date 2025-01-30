@@ -1,6 +1,6 @@
 import React from 'react';
 import Display from '../components/display.js';
-import { getItem } from '../components/utils.js';
+import PageWrapper from '../components/pageWrapper.js';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ function Center() {
 
 
     return (
-              <>
+              <PageWrapper>
                 {description && home && relation ? (
                 <div class="post" id="tip">
                   <h1>Start Publishing</h1>
@@ -30,7 +30,7 @@ function Center() {
                   )
                     }
                 <Display type='posts' />
-              </>
+              </PageWrapper>
             )
         
     };

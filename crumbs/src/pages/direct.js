@@ -1,12 +1,13 @@
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { doSearch } from '../components/utils';
 import { socket } from '../socket';
 import Conversations from '../components/direct/conversations';
-
+import PageWrapper from '../components/pageWrapper';
 import SocketContainer from '../components/direct/socketContainer';
+import ConversationsBar from '../components/navigation/defaultbar';
 function Direct() {
 
   const type = 'people';
@@ -59,7 +60,18 @@ function Direct() {
   }
 
 //pass all the data directly to socketcontsiner. no getChannel details
-  return  <>
+  return  (
+    <>
+    {channel ? (
+    <ConversationsBar>
+      <Link to='/direct'>
+      <p className='call-to-act'><i class="fa-solid fa-plus"></i> New Conversation</p>
+      </Link>
+    <Conversations displayLastMessage='false' profileSize='xs'/>
+    </ConversationsBar>
+    ) : (<></>)}
+    <PageWrapper>
+
   {channel ? (
   <>
   <SocketContainer channel={channel}/>
@@ -90,7 +102,9 @@ function Direct() {
       
     </>
   )}
+  </PageWrapper>
   </>
+  )
   };
 
   export default Direct;

@@ -4,45 +4,45 @@ function ConversationsSkeleton() {
     return (
         <>
             <div className='post conversation-container' >
-                <ProfilePicture size='s' className='skeleton' />
+                <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>You got skeletonizzzzed</h4>
-                    <p className='skeleton'>You got skeletonizzzzed</p>
+                    <h4 className='skeleton'>loading wait</h4>
+                    <p className='skeleton'>loading</p>
                 </div>
 
             </div>
             <div className='post conversation-container' >
-                <ProfilePicture size='s' className='skeleton' />
+                <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>You got skeletonizzzzed</h4>
-                    <p className='skeleton'>You got skeletonizzzzed</p>
-                </div>
-
-            </div>
-
-            <div className='post conversation-container' >
-                <ProfilePicture size='s' className='skeleton' />
-                <div>
-                    <h4 className='skeleton'>You got skeletonizzzzed</h4>
-                    <p className='skeleton'>You got skeletonizzzzed</p>
+                    <h4 className='skeleton'>loading wait wait</h4>
+                    <p className='skeleton'>loading wait</p>
                 </div>
 
             </div>
 
             <div className='post conversation-container' >
-                <ProfilePicture size='s' className='skeleton' />
+                <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>You got skeletonizzzzed</h4>
-                    <p className='skeleton'>You got skeletonizzzzed</p>
+                    <h4 className='skeleton'>loading wait</h4>
+                    <p className='skeleton'>loading</p>
                 </div>
 
             </div>
 
             <div className='post conversation-container' >
-                <ProfilePicture size='s' className='skeleton' />
+                <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>You got skeletonizzzzed</h4>
-                    <p className='skeleton'>You got skeletonizzzzed</p>
+                    <h4 className='skeleton'>loading wait wait</h4>
+                    <p className='skeleton'>loading</p>
+                </div>
+
+            </div>
+
+            <div className='post conversation-container' >
+                <ProfilePicture size='xs' className='skeleton' />
+                <div>
+                    <h4 className='skeleton'>loading wait wait</h4>
+                    <p className='skeleton'>loading wait</p>
                 </div>
 
             </div>

@@ -6,17 +6,21 @@ import { store } from '../../redux/store';
 import ConversationsSkeleton from '../skeletons/conversationsSkeleton';
 
 import ProfilePicture from '../profilePicture';
-function Conversations() {
+function Conversations(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const directActive = useSelector((state) => state.inbox.directActive);
   const userData = useSelector((state) => state.user.data);
+  const displayLastMessage = props.displayLastMessage;
+  const currentChannel = useSelector((state) => state.inbox.currentChannel);
+  const profileSize = props.profileSize;
 
   useEffect(() => {
+      fetchConversations()
       if (directActive){
         store.dispatch(setDirectActive());
       }
-    fetchConversations()
+    
 
   }, [directActive])
 
@@ -69,12 +73,19 @@ function Conversations() {
       <>
         <Link to={"/direct/" + url} key={url}>
           <div className='post conversation-container' >
-              <ProfilePicture size='s' src={process.env.REACT_APP_API_URL + '/profiles/' + photo}/>
+              <ProfilePicture size={profileSize || 's'} src={process.env.REACT_APP_API_URL + '/profiles/' + photo}/>
               <div>
               <h4>{name}</h4>
-              <p>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} 
-                {' ' + Shorten(message, 20)}
-                </p>
+              {displayLastMessage === 'false' ? (
+                  <p>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} 
+                  {' ' + Shorten(message, 10)}
+                  </p>
+                ) : (
+                  <p>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} 
+                  {' ' + Shorten(message, 20)}
+                  </p>
+                )
+              }
               </div>
             
           </div>

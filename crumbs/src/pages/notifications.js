@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { store } from "../redux/store";
 import { setRequestsActive } from "../redux/reducers/inbox";
 import Loading from "../components/loading";
+import PageWrapper from "../components/pageWrapper";
 import AcceptButton from "../components/buttons/acceptButton";
 
 function Notifications() {
@@ -31,14 +32,17 @@ function Notifications() {
 
   if (loading) {
     return (
+      <PageWrapper>
       <Loading />
+      </PageWrapper>
 
 
     );
   }
   else {
     return (
-      data.map(({ sender, receiver, status, date }) => (
+      <PageWrapper>
+      {data.map(({ sender, receiver, status, date }) => (
         <>
           {receiver === user ? (
             <div className="post" key={date}>
@@ -54,7 +58,8 @@ function Notifications() {
             <></>
           )}
         </>
-      ))
+      ))}
+      </PageWrapper>
     );
 
   }

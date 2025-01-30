@@ -2,6 +2,7 @@ import{ useState } from "react";
 import Loading from '../components/loading.js';
 import Uploader from "../components/buttons/uploader.js";
 import { useNavigate } from "react-router-dom";
+import PageWrapper from "../components/pageWrapper.js";
 
 function Publish() {
     const [postTitle, setPostTitle] = useState('');
@@ -78,7 +79,7 @@ function Publish() {
       }
 
     return (
-    <>
+      <PageWrapper>
 
 <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Publish Post</h2>
   <div className='publish post'>
@@ -106,7 +107,7 @@ function Publish() {
 
 
 
-</>
+  </PageWrapper>
   );
 };
 

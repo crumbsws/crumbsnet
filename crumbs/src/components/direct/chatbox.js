@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef} from 'react';
 import { socket } from '../../socket';
 import MessagesSkeleton from '../skeletons/messagesSkeleton';
-
+import { Linkify } from '../utils';
 
 
 
@@ -94,14 +94,14 @@ return  (
   <>
     <div className="chat sent">
     {reply ? (<div className='reply' id='sent'>{identToText(reply)}</div>) : (<></>)}
-    <p>{message}</p>
+    <p>{Linkify(message)}</p>
 </div>
 </>
 ) : (
 <>
 <div className="chat received">
     {reply ? (<div className='reply' id='received'>{identToText(reply)}</div>) : (<></>)}
-    <p>{message}</p>
+    <p>{Linkify(message)}</p>
     <span onClick={() => setReply(url)}><i class="fa-solid fa-reply"></i></span>
     
 </div>

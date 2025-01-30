@@ -10,6 +10,7 @@ import ProfilePicture from '../components/profilePicture.js';
 import { PopupTrigger } from '../components/popup.js';
 import { store } from '../redux/store.js';
 import { setUserData, setUserClubs } from '../redux/reducers/user.js';
+import PageWrapper from '../components/pageWrapper.js';
 
 
 
@@ -106,7 +107,9 @@ function Profile() {
 //Input defaultValue almıyor, veritabanı boşa çekiyor -çözdüm
 if(data.length === 0){
   return (
+    <PageWrapper>
     <Loading />
+    </PageWrapper>
       
     
   );
@@ -114,7 +117,7 @@ if(data.length === 0){
 else
 {
 return (
-<>
+  <PageWrapper>
 
 {data.map(({ name, description, home, photo }) =>(
 <>
@@ -168,7 +171,7 @@ return (
 <p>Running <strong>{process.env.REACT_APP_VERSION}</strong></p>
 </>
   ))}
-  </>
+  </PageWrapper>
   );
 }
 
