@@ -7,7 +7,7 @@ $data = json_decode($json, true);
 
 
     $user = $_SESSION['user']; 
-    $sql = "SELECT profile.name, profile.photo, channel_user.url, messages.message, messages.user, messages.date, messages.status FROM channel_user 
+    $sql = "SELECT profile.name, profile.photo, channel_user.url AS channel, messages.message, messages.user, messages.date, messages.status FROM channel_user 
             JOIN profile ON profile.name = channel_user.user JOIN messages ON messages.channel = channel_user.url
             WHERE profile.name != '$user'
             AND messages.id = (

@@ -1,13 +1,18 @@
 
 
+import point from './icons/point.png';
 function Icons(props) {
 
-    const icon = props.icon;
-    if(icon === 'point')
+  const icon = props.icon;
+  if (icon === 'pointSmall')
     return (
-              <img src={process.env.REACT_APP_API_URL + '/site-images/point.png'} className="font"/>
-            )
-        
-    };
+      <img src={point} className="fontSmall" />
+    )
+  if (icon === 'pointBig')
+    return (
+      <img src={point} className="fontBig" />
+    )
+
+};
 
 export default Icons;

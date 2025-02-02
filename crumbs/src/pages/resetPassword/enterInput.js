@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import BackNav from '../../components/navigation/backnav.js';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PageWrapper from '../../components/pageWrapper.js';
 
 
 
@@ -43,7 +44,8 @@ function EnterInput() {
     }
 
   }
-    return  <>
+    return (
+    <PageWrapper>
     <BackNav/>
     <h1>Find your account</h1>
     <p className='email'>Use your registered email to generate a password reset code.</p>
@@ -98,7 +100,8 @@ function EnterInput() {
       <input type="submit" value="Reset Password" />
     </form>
       <p className='result'>{message}</p>
-  </>;
+    </PageWrapper>
+    );
   
 };
 

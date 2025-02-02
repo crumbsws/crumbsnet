@@ -76,9 +76,16 @@ body {
 img[src=""] {
     display: none !important;
 }
-.font {
+.fontSmall {
   width: 18px !important;
   height: 18px !important;
+  vertical-align: middle;
+}
+.fontBig {
+  width: 32px !important;
+  height: 32px !important;
+  vertical-align: middle;
+  
 }
 
 #tip:hover {
@@ -138,31 +145,30 @@ li {
   background: var(--bgmain);
   z-index: 2;
   width: 100%;
+  display: flex;
+  gap: 30px;
+  align-items: baseline;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: flex-start;
 }
+
 .header a {
   text-decoration: none;
   color: var(--brand);
   font-size: 17px;
-  margin-right: 20px;
+  
   font-weight: 600;
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 .header a:hover {
-  text-decoration: 3px var(--brand) underline;
+  text-decoration: 2px var(--brand) underline;
 }
-.header ul {
-  margin: 0px;
-  margin-left: 60px;
-  padding-top: 10px;
-}
-.header i {
-  margin-right: 5px;
-}
+
 
 .main {
   min-height: calc(100vh - 80px);
   width: fit-content;
-  min-width: 770px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 80px;

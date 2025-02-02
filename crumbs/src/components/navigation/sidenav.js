@@ -19,8 +19,7 @@ function SideNav() {
 		<div className="sidenav" onClick={Change}>
       <div className="sidenav-content" onClick={(e) => e.stopPropagation()}>
         <span onClick={Change}><i class="fa-solid fa-xmark"></i></span>           
-        <ul>
-        <li>
+
         <Link className='decorated 'to="/">
         Crumbs 
         </Link>
@@ -45,8 +44,7 @@ function SideNav() {
         </Link>
 
 
-          </li>
-          </ul>
+
           </div>
         </div>
         )}

@@ -7,11 +7,15 @@ export const inboxSlice = createSlice({
     initialState: {
         direcActive: false,
         requestsActive: false,
+        lastActiveChannel: null,
         currentChannel: null
       },
     reducers: {
         setDirectActive: (state) => {
             state.directActive = !state.directActive ;
+        },
+        setLastActiveChannel: (state, action) => {
+            state.lastActiveChannel = action.payload;
         },
         setRequestsActive: (state) => {
             state.requestsActive = !state.requestsActive ;
@@ -22,5 +26,5 @@ export const inboxSlice = createSlice({
     }
 })
 
-export const { setDirectActive, setCurrentChannel, setRequestsActive } = inboxSlice.actions;
+export const { setDirectActive, setLastActiveChannel, setCurrentChannel, setRequestsActive } = inboxSlice.actions;
 export default inboxSlice.reducer;

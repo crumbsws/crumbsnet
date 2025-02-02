@@ -30,7 +30,7 @@ function Profilecard(props) {
     <div className='post' id='profile'>
         <div className="center-text">
         <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + photo} size='l' />
-        <h2>{name}︱{point} <Icons icon='point' /></h2>
+        <h2>{name}︱{point} <Icons icon='pointSmall' /></h2>
         </div>
         {name === user ? (
              <Link to={"/profile"}><h4 id='edit'>Edit Profile</h4></Link>

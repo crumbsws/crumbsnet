@@ -16,6 +16,7 @@
   .welcome {
     --svg-height: 384px;
     --svg-width: 612px;
+    text-align: center;
     min-width: 50vw;
     margin: auto;
     padding-top: 30px;

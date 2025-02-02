@@ -20,15 +20,16 @@ $data = json_decode($json, true);
     $user = $_SESSION['user'];
     } else {
     $user = checkToken($conn);
+    if ($user) {
+        $_SESSION['user'] = $user;
+    }
     }
 
 if (isset($user)) {
     $sql = "SELECT * FROM profile WHERE name='$user'";
     if($result = mysqli_query($conn, $sql)){
         if(mysqli_num_rows($result) === 1) {
-            if(!isset($_SESSION['user'])){
-                $_SESSION['user'] = $user;
-            }
+            $data = array();
             while ($row = mysqli_fetch_assoc($result)) {
             $data[] = $row;  
             }

@@ -57,50 +57,45 @@ export default function App() {
     getUnseenMessages()
   }, [])
 
-  const handleNotifications = useCallback((newMessage) => {
-    // Only show notifications for messages not from current user
-    if (loading) return;//active check wont work
-    if (userData?.name && newMessage.user !== userData.name) {
-      // Only notify if message is from a different channel
-      if (newMessage.channel !== currentChannel) {
-        if (!directActive){
-          store.dispatch(setDirectActive());
-        }
-        else {
-          console.log('skip notif logic')
-        }
-          if (!document.hasFocus()) {
-            document.title = 'New Message 🛎️';
-            
-            const resetTitle = () => {
-              document.title = 'Crumbs';
-              window.removeEventListener('focus', resetTitle);
-            };
-            window.addEventListener('focus', resetTitle);
-          }        
-        
 
-      }
-    }
-    else {
-      console.log('user not set')
-    }
-
-  });
 
 
 
   useEffect(() => {
-
-    socket.on('message', (newMessages) => {
+    const handleNotifications = (newMessage) => {
+    
+      // Only show notifications for messages not from current user
+      if (loading) return;//active check wont work
+      if (userData?.name && newMessage.user !== userData.name) {
+        // Only notify if message is from a different channel
+        if (newMessage.channel !== currentChannel) {
+          if (!directActive){
+            store.dispatch(setDirectActive());
+          }
+          else {
+            console.log('skip notif logic')
+          }
+            if (!document.hasFocus()) {
+              document.title = 'New Message 🛎️';
+              
+              const resetTitle = () => {
+                document.title = 'Crumbs';
+                window.removeEventListener('focus', resetTitle);
+              };
+              window.addEventListener('focus', resetTitle);
+            }        
           
-      handleNotifications(newMessages)
-
-    });
+  
+        }
+      }
+  
+  
+    };
+    socket.on('message', handleNotifications);
     //temp, broadcast the user from socketcontainer
 
     return () => {
-      socket.off('message');
+      socket.off('message', handleNotifications);
     };
   }, [currentChannel, loading, directActive])
 

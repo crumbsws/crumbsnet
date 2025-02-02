@@ -1,7 +1,7 @@
 import Loading from '../../components/loading.js';
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import PageWrapper from '../../components/pageWrapper.js';
 
 
 function ResetPassword() {
@@ -46,7 +46,8 @@ function ResetPassword() {
     }
 
   }
-    return  <>
+    return  (
+      <PageWrapper>
     <h1>Check your inbox</h1>
     <p className='email'>We have sent a 6-digit reset code to your mail address.</p>
     <form method="post" onSubmit={handleSubmit} >
@@ -65,7 +66,8 @@ function ResetPassword() {
       <input type="submit" value="Validate" />
     </form>
       <p className='result'>{message}</p>
-  </>;
+      </PageWrapper>
+      );
   
 };
 

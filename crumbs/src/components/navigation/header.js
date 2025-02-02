@@ -2,6 +2,7 @@
 import{ Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import{ Outlet } from "react-router-dom";
+import Icons from "../../icons/iconlibrary.js";
 
 
 import BottomNav from "./bottomnav.js";
@@ -27,33 +28,20 @@ const Header = () => {
     return (
       <>
 <div className="header" id="header">
-<ul>
-  <li>
+
 <Link className='decorated 'to="/">
 Crumbs 
 </Link>
 <Link to="/">
-<i className="fa-solid fa-house"/>
- Home
+<i className="fa-solid fa-house"/> Home
 </Link>
 <Link to="/login">
-<i className="fa-solid fa-user-group"/>
- Clubs
-</Link>
-<Link to="/login">
-<i className="fa-solid fa-wand-magic-sparkles"/>
- Publish
-</Link>
-<Link to="/login">
-<i className="fa-solid fa-user"/>
- Login
+<i className="fa-solid fa-user"/> Login
 </Link>
 <Link to="/register">
-<i className="fa-solid fa-right-to-bracket"></i>
- Register
+<i className="fa-solid fa-right-to-bracket"></i> Register
 </Link>
-          </li>
-          </ul>
+
           </div>
                   <BottomNav />
                   <div className="main" id="main">
@@ -68,26 +56,21 @@ Crumbs
         return (
     <>
 <div className="header" id="header">
-<ul>
-  <li>
+
 <Link className='decorated 'to="/">
 Crumbs 
 </Link>
 <Link to='/clubs'>
-<i className="fa-solid fa-user-group" />
- Clubs
+<i className="fa-solid fa-user-group" /> Clubs
 </Link>
 <Link to="/publish">
-<i className="fa-solid fa-wand-magic-sparkles"/>
- Publish
+<i className="fa-solid fa-wand-magic-sparkles"/> Publish
 </Link>
 <Link to={'/people/' + userData[0].name}>
-<i className="fa-solid fa-user" />
- Profile
+<i className="fa-solid fa-user" /> Profile
 </Link>
 <Link to="/discover">
-<i className="fa-solid fa-search" />
- Discover
+<i className="fa-solid fa-search" /> Discover
  </Link>
  <Link to="/notifications">
  {!requestsActive  ? (
@@ -95,9 +78,7 @@ Crumbs
 ) : (
   <i class="fa-solid fa-heart danger-zone"></i>
 )
-}
-
- Notifications
+} Notifications
 </Link>
 <Link to="/direct">
 {!directActive  ? (
@@ -105,16 +86,13 @@ Crumbs
 ) : (
   <i class="fa-solid fa-inbox danger-zone"></i>
 )
-}
- Messages
+} Messages
  </Link>
 <Link to="/">
-<i className="fa-solid fa-house"></i>
- Home
+<i className="fa-solid fa-house"></i> Home
 </Link>
 
-          </li>
-          </ul>
+
           </div>
 
         <BottomNav />

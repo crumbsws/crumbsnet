@@ -89,7 +89,7 @@ return  (
 <div  className="chat-container">
 
 {messages.map(({ user, message, url, reply }) =>(
-<>
+<div key={url}>
 { name === user ? (
   <>
     <div className="chat sent">
@@ -108,7 +108,7 @@ return  (
 </>
 )
 }
-</>
+</div>
   ))}
 
 
