@@ -36,7 +36,7 @@ return (
         <Link to={'discover/' + collect}>
         <div class='trend'>
         <h3><i class="fa-solid fa-circle" aria-hidden="true"></i> {collect}</h3>
-        <h4 className='email'><i class="fa-solid fa-thumbtack"></i> Trending  •  {count} New Posts</h4>
+        <h4 className='email'> Trending  •  {count} New Posts</h4>
         </div>
         </Link>
       ))}

@@ -9,6 +9,7 @@ function Welcome() {
       
       <strong>Join the Crowd</strong>
     </h1>
+
     <p>
     <Link to="/register">Register</Link> | <Link to="/login">Login</Link>
     </p>

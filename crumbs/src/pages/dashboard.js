@@ -19,8 +19,9 @@ function Dashboard() {
 
   if (loading) {
     return (
+      <PageWrapper>
       <Loading />
-
+      </PageWrapper>
 
     );
   }

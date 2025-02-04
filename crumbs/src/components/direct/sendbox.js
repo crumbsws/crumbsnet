@@ -49,8 +49,10 @@ function SendBox(props) {
             ) : null}
           </div>
   <form  onSubmit={handleSubmit}>
+    <div className='sendbox'>
     <input type="text" onChange={handleMessage} onBlur={handleMessageBlur} value={message} id="sendtext" placeholder="Type your message..."/>
     <button type="submit" id="sendsubmit" ><i className="fa-solid fa-paper-plane" /></button>
+    </div>
   </form>
   </div>
       )

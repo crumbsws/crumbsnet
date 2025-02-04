@@ -5,7 +5,7 @@ import Loading from '../components/loading.js';
 import Comments from '../components/comments.js';
 import ProfilePicture from '../components/profilePicture.js';
 import Reaction from '../components/interactions/reaction.js';
-import { Linkify } from '../components/utils.js';
+import { Linkify, isVideoFile } from '../components/utils.js';
 import PageWrapper from '../components/pageWrapper.js';
 
 function View() {
@@ -82,7 +82,15 @@ function View() {
               <p className='email'>{date}</p>
 
               {conf ? (
-                <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
+                                isVideoFile(conf) ? (
+                  
+                                  <video controls>
+                                  <source src={process.env.REACT_APP_API_URL + '/images/' + conf} type={'video/' + conf.split('.').pop() } />
+                                  </video>
+                                  
+                                ) : (
+                                  <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
+                                )
               ) : (
                 <></>
               )}

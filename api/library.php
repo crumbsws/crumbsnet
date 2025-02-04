@@ -147,4 +147,34 @@ function resetResetCode($conn, $name, $code){
   mysqli_query($conn, $sql);
 }
 
+
+function getSystemMessages($conn, $user){
+  $sql = "SELECT * FROM system_messages WHERE receiver='$user' ORDER BY date DESC";
+  $result = mysqli_query($conn, $sql);
+  $data = array();
+  while($row = mysqli_fetch_array($result)) {
+    $data[] = $row;
+  }
+  return $data;
+}
+
+function getUnseenSystemMessages($conn, $user){
+  $sql = "SELECT * FROM system_messages WHERE status='unseen' AND receiver='$user'";
+  $result = mysqli_query($conn, $sql);
+  $data = array();
+  while($row = mysqli_fetch_array($result)) {
+    $data[] = $row;
+  }
+  return $data;
+}
+function updateSystemMessages($conn, $user){
+  $sql = "UPDATE system_messages SET status='seen' WHERE status='unseen' AND receiver='$user'";
+  mysqli_query($conn, $sql);
+}
+function createSystemMessage($conn, $receiver, $message){
+  $date = date('Y-m-d h:i');
+  mysqli_real_escape_string($conn, $message);
+  $sql = "INSERT INTO system_messages (receiver, message, status, date) VALUES ('$receiver', '$message', 'unseen', '$date')";
+  mysqli_query($conn, $sql);
+}
 ?>

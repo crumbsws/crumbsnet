@@ -41,8 +41,9 @@ function Reactions() {
   }
   if (loading) {
     return (
+      <PageWrapper>
       <Loading />
-
+      </PageWrapper>
 
     );
   }

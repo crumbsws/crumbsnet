@@ -13,6 +13,7 @@ import TaskBar from "./taskbar.js";
 const Header = () => {
 
   const directActive = useSelector((state) => state.inbox.directActive);
+  const systemMessagesActive = useSelector((state) => state.inbox.systemMessagesActive);
   const requestsActive = useSelector((state) => state.inbox.requestsActive);
   const userData = useSelector((state) => state.user.data);
   
@@ -73,10 +74,11 @@ Crumbs
 <i className="fa-solid fa-search" /> Discover
  </Link>
  <Link to="/notifications">
- {!requestsActive  ? (
-  <i class="fa-solid fa-heart"></i>
-) : (
+ {requestsActive || systemMessagesActive ? (
   <i class="fa-solid fa-heart danger-zone"></i>
+  
+) : (
+  <i class="fa-solid fa-heart"></i>
 )
 } Notifications
 </Link>

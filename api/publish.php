@@ -53,7 +53,28 @@ $user = $_SESSION['user'];
 $body = mysqli_real_escape_string($conn, $_POST['body']);
 $date = date("Y-m-d h:i");
 if(!empty($_POST['parent'])){
-    $parent = $_POST['parent'];
+  $parent = mysqli_real_escape_string($conn, $_POST['parent']);
+  $sql = "SELECT name, body, title FROM paths WHERE url='$parent'";
+  $result = mysqli_query($conn, $sql);
+  if(mysqli_num_rows($result) === 1) {
+    $row = mysqli_fetch_assoc($result);
+    $parentName = mysqli_real_escape_string($conn, $row['name']);
+    $parentTitle = mysqli_real_escape_string($conn, $row['title']);
+    $parentBody = mysqli_real_escape_string($conn, $row['body']);
+    if($parentName !== $user){
+        if($parentTitle){
+        $message = $user . ' replied to your post: ' . $parentTitle;
+        }
+        else {
+        $message = $user . ' replied to your post: ' . $parentBody;
+        }
+    createSystemMessage($conn, $parentName, $message);
+    }
+    }
+  else {
+        $parent = 'public';
+    }
+    
 }
 else {
     $parent = 'public';

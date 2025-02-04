@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('connector.php');
+include('library.php');
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
@@ -26,6 +27,10 @@ if(isset($data['user']) && isset($_SESSION['user']))
       if(mysqli_query($conn, $sql)){
       $sql = "UPDATE requests SET status='accepted' WHERE sender = '$sender' AND receiver = '$receiver'";
       mysqli_query($conn, $sql);
+
+      $message = 'You are now friends with ' . $receiver;
+      createSystemMessage($conn, $sender, $message);
+
       $message = 'Accepted ' . $sender;
       $state = 'success';
       setResponse($state, $message);

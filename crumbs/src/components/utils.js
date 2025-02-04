@@ -161,6 +161,26 @@ catch(err)
   console.log(err);
 } 
 }
+export async function getSystemMessages( setData, setLoading){
+  try
+  {
+      
+      const response = await fetch(process.env.REACT_APP_API_URL + '/getSystemMessages.php', {
+          credentials: 'include',
+          method: 'POST',
+          credentials: 'include'
+        });
+      const data = await response.json();
+      setData(data);
+
+      setLoading(false);
+     
+}
+catch(err)
+{
+  console.log(err);
+} 
+}
 
 export function Linkify(text) {
   const urlRegex = /https?:\/\/[^\s]+/g;
@@ -183,3 +203,8 @@ export function Linkify(text) {
   }, []);
 }
 
+export const isVideoFile = (filename) => {
+  const videoExtensions = ['mp4', 'webm', 'ogg', 'mov', 'avi', 'mkv'];
+  const ext = filename.split('.').pop().toLowerCase();
+  return videoExtensions.includes(ext);
+};

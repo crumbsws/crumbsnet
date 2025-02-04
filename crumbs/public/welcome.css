@@ -38,6 +38,13 @@
     margin-bottom: 0px !important;
     line-height: normal;
   }
+  .attention {
+    background: rgb(180,152,58);
+    background: linear-gradient(90deg, rgba(180,152,58,1) 0%, rgba(253,29,29,1) 50%, rgba(252,228,69,1) 100%); 
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; 
+  }
 
   @media (max-width: 768px) {
     .welcome h1 {

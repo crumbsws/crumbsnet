@@ -8,7 +8,7 @@ import Comment from './interactions/comment.js';
 import ExclusiveTag from './tags/exclusiveTag.js';
 import SelfTag from './tags/selfTag.js';
 import Reaction from './interactions/reaction.js';
-import { Linkify } from './utils.js';
+import { Linkify, isVideoFile } from './utils.js';
 
 function Display(props) {
 
@@ -92,7 +92,19 @@ function Display(props) {
                 )}
 
                 {conf ? (
+
+                isVideoFile(conf) ? (
+                  
+                  <video controls>
+                  <source src={process.env.REACT_APP_API_URL + '/images/' + conf} type={'video/' + conf.split('.').pop() } />
+                  </video>
+                  
+                ) : (
                   <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
+                )
+
+
+
                 ) : (
                   <></>
                 )}

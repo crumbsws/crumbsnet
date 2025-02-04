@@ -130,7 +130,7 @@ function Conversations(props) {
               <div>
 
                 {displayLastMessage === 'false' ? (
-                <h4>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} {name}</h4>
+                <h4>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} {Shorten(name, 10)}</h4>
                 ) : (
                   <>
                   <h4>{name}</h4>

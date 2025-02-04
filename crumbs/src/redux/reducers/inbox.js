@@ -8,6 +8,7 @@ export const inboxSlice = createSlice({
         direcActive: false,
         requestsActive: false,
         lastActiveChannel: null,
+        systemMessagesActive: false,
         currentChannel: null
       },
     reducers: {
@@ -20,11 +21,14 @@ export const inboxSlice = createSlice({
         setRequestsActive: (state) => {
             state.requestsActive = !state.requestsActive ;
         },
+        setSystemMessagesActive: (state) => {
+            state.systemMessagesActive = !state.systemMessagesActive ;
+        },
         setCurrentChannel: (state, action) => {
             state.currentChannel = action.payload;
         }
     }
 })
 
-export const { setDirectActive, setLastActiveChannel, setCurrentChannel, setRequestsActive } = inboxSlice.actions;
+export const { setDirectActive, setLastActiveChannel, setCurrentChannel, setRequestsActive, setSystemMessagesActive } = inboxSlice.actions;
 export default inboxSlice.reducer;

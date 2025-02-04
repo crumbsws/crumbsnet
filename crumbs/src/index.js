@@ -23,7 +23,11 @@ import Discover from './pages/discover.js';
 import Clubs from './pages/clubs.js';
 import Tos from './pages/tos.js';
 import Dashboard from './pages/dashboard.js';
+
 import Notifications from './pages/notifications.js';
+import Requests from './pages/notifications/requests.js';
+import Messages from './pages/notifications/messages.js';
+
 import Direct from './pages/direct.js';
 
 import Board from './pages/clubs/board.js';
@@ -41,8 +45,9 @@ import EnterInput from './pages/resetPassword/enterInput.js';
 import ResetPassword from './pages/resetPassword/resetPassword.js';
 
 import FirstLoader from './components/firstLoader.js';
-import { setDirectActive, setRequestsActive } from './redux/reducers/inbox.js';
+import { setDirectActive, setRequestsActive, setSystemMessagesActive } from './redux/reducers/inbox.js';
 import { socket } from './socket.js';
+
 
 
 export default function App() {
@@ -53,12 +58,19 @@ export default function App() {
   
   useEffect(() => {
     getUserData(setLoading);
+    getUnseenSystemMessages()
     getUnseenRequests()
     getUnseenMessages()
+
   }, [])
 
 
-
+  function sendNotification(title, body) {
+    new Notification(title, {
+        body: body,
+        icon: process.env.REACT_APP_API_URL + '/apple-touch-icon.png'
+    });
+}
 
 
   useEffect(() => {
@@ -77,7 +89,15 @@ export default function App() {
           }
             if (!document.hasFocus()) {
               document.title = 'New Message 🛎️';
-              
+              if (Notification.permission === "granted") {
+                sendNotification(newMessage.user, newMessage.message);
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        sendNotification(newMessage.user, newMessage.message);
+                    }
+                });
+            }
               const resetTitle = () => {
                 document.title = 'Crumbs';
                 window.removeEventListener('focus', resetTitle);
@@ -112,6 +132,22 @@ export default function App() {
         const data = await response.json();
         if(data.length > 0){
           store.dispatch(setRequestsActive());
+        }
+      } catch (error) {
+        console.log(error);
+        
+        
+      }
+    }
+    async function getUnseenSystemMessages() {
+      try {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/getSystemMessages.php?status=unseen', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        const data = await response.json();
+        if(data.length > 0){
+          store.dispatch(setSystemMessagesActive());
         }
       } catch (error) {
         console.log(error);
@@ -172,7 +208,13 @@ export default function App() {
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/view/:id" element={<PrivateRoute><View /></PrivateRoute>} />
         <Route path="/reactions/:id" element={<PrivateRoute><Reactions /></PrivateRoute>} />
-        <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
+
+        <Route path="/notifications/" element={<PrivateRoute><Notifications /></PrivateRoute>}>
+          <Route index element={<PrivateRoute><Requests /></PrivateRoute>} />
+          
+          <Route path='messages' element={<PrivateRoute><Messages /></PrivateRoute>} />
+        </Route>
+
         <Route path="/direct/:channel?" element={<PrivateRoute><Direct /></PrivateRoute>} />
         <Route path="/people/:people" element={<PrivateRoute><People /></PrivateRoute>} >
           <Route index element={<PrivateRoute><Main /></PrivateRoute>} />
