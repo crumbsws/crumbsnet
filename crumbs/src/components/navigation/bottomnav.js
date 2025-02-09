@@ -12,7 +12,7 @@ function BottomNav() {
 
 
   
-  if(state === null){
+  if(!state){
     return (
 	<div className="bottomnav" id="bottomnav">
                

@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import PageWrapper from "../components/pageWrapper";
+import WelcomeOne from '../icons/images/welcome1.png';
+import WelcomeTwo from '../icons/images/welcome2.png';
+import WelcomeThree from '../icons/images/welcome3.png';
+
 function Welcome() {
     return  (
 
@@ -177,6 +180,25 @@ function Welcome() {
         </g>
     </g>
 </svg>
+    <div>
+    <h2>    
+      <strong>Re-connect with your friends online</strong>
+    </h2>
+    </div>
+    <div>
+    <img src={WelcomeOne}/>
+    <h2>    
+      <strong>Form your own club for your loved ones</strong>
+    </h2>
+    <img src={WelcomeTwo}/>
+    </div>
+    <div>
+    <h2>    
+      <strong>All in one social networking</strong>
+    </h2>
+    <img src={WelcomeThree}/>
+    </div>
+    <p className="email">© 2025 - Crumbs Network - A Mehmet Altuğ Jakal Production - All rights reserved</p>
   </div>
 
 

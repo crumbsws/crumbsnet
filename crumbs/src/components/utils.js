@@ -19,7 +19,7 @@ import { socket } from "../socket";
           store.dispatch(setUserData(data.data));
           store.dispatch(setUserClubs(data.clubs));
           store.dispatch(setUserContacts(data.contacts));
-          
+          joinChannel(data.data[0].name);
           data.contacts.forEach((element) => joinChannel(element.url));
           sessionStorage.setItem('loggedin', true);
           

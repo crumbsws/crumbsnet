@@ -1,6 +1,6 @@
 
 
-import point from './icons/point.png';
+import point from './images/point.png';
 function Icons(props) {
 
   const icon = props.icon;

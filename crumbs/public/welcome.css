@@ -29,6 +29,10 @@
     color: var(--bgsecond);
     border-radius: 5px;
   }
+  .welcome img{
+    object-fit:scale-down;
+    width: fit-content;
+  }
   .welcome h1 {
     font-size: 85px;
     margin-top: 0px !important;
@@ -51,6 +55,14 @@
       font-size: 60px;
 
     } 
+    .welcome h2 {
+      line-height: 1.5rem;
+
+    } 
+    .welcome img{
+      object-fit:scale-down;
+      width: 100%;
+    }
     .welcome {
       --svg-height: 288px;
       --svg-width: 576px;

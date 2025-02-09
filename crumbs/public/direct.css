@@ -3,7 +3,58 @@
   align-items: center;
   flex-direction: row;
   gap: 10px;
+  
 } 
+.button-container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+
+  
+} 
+.file-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+} 
+ 
+.file {
+  width: 30%;
+  height: 180px;
+  border: 1px solid var(--froutline);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+} 
+
+.file img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+} 
+
+.remove{
+  background: var(--froutline);
+  color: gray;
+  border-radius: 9999px;
+  height: 21px;
+  width: 21px;
+
+  line-height: 21px;
+  position: absolute;
+  top: 0;
+  text-align: center;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+}
 
 
 
@@ -80,19 +131,23 @@
   }
 
 .sendform {
-    bottom: 0px;
+    bottom: 5px;
     position: sticky;
     background: var(--bgmain);
     z-index: 1;
+    border: 1px solid var(--froutline);
+    border-radius: 8px;
     width: 100%;
 }
-#sendsubmit {
+.sendsubmit {
     width: 45px;
     height: 45px;
     border-radius: 9999px;
   }
-#sendtext {
-  max-width: 85%;
+.sendtext {
+  border: none !important;
+  width: 100% !important;
+  margin: 0 !important;
   }
   @media (max-width: 1024px) { 
 
@@ -106,8 +161,6 @@
  
       max-height: 80px;
     }
-    #sendtext {
-      max-width: 80%;
-      }
+
 
     }

@@ -16,16 +16,14 @@ function setResponse($state, $data, $clubs, $contacts){
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-    if(!empty($_SESSION['user'])){
-    $user = $_SESSION['user'];
-    } else {
-    $user = checkToken($conn);
-    if ($user) {
-        $_SESSION['user'] = $user;
-    }
-    }
 
-if (isset($user)) {
+    $user = checkToken($conn);
+//
+
+if ($user) {
+    session_regenerate_id();
+    $_SESSION['user'] = $user;
+    error_log("User from token: " . $user);
     $sql = "SELECT * FROM profile WHERE name='$user'";
     if($result = mysqli_query($conn, $sql)){
         if(mysqli_num_rows($result) === 1) {

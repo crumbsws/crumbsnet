@@ -72,6 +72,9 @@ export default function App() {
     });
 }
 
+function joinChannel(channel) {
+  socket.emit('joinChannel', channel);
+}
 
   useEffect(() => {
     const handleNotifications = (newMessage) => {
@@ -119,9 +122,17 @@ export default function App() {
     };
   }, [currentChannel, loading, directActive])
 
-  function joinChannel(channel) {
-    socket.emit('joinChannel', channel);
-  }
+
+  useEffect(() => {
+
+    socket.on('create_channel', joinChannel);
+
+    return () => {
+      socket.off('create_channel', joinChannel);
+    };
+  }, [])
+
+
 
     async function getUnseenRequests() {
       try {

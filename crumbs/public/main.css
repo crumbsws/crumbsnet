@@ -328,7 +328,7 @@ select {
 }
 
 
-#conf, #photo{
+#conf, #photo, #file{
   display: none;
 }
 
@@ -586,7 +586,8 @@ textarea:focus {
   position: sticky;
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
   line-height: normal;
-  
+  overflow-y: hidden;
+  scrollbar-width:0px;
   color: var(--brand);
   width: 180px;
   border: 1px solid var(--froutline);
@@ -602,6 +603,10 @@ textarea:focus {
   flex-direction: column;
   background-color: var(--bgmain);
   z-index: 1;
+}
+.defaultbar:hover {
+overflow-y: scroll;
+scrollbar-width: thin;
 }
 .trend {
   transition: 0.5s;
@@ -776,7 +781,7 @@ display: block;
 
   .border-left {
     border-left: 1px solid #1b1b1b;
-    width: 320px;
+
   }
 
 

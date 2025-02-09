@@ -59,6 +59,12 @@ socket.on('typing_stop', ({ user, channel}) => {
   
 });
 
+socket.on('create_channel', ({ user, channel}) => {
+  io.to(user).emit('create_channel', channel);
+
+  
+});
+
 
 
 socket.on('message', ({ user, channel, message, reply }) => {

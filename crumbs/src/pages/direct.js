@@ -50,7 +50,9 @@ function Direct() {
       const data = await response.json();
       if(data.state === 'success') {
         joinChannel(data.url)
+        socket.timeout(5000).emit('create_channel', { user, channel: data.url });
         navigate('/direct/' + data.url);
+        //emit channel creation to the other users along with the channel url so they can join too
 
       }
         
