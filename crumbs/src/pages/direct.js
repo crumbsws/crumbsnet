@@ -16,12 +16,13 @@ function Direct() {
 
   const userData = useSelector((state) => state.user.data);
   const user = userData[0].name;
+  const {channel} = useParams();
 
   useEffect(() => {
       doSearch(query, type, setData)
     }, [query])
 
-    const {channel} = useParams();
+
 
 
 

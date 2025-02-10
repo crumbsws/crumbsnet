@@ -15,7 +15,7 @@ function Conversations(props) {
   const userData = useSelector((state) => state.user.data);
   const displayLastMessage = props.displayLastMessage;
   const profileSize = props.profileSize;
-
+  const currentChannel = useSelector((state) => state.inbox.currentChannel);
 
   useEffect(() => {
 
@@ -50,7 +50,18 @@ function Conversations(props) {
     };
   }, [])
 
-  
+useEffect(() => {  
+readChannel(currentChannel);
+}, [currentChannel])
+
+function readChannel(channel) {
+  const targetIndex = data.findIndex(item => item.channel === channel);
+  if (targetIndex === -1) return;
+  const dummyData = [...data];
+  dummyData[targetIndex].status = "seen"
+  setData(dummyData);
+  console.log('read channel ' + channel);
+}
 
   function moveChannel(channel) {
     console.log('moving channel ' + channel)
@@ -59,7 +70,7 @@ function Conversations(props) {
       const targetIndex = currentData.findIndex(item => item.channel === channel);
       
       if (targetIndex === -1) return currentData;
-      if (targetIndex === 0) return currentData;
+
       
       
       const newData = [...currentData];
@@ -69,7 +80,9 @@ function Conversations(props) {
       
       
       newData.unshift(removedObject);
-
+      if (channel !== currentChannel) {
+      newData[targetIndex].status = "unseen"
+    }
       console.log(newData);
       return newData;
       
@@ -130,7 +143,7 @@ function Conversations(props) {
               <div>
 
                 {displayLastMessage === 'false' ? (
-                <h4>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} {Shorten(name, 10)}</h4>
+                <h4>{status === 'unseen' && user !== userData[0].name ? (<i class="fa-solid fa-circle fa-2xs call-to-act"></i>) : (<></>)} {Shorten(name, 8)}</h4>
                 ) : (
                   <>
                   <h4>{name}</h4>

@@ -55,7 +55,7 @@ return (
       <div className='publish post'>
         <form encType="multipart/form-data" method="post" >
           <input type="text" id="title" onChange={handleMessage} value={message} placeholder="What a sunny day! Right?" minLength="3" maxLength="28" required />
-          <button type="submit" id="sendsubmit" onClick={handleSubmit} >{value}</button>
+          <button type="submit" className="sendsubmit" onClick={handleSubmit} >{value}</button>
         </form>
       </div>
       </>
