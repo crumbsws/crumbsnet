@@ -22,8 +22,9 @@ import { socket } from "../socket";
           joinChannel(data.data[0].name);
           data.contacts.forEach((element) => joinChannel(element.url));
           sessionStorage.setItem('loggedin', true);
-          
-
+          } 
+          else {
+            sessionStorage.removeItem('loggedin');
           }
           
           setLoading(false);

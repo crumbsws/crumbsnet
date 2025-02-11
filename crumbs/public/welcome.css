@@ -28,6 +28,7 @@
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
     color: var(--bgsecond);
     border-radius: 5px;
+
   }
   .welcome img{
     object-fit:scale-down;

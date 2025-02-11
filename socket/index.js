@@ -13,7 +13,7 @@ const options = {
 };
 const io = require("socket.io")(httpServer, options);
 
- async function sendMessage( user, channel, url, message, reply) {
+ async function sendMessage( user, channel, url, message, reply, assets) {
   try
   {
       
@@ -25,7 +25,8 @@ const io = require("socket.io")(httpServer, options);
               channel: channel,
               url: url,
               message: message,
-              reply: reply || null
+              reply: reply || null,
+              assets: assets || null
 
             })
         });
@@ -67,12 +68,12 @@ socket.on('create_channel', ({ user, channel}) => {
 
 
 
-socket.on('message', ({ user, channel, message, reply }) => {
+socket.on('message', ({ user, channel, message, reply, asset }) => {
   // Broadcast message to the club if the user is in the correct channel
   const url = crypto.randomUUID();
-  io.to(channel).emit('message', { url, user, channel, message, reply });
-  sendMessage( user, channel, url, message, reply);
-  console.log('User ' + user + ' with ID ' + socket.id + ' said ' + message + ' on ' + channel + ' ident ' + url );
+  io.to(channel).emit('message', { url, user, channel, message, reply, asset });
+  sendMessage( user, channel, url, message, reply, asset);
+  console.log('User ' + user + ' with ID ' + socket.id + ' said ' + message + ' on ' + channel + ' ident ' + url + asset);
   
 });
 

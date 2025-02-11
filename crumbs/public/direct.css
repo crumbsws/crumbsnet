@@ -39,6 +39,36 @@
   object-fit: cover;
   border-radius: 8px;
 } 
+.assets {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+  max-width: 80%;
+} 
+
+.asset-received {
+  margin-left: 10px;
+  margin-right: auto;
+  justify-content: left;
+  flex-direction: row;
+ }  
+
+ .asset-sent {
+  margin-right: 10px;
+  margin-left: auto;
+  justify-content: right;
+  flex-direction: row-reverse;
+
+ }
+
+.assets img{
+  width: 30%;
+  min-height: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+} 
 
 .remove{
   background: var(--froutline);
@@ -114,6 +144,8 @@
     color: var(--bgmain);
 
   }
+
+
 
   .chat:hover, .chat:active{
     span{

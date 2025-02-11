@@ -21,7 +21,7 @@ if(isset($data['channel'])){
 
     
     $channel = $data['channel'];
-    $sql = "SELECT * FROM messages WHERE channel='$channel'";
+    $sql = "SELECT messages.*, GROUP_CONCAT(message_assets.asset) as asset FROM messages LEFT JOIN message_assets ON messages.url = message_assets.parent WHERE messages.channel='$channel' GROUP BY messages.id, messages.url, messages.channel ORDER BY messages.id ASC";
     $result = mysqli_query($conn, $sql);
     $data = array();
     

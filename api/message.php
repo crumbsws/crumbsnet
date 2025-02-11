@@ -31,7 +31,13 @@ else
 {
     $reply = null;
 }
-
+if(!empty($data['assets'][0])) {
+    $assets = $data['assets'];
+    foreach ($assets as $x) {
+        $sql = "INSERT INTO message_assets (parent, asset) VALUES ('$url', '$x')";
+        mysqli_query($conn, $sql);
+      }
+}
 //media handling too pls
 
 

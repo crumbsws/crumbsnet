@@ -122,17 +122,7 @@ function readChannel(channel) {
 
     );
   }
-  else if (data.length === 0) {
 
-    return (
-      <div className='post' id='tip'>
-        <h1>Find Friends</h1>
-        <p>You haven't chatted with anyone before...</p>
-      </div>
-
-
-    );
-  }
   else {
     return (
       data.map(({ name, photo, channel, message, date, status, user }) => (
