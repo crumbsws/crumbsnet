@@ -34,13 +34,16 @@ import Loading from '../loading.js';
   return (
     
     data.map(({ name, founder, description, card, point }) =>(
-      <div className='post club' id={card}>
-        <div id='club-content'>
-          <h1>{name}</h1>
-          <p>Club card of <strong>{user}</strong></p>
-          <p className='email'>{founder}</p>
+      <>
+      <Link to={"/clubs/" + name} key={name}>
+        <div className='post club' id={card}>
+          <div id='club-content'>
+            <h1 className='decorated'>{name}</h1>
+            <p>{description}</p>
+          </div>
         </div>
-      </div>
+      </ Link>
+    </>
     ))
 );
 } 

@@ -58,11 +58,16 @@ export default function App() {
   
   useEffect(() => {
     getUserData(setLoading);
+
+  }, [])
+
+  useEffect(() => {
+    if(loading) return;
     getUnseenSystemMessages()
     getUnseenRequests()
     getUnseenMessages()
 
-  }, [])
+  }, [loading])
 
 
   function sendNotification(title, body) {

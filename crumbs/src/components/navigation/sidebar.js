@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from '../loading.js';
-
+import ProfilePicture from "../profilePicture.js";
 
 
 
 function Sidebar() {
     const [trends, setTrends] = useState([]);
+
+    const userData = useSelector((state) => state.user.data[0]);
 
     useEffect(() => {
       fetchTrends()
@@ -29,6 +31,12 @@ return (
 <div className="sidebar">
 <div className="info">
 </div>
+<Link to={'people/' + userData.name} >
+<div class="post profile-fast">
+<ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + userData.photo} size='xs' />
+<p className="email">{userData.name}</p>
+</div>
+</Link>
 <h3>Lounge </h3>
 <p>Open for suggestions</p>
 <h3>Trending Collections</h3>

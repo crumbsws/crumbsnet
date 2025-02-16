@@ -44,33 +44,25 @@
   flex-wrap: wrap;
 
   gap: 10px;
-  max-width: 80%;
+  max-width: 90%;
 } 
 
 .asset-received {
-  margin-left: 10px;
-  margin-right: auto;
+  margin: 1rem;
   justify-content: left;
   flex-direction: row;
  }  
 
  .asset-sent {
-  margin-right: 10px;
-  margin-left: auto;
+  margin: 1rem 1rem 1rem auto;
   justify-content: right;
   flex-direction: row-reverse;
 
  }
 
-.assets img{
-  width: 30%;
-  min-height: 150px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-} 
 
-.remove{
+
+.remove, .install{
   background: var(--froutline);
   color: gray;
   border-radius: 9999px;
@@ -79,10 +71,10 @@
 
   line-height: 21px;
   position: absolute;
-  top: 0;
+  top: 2px;
   text-align: center;
-  right: 0;
-  z-index: 2;
+  right: 2px;
+  z-index: 1;
   cursor: pointer;
 }
 

@@ -1,0 +1,163 @@
+
+on join:
+    if {experience::%player%} is not set:
+        set {experience::%player%} to 0
+    if {level::%player%} is not set:
+        set {experience::%player%} to 0
+on spawn of a mob:
+    if {experience::%entity's uuid%} is not set:
+        set {experience::%entity's uuid%} to 1
+
+on spawn of a zombie:
+    if name of event-entity contains "Gloomy":
+        set {_randomNumber} to a random integer between 1 and 50
+        set name of the event-entity to "&aGloomy Slime &8[&8Lv. %{_randomNumber}%&8]"
+        set {experience::%entity's uuid%} to {_randomNumber}
+on spawn of a zombie:
+    if name of event-entity contains "Grape":
+        set {_randomNumber} to a random integer between 1 and 20
+        set name of the event-entity to "&5Grape Zombie &8[&8Lv. %{_randomNumber}%&8]"
+        set {experience::%entity's uuid%} to {_randomNumber}
+on spawn of a zombie:
+    if name of event-entity contains "&nApple" or "&cApple":
+        set {_randomNumber} to a random integer between 1 and 20
+        set name of the event-entity to "&cApple Zombie &8[&8Lv. %{_randomNumber}%&8]"
+        set {experience::%entity's uuid%} to {_randomNumber}
+on spawn of a bee:
+    if name of event-entity contains "Wasp":
+        set {_randomNumber} to a random integer between 1 and 50
+        set name of the event-entity to "&eSeasoned Wasp &7(&aP&7) &8[&8Lv. %{_randomNumber}%&8]"
+        set {experience::%entity's uuid%} to {_randomNumber}
+on spawn of a wolf:
+    set {_randomNumber} to a random integer between 1 and 50
+    set name of the event-entity to "Wild Wolf &8[&8Lv. %{_randomNumber}%&8]"
+    set {experience::%entity's uuid%} to {_randomNumber}
+on block break:
+    if event-block is wheat:
+        set {_randomNumber} to a random integer between 1 and 5
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to player
+        add {_randomNumber} to {experience::%player%}
+        send title "&e&l+ %{_randomNumber}%" with subtitle "&6&l%{level::%player%}%&8 &8&l>> &8&a%{experience::%player%}%&7/&a%{required::%player%}%" to player for 1 seconds
+on block break:
+    if event-block is minecraft:beetroots:
+        set {_randomNumber} to a random integer between 1 and 5
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to player
+        add {_randomNumber} to {experience::%player%}
+        send title "&e&l+ %{_randomNumber}%" with subtitle "&6&l%{level::%player%}%&8 &8&l>> &8&a%{experience::%player%}%&7/&a%{required::%player%}%" to player for 1 seconds
+
+on block break:
+    if event-block is minecraft:potatoes:
+        set {_randomNumber} to a random integer between 1 and 5
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to player
+        add {_randomNumber} to {experience::%player%}
+        send title "&e&l+ %{_randomNumber}%" with subtitle "&6&l%{level::%player%}%&8 &8&l>> &8&a%{experience::%player%}%&7/&a%{required::%player%}%" to player for 1 seconds
+
+on block break:
+    if event-block is minecraft:carrots:
+        set {_randomNumber} to a random integer between 1 and 5
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to player
+        add {_randomNumber} to {experience::%player%}
+        send title "&e&l+ %{_randomNumber}%" with subtitle "&6&l%{level::%player%}%&8 &8&l>> &8&a%{experience::%player%}%&7/&a%{required::%player%}%" to player for 1 seconds
+
+
+on damage:
+    victim is a mob:
+        play sound "entity.player.big_fall" with volume 20 and pitch 200 to attacker
+on death:
+    victim is a zombie:
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to attacker
+        add {experience::%victim's uuid%} to {experience::%attacker%}
+        send title "&a&l+ %{experience::%victim's uuid%}%" with subtitle "&6&l%{level::%attacker%}%&8 &8&l>> &8&a%{experience::%attacker%}%&7/&a%{required::%attacker%}%" to attacker for 1 seconds
+on death:
+    victim is a bee:
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to attacker
+        add {experience::%victim's uuid%} to {experience::%attacker%}
+        send title "&a&l+ %{experience::%victim's uuid%}%" with subtitle "&6&l%{level::%attacker%}%&8 &8&l>> &8&a%{experience::%attacker%}%&7/&a%{required::%attacker%}%" to attacker for 1 seconds
+on death:
+    victim is a wolf:
+        play sound "entity.player.experienceup" with volume 20 and pitch 300 to attacker
+        add {experience::%victim's uuid%} to {experience::%attacker%}
+        send title "&a&l+ %{experience::%victim's uuid%}%" with subtitle "&6&l%{level::%attacker%}%&8 &8&l>> &a%{experience::%attacker%}%&7/&a%{required::%attacker%}% &8&8&l>>" to attacker for 1 seconds
+
+on death:
+    if {required::%attacker%} is not set:
+        set {required::%attacker%} to 500
+    if victim is a mob:
+        if {experience::%attacker%} is greater than {required::%attacker%}:
+            add 50 to {required::%attacker%}
+            set {experience::%attacker%} to 0
+            add 1 to {level::%attacker%}
+            send title "&6&lLEVEL UP+" with subtitle "&7You are now level &8%{level::%attacker%}%" to attacker for 3 seconds
+            play sound "ui.toast.challenge_complete" at volume 1 at pitch 2 to attacker
+on block break:
+    if {required::%player%} is not set:
+        set {required::%player%} to 500
+    if event-block is wheat:
+        if {experience::%player%} is greater than {required::%player%}:
+            add 50 to {required::%player%}
+            set {experience::%player%} to 0
+            add 1 to {level::%player%}
+            send title "&6&lLEVEL UP+" with subtitle "&7You are now level &8%{level::%player%}%" to player for 3 seconds
+            play sound "ui.toast.challenge_complete" at volume 1 at pitch 2 to player
+
+on block break:
+    if {required::%player%} is not set:
+        set {required::%player%} to 500
+    if event-block is minecraft:potatoes:
+        if {experience::%player%} is greater than {required::%player%}:
+            add 50 to {required::%player%}
+            set {experience::%player%} to 0
+            add 1 to {level::%player%}
+            send title "&6&lLEVEL UP+" with subtitle "&7You are now level &8%{level::%player%}%" to player for 3 seconds
+            play sound "ui.toast.challenge_complete" at volume 1 at pitch 2 to player
+
+on block break:
+    if {required::%player%} is not set:
+        set {required::%player%} to 500
+    if event-block is minecraft:beetroots:
+        if {experience::%player%} is greater than {required::%player%}:
+            add 50 to {required::%player%}
+            set {experience::%player%} to 0
+            add 1 to {level::%player%}
+            send title "&6&lLEVEL UP+" with subtitle "&7You are now level &8%{level::%player%}%" to player for 3 seconds
+            play sound "ui.toast.challenge_complete" at volume 1 at pitch 2 to player
+
+on block break:
+    if {required::%player%} is not set:
+        set {required::%player%} to 500
+    if event-block is minecraft:carrots:
+        if {experience::%player%} is greater than {required::%player%}:
+            add 50 to {required::%player%}
+            set {experience::%player%} to 0
+            add 1 to {level::%player%}
+            send title "&6&lLEVEL UP+" with subtitle "&7You are now level &8%{level::%player%}%" to player for 3 seconds
+            play sound "ui.toast.challenge_complete" at volume 1 at pitch 2 to player
+
+command /level:
+    trigger:
+        message "&6&l&m-------------------"
+        message "&7Your EXP: &8&l(&a%{experience::%player%}%&8&l)"
+        message "&7Your Level: &8&l(&6%{level::%player%}%&8&l)"
+        message "&6&l&m-------------------"
+  
+command /reset <text>:
+    trigger:
+        if arg-1 is "level":
+            message "&6&l&m-------------------"
+            message "&cAre you sure you want to reset all your statistics? &e/reset confirm"
+            message "&6&l&m-------------------" 
+        if arg-1 is "confirm":
+            set {level::%player%} to 0
+            set {experience::%player%} to 0
+            set {required::%player%} to 500
+            message "&6&l&m-------------------"
+            message "&cResetted your level"
+            message "&6&l&m-------------------"
+
+
+
+on placeholderapi placeholder request for the prefix "skript":
+    if the identifier is "experience":
+        set the result to "%{experience::%player%}%&7/&a%{required::%player%}%"
+    if the identifier is "level":
+        set the result to "%{level::%player%}%"

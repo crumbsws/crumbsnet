@@ -66,15 +66,16 @@ function ExploreClubs() {
       ) : (
         <>
           {data.map(({ name, founder, description, card }) => (
-            <Link to={`/clubs/${name}`} key={name}>
-              <div className='post club' id={card}>
-                <div id='club-content'>
-                  <h1>{name}</h1>
-                  <p>{description}</p>
-                  <p className='email'>{founder}</p>
-                </div>
-              </div>
-            </Link>
+           <>
+           <Link to={"/clubs/" + name} key={name}>
+             <div className='post club' id={card}>
+               <div id='club-content'>
+                 <h1 className='decorated'>{name}</h1>
+                 <p>{description}</p>
+               </div>
+             </div>
+           </ Link>
+         </>
           ))}
         </>
       )}

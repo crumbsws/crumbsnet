@@ -33,6 +33,7 @@ function SendBox(props) {
       e.preventDefault();
       if (message) {
         const fileNames = files.map(file => file.name);
+
         if (files.length > 0) {
           console.log('uploading assets' + fileNames);
           await uploadAssets();

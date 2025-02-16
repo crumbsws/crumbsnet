@@ -66,35 +66,35 @@ function Board() {
             <div className="post tip">
                 <h1>Pin</h1>
                 <p>Pin an event, announcement or a project to the board.</p>
-            
-            {isClubJoined ? (
-                <>
-                    <PopupTrigger
-                        content={
-                            <>
-                                <h2>Pin To Club</h2>
-                                <div className='publish post'>
-                                    <form method="post">
-                                        <input type="text" onChange={handlePinTitle} value={pinTitle} placeholder="Pin title" maxLength='25' required />
-                                        <input type="text" onChange={handlePinDescription} value={pinDescription} placeholder="Pin description" maxLength='100' required />
 
-                                        <input type="text" onChange={handlePinContext} value={pinContext} placeholder="Add additional context" />
-
-                                        <input type="submit" value={value} onClick={handleSubmit} />
-                                    </form>
-                                </div>
-                            </>
-                        }
-                        bottom="Pins are club-specific">
-
-                        <button>Pin</button>
-                    </PopupTrigger>
-                </>
-            ) : (<></>)}
             </div>
 
+
             <div className='post container' >
-            <p>In development</p>
+                {isClubJoined ? (
+                    <div className="contained">
+                        <PopupTrigger
+                            content={
+                                <>
+                                    <h2>Pin To Club</h2>
+                                    <div className='publish post'>
+                                        <form method="post">
+                                            <input type="text" onChange={handlePinTitle} value={pinTitle} placeholder="Pin title" maxLength='25' required />
+                                            <input type="text" onChange={handlePinDescription} value={pinDescription} placeholder="Pin description" maxLength='100' required />
+
+                                            <input type="text" onChange={handlePinContext} value={pinContext} placeholder="Add additional context" />
+
+                                            <input type="submit" value={value} onClick={handleSubmit} />
+                                        </form>
+                                    </div>
+                                </>
+                            }
+                            bottom="Pins are club-specific">
+
+                            <button id="add"><i class="fa-solid fa-plus fa-2x" aria-hidden="true"></i></button>
+                        </PopupTrigger>
+                    </div>
+                ) : (<></>)}
             </div>
         </>
     )

@@ -6,7 +6,7 @@
   --brand: #fffcf4;
   --bgthird: #09090a;
   --froutline: #27272A;
-  --email: #767b80;
+  --email: #8a9097;
   --cta: rgb(0, 149, 246);
   --dz: rgb(250, 7, 80);
 
@@ -79,12 +79,12 @@ img[src=""] {
 .fontSmall {
   width: 18px !important;
   height: 18px !important;
-  vertical-align: middle;
+  vertical-align: bottom;
 }
 .fontBig {
   width: 32px !important;
   height: 32px !important;
-  vertical-align: middle;
+  vertical-align: bottom;
   
 }
 
@@ -157,6 +157,7 @@ li {
   text-decoration: none;
   color: var(--brand);
   font-size: 17px;
+  text-align: center;
   
   font-weight: 600;
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -218,6 +219,7 @@ li {
 .email {
   color: var(--email);
   font-size: 10px !important;
+  font-weight: 500 !important;
 }
 
 
@@ -356,6 +358,7 @@ textarea:focus {
   background: var(--bgmain);
   border-bottom: 1px solid var(--froutline);
   margin-bottom: 20px;
+  max-height: fit-content;
   position: static;
   box-sizing: border-box;
   vertical-align: top;
@@ -377,7 +380,7 @@ textarea:focus {
 
 
 
-.interaction-menu, .post-credit {
+.interaction-menu, .post-credit, .profile-fast {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -415,7 +418,7 @@ textarea:focus {
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
 }
 #navigator:hover {
@@ -697,9 +700,7 @@ display: block;
   .taskbar{
     display: none;
   }
-  #navigator {
-    top: 0px;
-  }  
+ 
   .info {
     display: none;
   }
@@ -736,6 +737,7 @@ display: block;
   }
   #navigator {
     width: 100%;
+    top: 0px;
   }
 
   .modal-content {
@@ -755,9 +757,7 @@ display: block;
     min-width: 100%;
     border: none;
   }
-  .post {
-    max-height: 750px;
-  }
+
   .outlet-wrapper {
     width: 100vw;
     box-sizing: border-box;
@@ -767,7 +767,7 @@ display: block;
   width:100%;
   
   }
-  .main img {
+  .main img, video {
     width: 100%;
     overflow: hidden;
     object-fit: cover;

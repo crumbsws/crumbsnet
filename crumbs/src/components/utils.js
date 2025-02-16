@@ -209,3 +209,8 @@ export const isVideoFile = (filename) => {
   const ext = filename.split('.').pop().toLowerCase();
   return videoExtensions.includes(ext);
 };
+export function isImageFile(fileName) {
+  const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'tiff', 'ico', 'avif'];
+  const ext = fileName.split('.').pop().toLowerCase();
+  return imageExtensions.includes(ext);
+}

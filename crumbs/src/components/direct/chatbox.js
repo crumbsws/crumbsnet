@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { socket } from '../../socket';
 import MessagesSkeleton from '../skeletons/messagesSkeleton';
-import { Linkify } from '../utils';
+import { Linkify, isImageFile } from '../utils';
 
 
 
@@ -82,8 +83,8 @@ function ChatBox(props) {
 
 
   /*
-Implement support for multiple filetypes by storing type in db and conditionally rendering a button redirecting to the link for the file in the cdn  
-image enlarger
+Implement support for multiple filetypes by storing type in db and conditionally rendering a button redirecting to the link for the file in the cdn  -temp solved w regex
+
   */
 
 
@@ -112,7 +113,7 @@ image enlarger
 
 
         </div >
-        
+
       </div>
       <div ref={messagesEndRef} />
     </>
@@ -130,9 +131,20 @@ image enlarger
       {asset && asset.length > 0 ? (
         <div className='assets asset-sent'>
           {asset.map((asset, index) => (
-            <Fragment key={index}>
-              <img src={process.env.REACT_APP_API_URL + '/message-assets/' + asset} alt='asset' />
-            </Fragment>
+            <div className='file' key={index}>
+              {isImageFile(asset) ? (
+                <img src={process.env.REACT_APP_API_URL + '/message-assets/' + asset} alt='asset' />
+              ) : (
+
+
+                <Link to={process.env.REACT_APP_API_URL + '/message-assets/' + asset} target='_blank' rel='noreferrer'>
+                  <span className='install' style={{ cursor: 'pointer' }}><i class="fa-solid fa-arrow-down"></i></span>
+                  <p className='email'>{asset}</p>
+                </Link>
+
+
+              )}
+            </div>
           ))}
         </div>
       ) : (<></>)}
@@ -149,10 +161,22 @@ image enlarger
       {asset && asset.length > 0 ? (
         <div className='assets asset-received'>
           {asset.map((asset, index) => (
-            <Fragment key={index}>
-              <img src={process.env.REACT_APP_API_URL + '/message-assets/' + asset} alt='asset' />
-            </Fragment>
-          ))}
+           <div className='file' key={index}>
+           {isImageFile(asset) ? (
+             <img src={process.env.REACT_APP_API_URL + '/message-assets/' + asset} alt='asset' />
+           ) : (
+
+
+             <Link to={process.env.REACT_APP_API_URL + '/message-assets/' + asset} target='_blank' rel='noreferrer'>
+               <span className='install' style={{ cursor: 'pointer' }}><i class="fa-solid fa-arrow-down"></i></span>
+  
+               <p className='email'>{asset}</p>
+             </Link>
+
+
+           )}
+         </div>
+       ))}
         </div>
       ) : (<></>)}
     </>;

@@ -126,9 +126,8 @@ function Display(props) {
             <Link to={"/clubs/" + name} key={name}>
               <div className='post club' id={card}>
                 <div id='club-content'>
-                  <h1>{name}</h1>
-                  <p>{point} ︱{description}</p>
-                  <p className='email'>{founder}</p>
+                  <h1 className='decorated'>{name}</h1>
+                  <p>{description}</p>
                 </div>
               </div>
             </ Link>
