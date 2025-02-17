@@ -74,7 +74,7 @@ function View() {
 
               <Link to={'../people/' + name}>
                 <div className='post-credit'>
-                  <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + photo} size='xs' />
+                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='xs' />
                   <p className='email' >{name}</p>
                 </div>
               </Link>
@@ -85,11 +85,11 @@ function View() {
                                 isVideoFile(conf) ? (
                   
                                   <video controls>
-                                  <source src={process.env.REACT_APP_API_URL + '/images/' + conf} type={'video/' + conf.split('.').pop() } />
+                                  <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop() } />
                                   </video>
                                   
                                 ) : (
-                                  <img src={process.env.REACT_APP_API_URL + '/images/' + conf} alt='' />
+                                  <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
                                 )
               ) : (
                 <></>

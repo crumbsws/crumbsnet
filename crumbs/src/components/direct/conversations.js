@@ -129,7 +129,7 @@ function readChannel(channel) {
         
           <Link to={"/direct/" + channel} key={channel}>
             <div className='post conversation-container' >
-              <ProfilePicture size={profileSize || 's'} src={process.env.REACT_APP_API_URL + '/profiles/' + photo} />
+              <ProfilePicture size={profileSize || 's'} src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} />
               <div>
 
                 {displayLastMessage === 'false' ? (

@@ -72,8 +72,7 @@ export default function App() {
 
   function sendNotification(title, body) {
     new Notification(title, {
-        body: body,
-        icon: process.env.REACT_APP_API_URL + '/apple-touch-icon.png'
+        body: body
     });
 }
 

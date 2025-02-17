@@ -48,34 +48,38 @@ function ExploreClubs() {
               <Link to={`/dashboard`}><button>Create</button></Link>
             </div>
           ) : (
-
-            <div className='post container'>
-          {Object.values(club).map(({ name, founder, description, card }) => (          
-              <div id="club-container" className='contained' key={name}>
-                <Link to={`/clubs/${name}`} >
-                <p>{name}</p>
-                <p className="email">{description}</p>
-                </Link>
-              </div>
-          ))}
+            <div className='post' id='tip'>
+              <h1>Your clubs</h1>
+              <p>Clubs that you are a part of.</p>
             </div>
           )}
 
-          <Display type='clubs' />
+          {Object.values(club).map(({ name, founder, description, card }) => (
+            <>
+              <Link to={"/clubs/" + name} key={name}>
+                <div className='post club' id={card}>
+                  <div id='club-content'>
+                    <h1 className='decorated'>{name}</h1>
+                    <p>{description}</p>
+                  </div>
+                </div>
+              </ Link>
+            </>
+          ))}
         </>
       ) : (
         <>
           {data.map(({ name, founder, description, card }) => (
-           <>
-           <Link to={"/clubs/" + name} key={name}>
-             <div className='post club' id={card}>
-               <div id='club-content'>
-                 <h1 className='decorated'>{name}</h1>
-                 <p>{description}</p>
-               </div>
-             </div>
-           </ Link>
-         </>
+            <>
+              <Link to={"/clubs/" + name} key={name}>
+                <div className='post club' id={card}>
+                  <div id='club-content'>
+                    <h1 className='decorated'>{name}</h1>
+                    <p>{description}</p>
+                  </div>
+                </div>
+              </ Link>
+            </>
           ))}
         </>
       )}

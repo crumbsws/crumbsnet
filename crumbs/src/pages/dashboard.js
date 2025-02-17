@@ -35,6 +35,8 @@ function Dashboard() {
             </>
           ) : (
             <>
+            {data.length > 0 ? (
+              
               <div className='post container'>
                 {data.map(({ name, description, card }) => (
                   <>
@@ -48,7 +50,9 @@ function Dashboard() {
                   </>
                 ))}
               </div>
-              <ClubSetup />
+
+            ) : (<></>)}
+            <ClubSetup />
               {console.log(club)}
 
             </>

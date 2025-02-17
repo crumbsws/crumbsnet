@@ -7,9 +7,9 @@
     font-weight: 600 !important;
   }
   .exclusive {
-    background: rgb(9, 113, 121);
-    color: rgba(213, 254, 255, 0.829);
-    border: 1px solid rgb(42, 148, 209);
+    background: rgb(121, 69, 9);
+    color: rgba(255, 235, 213, 0.829);
+    border: 1px solid rgb(212, 126, 28);
   }
   .self {
     background: rgba(235, 11, 67, 0.4);

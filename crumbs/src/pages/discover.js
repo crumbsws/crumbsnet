@@ -73,7 +73,7 @@ function Discover() {
                         <p>Reply to <strong>{parent}</strong></p>
                       )}
                       {conf && (
-                        <img src={process.env.REACT_APP_API_URL + `/images/${conf}`} alt='' />
+                        <img src={process.env.REACT_APP_CDN_URL + `/images/${conf}`} alt='' />
                       )}
                       <p>{body}</p>
                     </div>

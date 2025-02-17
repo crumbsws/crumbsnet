@@ -86,7 +86,7 @@ function SocketContainer(props) {
         {data.map(({ name, photo }) => (
 
           <>
-            <ProfilePicture src={process.env.REACT_APP_API_URL + '/profiles/' + photo} size='xs' />
+            <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='xs' />
             {!typer ? (
               <p>{name}</p>
             ) : (

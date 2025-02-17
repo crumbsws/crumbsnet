@@ -133,11 +133,11 @@ Implement support for multiple filetypes by storing type in db and conditionally
           {asset.map((asset, index) => (
             <div className='file' key={index}>
               {isImageFile(asset) ? (
-                <img src={process.env.REACT_APP_API_URL + '/message-assets/' + asset} alt='asset' />
+                <img src={process.env.REACT_APP_CDN_URL + '/message-assets/' + asset} alt='asset' />
               ) : (
 
 
-                <Link to={process.env.REACT_APP_API_URL + '/message-assets/' + asset} target='_blank' rel='noreferrer'>
+                <Link to={process.env.REACT_APP_CDN_URL + '/message-assets/' + asset} target='_blank' rel='noreferrer'>
                   <span className='install' style={{ cursor: 'pointer' }}><i class="fa-solid fa-arrow-down"></i></span>
                   <p className='email'>{asset}</p>
                 </Link>
@@ -163,11 +163,11 @@ Implement support for multiple filetypes by storing type in db and conditionally
           {asset.map((asset, index) => (
            <div className='file' key={index}>
            {isImageFile(asset) ? (
-             <img src={process.env.REACT_APP_API_URL + '/message-assets/' + asset} alt='asset' />
+             <img src={process.env.REACT_APP_CDN_URL + '/message-assets/' + asset} alt='asset' />
            ) : (
 
 
-             <Link to={process.env.REACT_APP_API_URL + '/message-assets/' + asset} target='_blank' rel='noreferrer'>
+             <Link to={process.env.REACT_APP_CDN_URL + '/message-assets/' + asset} target='_blank' rel='noreferrer'>
                <span className='install' style={{ cursor: 'pointer' }}><i class="fa-solid fa-arrow-down"></i></span>
   
                <p className='email'>{asset}</p>
