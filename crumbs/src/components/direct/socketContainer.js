@@ -9,6 +9,7 @@ import BackNav from '../navigation/backnav';
 import SendBox from './sendbox';
 import ChatBox from './chatbox';
 import ProfilePicture from '../profilePicture';
+import { setBottomNavVisible } from '../../redux/reducers/interface';
 
 function SocketContainer(props) {
 
@@ -49,7 +50,7 @@ function SocketContainer(props) {
   useEffect(() => {
 
     if (!channel) return; 
-      
+      store.dispatch(setBottomNavVisible());
       store.dispatch(setCurrentChannel(channel));
       console.log('Switched to ' + channel)
       fetchDetails();
@@ -71,6 +72,7 @@ function SocketContainer(props) {
     
       return () => { //not tested, must prevent leak between channels and messages stil received by the other socket channel
         dispatch(setCurrentChannel(null)); // Clear current channel on unmount
+        store.dispatch(setBottomNavVisible());
         setTyper('');
         setReply('');
       };

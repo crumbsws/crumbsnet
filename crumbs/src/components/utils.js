@@ -217,3 +217,10 @@ export function isImageFile(fileName) {
   const ext = fileName.split('.').pop().toLowerCase();
   return imageExtensions.includes(ext);
 }
+export function Shorten(str, length) {
+  if (str.length > length) {
+    return str.slice(0, length) + '...';
+  } else {
+    return str;
+  }
+}

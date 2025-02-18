@@ -5,6 +5,7 @@ import { setDirectActive } from '../../redux/reducers/inbox';
 import { socket } from '../../socket';
 import { store } from '../../redux/store';
 import ConversationsSkeleton from '../skeletons/conversationsSkeleton';
+import { Shorten }  from '../utils.js';
 
 import ProfilePicture from '../profilePicture';
 function Conversations(props) {
@@ -90,13 +91,7 @@ function readChannel(channel) {
     
 }
 
-  function Shorten(str, length) {
-    if (str.length > length) {
-      return str.slice(0, length) + '...';
-    } else {
-      return str;
-    }
-  }
+
 
   async function fetchConversations() {
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from '../loading.js';
 import ProfilePicture from "../profilePicture.js";
+import { Shorten } from "../utils.js";
 
 
 
@@ -43,7 +44,7 @@ return (
 {trends.map(({ collect, count }) =>(
         <Link to={'discover/' + collect}>
         <div class='trend'>
-        <h3><i class="fa-solid fa-circle" aria-hidden="true"></i> {collect}</h3>
+        <h3><i class="fa-solid fa-circle" aria-hidden="true"></i> {Shorten(collect, 12)}</h3>
         <h4 className='email'> Trending  •  {count} New Posts</h4>
         </div>
         </Link>

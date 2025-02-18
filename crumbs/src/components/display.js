@@ -8,7 +8,7 @@ import Comment from './interactions/comment.js';
 import ExclusiveTag from './tags/exclusiveTag.js';
 import SelfTag from './tags/selfTag.js';
 import Reaction from './interactions/reaction.js';
-import { Linkify, isVideoFile } from './utils.js';
+import { Linkify, isVideoFile, Shorten } from './utils.js';
 
 function Display(props) {
 
@@ -108,7 +108,7 @@ function Display(props) {
                 ) : (
                   <></>
                 )}
-                <p>{Linkify(body)}</p>
+                <p>{Shorten(Linkify(body), 120)}</p>
                 <div className='interaction-menu' >
                   <Comment />
                   <Reaction url={url} />

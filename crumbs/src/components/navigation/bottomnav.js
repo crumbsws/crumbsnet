@@ -4,14 +4,14 @@ import SideNav from "./sidenav.js";
 function BottomNav() {
   
   const userData = useSelector((state) => state.user.data);
-  
+  const isVisible = useSelector((state) => state.interface.bottomNavVisible);
   // Use optional chaining and fallback to a default value if name is undefined
   const user = userData[0] && userData[0].name ? userData[0].name : 'Guest';
 
   const state = sessionStorage.getItem('loggedin');
 
 
-  
+if(isVisible){
   if(!state){
     return (
 	<div className="bottomnav" id="bottomnav">
@@ -77,5 +77,6 @@ function BottomNav() {
               </div>
 	);
   }
+    }
        };
 export default BottomNav;

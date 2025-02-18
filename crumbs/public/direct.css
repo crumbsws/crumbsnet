@@ -173,18 +173,3 @@
   width: 100% !important;
   margin: 0 !important;
   }
-  @media (max-width: 1024px) { 
-
-
-    }
-  @media (max-width: 768px) {
-  .sendform {
-      bottom: 70px;
-  }
-    .reply{
- 
-      max-height: 80px;
-    }
-
-
-    }

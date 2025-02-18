@@ -3,7 +3,7 @@ import Loading from '../loading.js';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { getItem, doSearch } from "../utils.js";
+import { getItem, doSearch, Shorten } from "../utils.js";
 function ExploreClubs() {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
