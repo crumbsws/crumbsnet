@@ -27,6 +27,11 @@ if (isset($_FILES['conf'])) {
     if (move_uploaded_file($_FILES["conf"]["tmp_name"], $file)) {
         $conf = $newName;
     }
+    else {
+        $state= 'failed2';
+        setResponse($state, []);
+        exit;
+        }
 }
 else {
     $conf = null;

@@ -63,7 +63,7 @@ function Board() {
 
     return (
         <>
-            <div className="post tip">
+            <div className="post" id="tip">
                 <h1>Pin</h1>
                 <p>Pin an event, announcement or a project to the board.</p>
 

@@ -85,7 +85,7 @@ function Publish() {
   <div className='publish post'>
   <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
   <input type="text" name="title" id="title" value={postTitle} placeholder="Post title" minLength="3" maxLength="28" onChange={handlePostTitle} required />
-  <input type="text" name="body" id="body" value={postBody} placeholder="Post itself" minLength="10" maxLength="120"  onChange={handlePostBody} required />
+  <input type="text" name="body" id="body" value={postBody} placeholder="Post itself" minLength="10" maxLength="200"  onChange={handlePostBody} required />
   <input type="text" name="collect" id="collect" value={postCollect} placeholder="Collection Name" maxLength="16"  onChange={handlePostCollect} required />
 
   <div>

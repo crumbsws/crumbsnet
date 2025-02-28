@@ -37,19 +37,18 @@ function Dashboard() {
             <>
             {data.length > 0 ? (
               
-              <div className='post container'>
-                {data.map(({ name, description, card }) => (
-                  <>
-
-                    <div className='contained' id='club-container' key={name}>
-                      <Link to={"/dashboard/" + name}>
-                        <p>{name}</p>
-                        <p className="email">{description}</p>
-                      </ Link>
+              data.map(({ name, founder, description, card, point }) => (
+                <>
+                  <Link to={"/dashboard/" + name} key={name}>
+                    <div className='post club' id={card}>
+                      <div id='club-content'>
+                        <h1 className='decorated'>{name}</h1>
+                        <p>{description}</p>
+                      </div>
                     </div>
-                  </>
-                ))}
-              </div>
+                  </ Link>
+                </>
+              ))
 
             ) : (<></>)}
             <ClubSetup />
