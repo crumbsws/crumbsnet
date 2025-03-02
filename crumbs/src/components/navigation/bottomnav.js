@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import SideNav from "./sidenav.js";
 function BottomNav() {
   
-  const userData = useSelector((state) => state.user.data);
+  const userData = useSelector((state) => state.user.data); 
   const isVisible = useSelector((state) => state.interface.bottomNavVisible);
   // Use optional chaining and fallback to a default value if name is undefined
   const user = userData[0] && userData[0].name ? userData[0].name : 'Guest';

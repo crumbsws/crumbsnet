@@ -66,7 +66,7 @@ function ChatBox(props) {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({
-          channel: channel
+          channel: channel 
         })
       });
       const data = await response.json();

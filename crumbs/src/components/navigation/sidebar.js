@@ -10,6 +10,7 @@ import { Shorten } from "../utils.js";
 function Sidebar() {
     const [trends, setTrends] = useState([]);
 
+    const isVisible = useSelector((state) => state.interface.sideBarVisible);
     const userData = useSelector((state) => state.user.data[0]);
 
     useEffect(() => {
@@ -27,6 +28,8 @@ function Sidebar() {
         
       }
     }
+
+if (isVisible) {
 return (
 
 <div className="sidebar">
@@ -51,6 +54,7 @@ return (
       ))}
 </div>
 );
+}
 };
 
 export default Sidebar;

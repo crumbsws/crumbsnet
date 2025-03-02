@@ -90,6 +90,9 @@ Crumbs
 )
 } Messages
  </Link>
+<Link to="/notes">
+<i className="fa-solid fa-list"></i> Notes
+</Link>
 <Link to="/">
 <i className="fa-solid fa-house"></i> Home
 </Link>

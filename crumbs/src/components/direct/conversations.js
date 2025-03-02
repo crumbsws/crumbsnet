@@ -70,7 +70,21 @@ function readChannel(channel) {
       
       const targetIndex = currentData.findIndex(item => item.channel === channel);
       
-      if (targetIndex === -1) return currentData;
+      if (targetIndex === -1) 
+        {  
+          const newData = [...currentData];
+          newData.unshift({
+            channel: channel,
+            status: "unseen",
+            name: "New Channel",
+            photo: '/default.png',
+            message: "",
+            date: "Just Now",
+            user: "New Channel"
+            // Add other necessary details for the new channel
+          });
+          return newData;
+        }
 
       
       
@@ -102,7 +116,7 @@ function readChannel(channel) {
       });
       const json = await response.json();
       setData(json);
-      setLoading(false);
+      setLoading(false); 
     } catch (error) {
       console.log(error);
 

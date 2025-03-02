@@ -14,7 +14,11 @@ import Contributors from './pages/contributors.js';
 import Err from './pages/404.js';
 import Register from './pages/register.js';
 import Center from './pages/center.js';
+
 import Publish from './pages/publish.js';
+import Post from './pages/publish/post.js';
+import Pin from './pages/publish/pin.js';
+
 import Profile from './pages/profile.js';
 import View from './pages/view.js';
 import Reactions from './pages/reactions.js';
@@ -43,6 +47,8 @@ import PrivateRoute from './privateroute.js';
 
 import EnterInput from './pages/resetPassword/enterInput.js';
 import ResetPassword from './pages/resetPassword/resetPassword.js';
+
+import Notes from './pages/notes.js';
 
 import FirstLoader from './components/firstLoader.js';
 import { setDirectActive, setRequestsActive, setSystemMessagesActive } from './redux/reducers/inbox.js';
@@ -216,23 +222,30 @@ function joinChannel(channel) {
     
     
       
+        <Route path="/notes" element={<PrivateRoute><Notes /></PrivateRoute>} />
 
         
         <Route index element={<PrivateRoute><Center /></PrivateRoute>} />
-        <Route path="/publish" element={<PrivateRoute><Publish /></PrivateRoute>} />
+        <Route path="/publish/" element={<PrivateRoute><Publish /></PrivateRoute>} >
+          <Route index element={<PrivateRoute><Post /></PrivateRoute>} />
+          <Route path='post' element={<PrivateRoute><Post /></PrivateRoute>} />
+          <Route path='pin/:type/:id' element={<PrivateRoute><Pin /></PrivateRoute>} />
+        </Route>
+
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/view/:id" element={<PrivateRoute><View /></PrivateRoute>} />
         <Route path="/reactions/:id" element={<PrivateRoute><Reactions /></PrivateRoute>} />
 
         <Route path="/notifications/" element={<PrivateRoute><Notifications /></PrivateRoute>}>
           <Route index element={<PrivateRoute><Requests /></PrivateRoute>} />
-          
+          <Route path='requests' element={<PrivateRoute><Requests /></PrivateRoute>} />         
           <Route path='messages' element={<PrivateRoute><Messages /></PrivateRoute>} />
         </Route>
 
         <Route path="/direct/:channel?" element={<PrivateRoute><Direct /></PrivateRoute>} />
         <Route path="/people/:people" element={<PrivateRoute><People /></PrivateRoute>} >
           <Route index element={<PrivateRoute><Main /></PrivateRoute>} />
+          <Route path='main' element={<PrivateRoute><Main /></PrivateRoute>} />
           <Route path='cards' element={<PrivateRoute><Cards /></PrivateRoute>} />
           <Route path='friends' element={<PrivateRoute><Friends /></PrivateRoute>} />    
         </Route>
@@ -242,6 +255,7 @@ function joinChannel(channel) {
 
         <Route path="/clubs/:club?" element={<PrivateRoute><Clubs /></PrivateRoute>} >
           <Route index element={<PrivateRoute><Board /></PrivateRoute>} />
+          <Route path='board' element={<PrivateRoute><Board /></PrivateRoute>} />
           <Route path='posts' element={<PrivateRoute><Posts/></PrivateRoute>} />
           <Route path='box' element={<PrivateRoute><Box /></PrivateRoute>} />
           <Route path='gallery' element={<PrivateRoute><ClubGallery /></PrivateRoute>} />

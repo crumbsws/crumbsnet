@@ -43,6 +43,9 @@ function SideNav() {
         <i class="fa-solid fa-heart"></i> Notifications
         </Link>
 
+        <Link to='/notes'>
+        <i class="fa-solid fa-list"></i> Notes
+        </Link>
 
 
           </div>

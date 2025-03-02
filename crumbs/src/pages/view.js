@@ -79,7 +79,7 @@ function View() {
                 </div>
               </Link>
 
-              <p className='email'>{date}</p>
+              
 
               {conf ? (
                                 isVideoFile(conf) ? (
@@ -95,6 +95,7 @@ function View() {
                 <></>
               )}
               <p>{Linkify(body)}</p>
+              <p className='email'>{date}</p>
               {parent === 'public' ? (
                 <></>
               ) : (

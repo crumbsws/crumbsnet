@@ -22,6 +22,7 @@ function Direct() {
       doSearch(query, type, setData)
     }, [query])
 
+    
 
 
 
@@ -65,14 +66,14 @@ function Direct() {
 //pass all the data directly to socketcontsiner. no getChannel details
   return  (
     <>
-    {channel ? (
+    
     <ConversationsBar>
       <Link to='/direct'>
       <p className='call-to-act'><i class="fa-solid fa-plus"></i> New Conversation</p>
       </Link>
     <Conversations displayLastMessage='false' profileSize='xs'/>
     </ConversationsBar>
-    ) : (<></>)}
+    
     <PageWrapper>
 
   {channel ? (
@@ -98,9 +99,9 @@ function Direct() {
                 ))}
       </form>
         {!query ? (
-          <>        
-          <Conversations />
-          </>
+          <div className='mobile'>        
+          <Conversations  /> 
+          </div>
         ) : (<></>)}
       
     </>

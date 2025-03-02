@@ -6,7 +6,7 @@ function SendBox(props) {
 
   const channel = props.channel;
   const user = props.user;
-  const reply = props.reply;
+  const reply = props.reply; 
   const setReply = props.setReply;
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState([]);

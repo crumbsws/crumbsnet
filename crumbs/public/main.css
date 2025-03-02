@@ -9,6 +9,7 @@
   --email: #8a9097;
   --cta: rgb(0, 149, 246);
   --dz: rgb(250, 7, 80);
+  --editorplaceholder: 	rgb(82, 82, 82);
 
   scrollbar-width: thin;
   scrollbar-color: var(--froutline) var(--bgmain);
@@ -22,6 +23,7 @@ body {
 
   
 }
+
 ::-moz-selection { /* Code for Firefox */
   color: var(--froutline);
   background: var(--brand);
@@ -31,6 +33,11 @@ body {
   color: var(--froutline);
   background: var(--brand);
 }
+
+.mobile {
+  display: none;
+}
+
 #new {
   background: #FF0123;
   background: linear-gradient(to left, #FF0123 0%, #FF3FEC 100%);
@@ -210,12 +217,42 @@ li {
 
 }
 .page-wrapper {
-  width:550px;
+  width:580px;
   display: flex;
   flex-direction: column;
   min-height: 100%;
 
 }
+.editor-wrapper, .club-wrapper {
+  width:700px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.editor-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--froutline);
+  height: 100%;
+  }
+.editor {
+outline: none;
+overflow-wrap: break-word;
+line-height: 1.5;
+}
+.editor h1{
+  font-size: 1.5em;
+  line-height: 1.2;
+  }
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  color: var(--editorplaceholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+}
+
 .email {
   color: var(--email);
   font-size: 10px !important;
@@ -690,7 +727,7 @@ display: block;
   border-left: 1px solid var(--froutline);
   width: 100%;
 }
-@media (max-width: 1128px) {
+@media (max-width: 1176px) {
   .sidebar{
     display: none;
   }
@@ -703,6 +740,9 @@ display: block;
  
   .info {
     display: none;
+  }
+  .editor-wrapper, .club-wrapper {
+    width:610px;
   }
 
   #menu {
@@ -726,6 +766,10 @@ display: block;
   :root::-webkit-scrollbar {
     display: none;
   }
+.mobile {
+  display: block;
+}
+
   .bottomnav {
     display: flex;
     flex-direction: row;
@@ -762,10 +806,15 @@ display: block;
     box-sizing: border-box;
     
   }
-  .page-wrapper {
+  .page-wrapper, .editor-wrapper, .club-wrapper {
   width:100%;
-  
   }
+  .editor-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    border: none;
+    }
+  
   .main img, video {
     width: 100%;
     overflow: hidden;

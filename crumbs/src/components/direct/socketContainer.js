@@ -53,7 +53,7 @@ function SocketContainer(props) {
       store.dispatch(setBottomNavVisible());
       store.dispatch(setCurrentChannel(channel));
       console.log('Switched to ' + channel)
-      fetchDetails();
+      fetchDetails(); 
 
       socket.on('typing_start', (typer) => {
 

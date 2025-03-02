@@ -14,17 +14,7 @@ function Board() {
 
     const { club } = useParams();
 
-    const user = useSelector((state) => state.user.data[0].name);
 
-    function handlePinTitle(e) {
-        setPinTitle(e.target.value);
-    }
-    function handlePinDescription(e) {
-        setPinDescription(e.target.value);
-    }
-    function handlePinContext(e) {
-        setPinContext(e.target.value);
-    }
 
 
     const handleSubmit = async (e) => {
@@ -78,14 +68,8 @@ function Board() {
                                 <>
                                     <h2>Pin To Club</h2>
                                     <div className='publish post'>
-                                        <form method="post">
-                                            <input type="text" onChange={handlePinTitle} value={pinTitle} placeholder="Pin title" maxLength='25' required />
-                                            <input type="text" onChange={handlePinDescription} value={pinDescription} placeholder="Pin description" maxLength='100' required />
-
-                                            <input type="text" onChange={handlePinContext} value={pinContext} placeholder="Add additional context" />
-
-                                            <input type="submit" value={value} onClick={handleSubmit} />
-                                        </form>
+                          
+                                    
                                     </div>
                                 </>
                             }
