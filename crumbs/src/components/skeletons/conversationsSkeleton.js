@@ -7,15 +7,13 @@ function ConversationsSkeleton() {
                 <ProfilePicture size='xs' className='skeleton' />
                 <div>
                     <h4 className='skeleton'>loading wait</h4>
-                    <p className='skeleton'>loading</p>
                 </div>
 
             </div>
             <div className='post conversation-container' >
                 <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>loading wait wait</h4>
-                    <p className='skeleton'>loading wait</p>
+                    <h4 className='skeleton'>loading wait</h4>
                 </div>
 
             </div>
@@ -24,7 +22,6 @@ function ConversationsSkeleton() {
                 <ProfilePicture size='xs' className='skeleton' />
                 <div>
                     <h4 className='skeleton'>loading wait</h4>
-                    <p className='skeleton'>loading</p>
                 </div>
 
             </div>
@@ -32,8 +29,7 @@ function ConversationsSkeleton() {
             <div className='post conversation-container' >
                 <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>loading wait wait</h4>
-                    <p className='skeleton'>loading</p>
+                    <h4 className='skeleton'>loading wait</h4>
                 </div>
 
             </div>
@@ -41,8 +37,7 @@ function ConversationsSkeleton() {
             <div className='post conversation-container' >
                 <ProfilePicture size='xs' className='skeleton' />
                 <div>
-                    <h4 className='skeleton'>loading wait wait</h4>
-                    <p className='skeleton'>loading wait</p>
+                    <h4 className='skeleton'>loading wait </h4>
                 </div>
 
             </div>

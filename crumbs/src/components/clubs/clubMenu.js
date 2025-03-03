@@ -4,29 +4,29 @@ import ClubButton from '../buttons/clubButton.js';
 function ClubMenu(props) {
 
 
-    const clubProp = props.club;
+    const data = props.data;
 
 return (
     <>
-    <div id='tip' className='post'>
-    <h1 className='decorated'><i class="fa-solid fa-circle"></i> {clubProp}</h1>
-    <p className='email'>A Crumbs Club • Branch of the Crumbs Net</p>
+    <div id='tip' className='post mobile'>
+    <h1 className='decorated'><i class="fa-solid fa-circle"></i> {data[0].name}</h1>
+    <p className='email'>{data[0].description}</p>
     </div>
-    <ClubButton club={clubProp}/>
+    <ClubButton club={data[0].name}/>
     <div className='post' id='menu'>
 
 
-    <NavLink to={'/clubs/' + clubProp}>
+    <NavLink to={'/clubs/' + data[0].name}>
     Board
     </NavLink>
-    <NavLink to={'/clubs/' + clubProp + '/posts'}>
+    <NavLink to={'/clubs/' + data[0].name + '/posts'}>
     Posts
     </NavLink>
-    <NavLink to={'/clubs/' + clubProp + '/box'}>
+    <NavLink to={'/clubs/' + data[0].name + '/box'}>
     Box
     </NavLink>
 
-    <NavLink to={'/clubs/' + clubProp + '/gallery'}>
+    <NavLink to={'/clubs/' + data[0].name + '/gallery'}>
     Gallery
     </NavLink>
     </div>

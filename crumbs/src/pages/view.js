@@ -74,7 +74,7 @@ function View() {
 
               <Link to={'../people/' + name}>
                 <div className='post-credit'>
-                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='xs' />
+                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
                   <p className='email' >{name}</p>
                 </div>
               </Link>

@@ -94,12 +94,12 @@ function Profile() {
         if(data.state === 'success'){
           setMessage('Profile updated.');
         }
-        else {
+        else { 
           setMessage(data.message);
   
         }
       }catch(err){
-        console.log(err);
+        console.log(err); 
         setMessage('Check your network.')
       }
     }
@@ -126,7 +126,7 @@ return (
 
 
 <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-{displayPhoto ? <ProfilePicture src={displayPhoto} size='l' /> : <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='l' />}
+{displayPhoto ? <ProfilePicture src={displayPhoto} size='l' /> : <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='l' />}
 
 
 {Uploader(displayPhoto, handleProfilePhoto, removeProfilePhoto)}
@@ -158,7 +158,7 @@ return (
     <PopupTrigger
     content={
       <>
-      <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + userPhoto} size='l' />
+      <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + userPhoto} size='l' />
       <h3>{user}</h3>
       <p onClick={handleLogout} className='danger-zone'>Logout</p>
       </>

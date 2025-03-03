@@ -16,7 +16,7 @@ $user = $_POST['user'];
 
 if (!empty($_FILES['photo'])) {
 
-    $directory = $_SERVER["DOCUMENT_ROOT"] . "/profiles/";
+    $directory = $_SERVER["DOCUMENT_ROOT"] . "/profile-images/";
     $newName = basename($user . '-' . $_FILES["photo"]["name"]);
     $file = $directory . $newName;
     $filetype = strtolower(pathinfo($file,PATHINFO_EXTENSION));

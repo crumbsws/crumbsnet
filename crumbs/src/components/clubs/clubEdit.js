@@ -1,14 +1,18 @@
 import { useState, useEffect} from 'react'
 import { getOtherClub } from '../utils.js';
+import Uploader from '../buttons/uploader.js';
 import Loading from '../loading.js';
 import BackNav from '../navigation/backnav.js';
+import ProfilePicture from '../profilePicture.js';
+
 
 function ClubEdit(props) {
   const club = props.club;
   const [clubDescription, setClubDescription] = useState('');
   const [clubCard, setClubCard] = useState('');
   const [message, setMessage] = useState('');
-
+  const [profilePhoto, setProfilePhoto] = useState('');
+  const [displayPhoto, setDisplayPhoto] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +20,22 @@ function ClubEdit(props) {
     getOtherClub(club, setData, setLoading)
   }, [])
 
-
+  function handleProfilePhoto(e){
+    const file = e.target.files[0];
+    if(file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setDisplayPhoto(reader.result);
+        }
+        reader.readAsDataURL(file);
+        setProfilePhoto(file);
+        
+    }
+  }
+  function removeProfilePhoto(){
+    setProfilePhoto(null);
+    setDisplayPhoto(null);
+  }
 
 
   function handleDescription(e) {
@@ -34,6 +53,7 @@ function ClubEdit(props) {
       formData.append('description', clubDescription)
       formData.append('card', clubCard)
       formData.append('club', club)
+      formData.append('photo', profilePhoto)
       try{
         const response = await fetch(process.env.REACT_APP_API_URL + '/updateClub.php', {
           method: 'POST',
@@ -67,10 +87,22 @@ else
 return (
 <>
 <BackNav />
-{data.map(({ name, founder, description, point }) =>(
+{data.map(({ name, founder, description, point, photo }) =>(
 <>
 <h2>{name}</h2>
 <p className='email'>Permanent</p>
+
+
+
+
+
+<form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
+
+{displayPhoto ? <ProfilePicture src={displayPhoto} size='l' /> : <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='l' />}
+
+
+{Uploader(displayPhoto, handleProfilePhoto, removeProfilePhoto)}
+<p className='email'>Your clubs image, gifs are allowed.</p>
 
 <div className='statistics'>
 <div className='statistics-content'>
@@ -78,10 +110,7 @@ return (
 <p className='email'>Points</p>
 </div>
 </div>
-
-<p className='email'>Given to the top 100 in the Crumbs Club Awards. On creation, it is set to five.</p>
-
-<form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
+<p className='email'>Staff rating for your club, set to 5 initially.</p>
 <input type="text" id='description' placeholder={description === '' ? ('Small description') : (description)} onChange={handleDescription} />
 
 <p className='email'>Edit the description that will be displayed to people that are searching for the club.</p>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { getItem, doSearch, Shorten } from "../utils.js";
+import ProfilePicture from "../profilePicture.js";
 function ExploreClubs() {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
@@ -54,13 +55,16 @@ function ExploreClubs() {
             </div>
           )}
 
-          {Object.values(club).map(({ name, founder, description, card }) => (
+          {Object.values(club).map(({ name, founder, description, card, photo }) => (
             <>
               <Link to={"/clubs/" + name} key={name}>
                 <div className='post club' id={card}>
-                  <div id='club-content'>
+                  <div className='club-content'>
+                    <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
+                    <div>
                     <h1 className='decorated'>{name}</h1>
                     <p>{description}</p>
+                    </div>
                   </div>
                 </div>
               </ Link>
@@ -69,13 +73,16 @@ function ExploreClubs() {
         </>
       ) : (
         <>
-          {data.map(({ name, founder, description, card }) => (
+          {data.map(({ name, founder, description, card, photo }) => (
             <>
-              <Link to={"/clubs/" + name} key={name}>
+            <Link to={"/clubs/" + name} key={name}>
                 <div className='post club' id={card}>
-                  <div id='club-content'>
+                  <div className='club-content'>
+                    <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
+                    <div>
                     <h1 className='decorated'>{name}</h1>
                     <p>{description}</p>
+                    </div>
                   </div>
                 </div>
               </ Link>

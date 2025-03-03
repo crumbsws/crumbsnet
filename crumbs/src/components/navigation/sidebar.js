@@ -37,7 +37,7 @@ return (
 </div>
 <Link to={'people/' + userData.name} >
 <div class="post profile-fast">
-<ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + userData.photo} size='xs' />
+<ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + userData.photo} size='xs' />
 <p className="email">{userData.name}</p>
 </div>
 </Link>

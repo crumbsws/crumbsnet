@@ -4,9 +4,9 @@
 :root {
   --bgmain: #09090B;
   --brand: #fffcf4;
-  --bgthird: #09090a;
-  --froutline: #27272A;
-  --email: #8a9097;
+  --bgthird: #18181b;
+  --froutline: #18181b;
+  --email: #71717a;
   --cta: rgb(0, 149, 246);
   --dz: rgb(250, 7, 80);
   --editorplaceholder: 	rgb(82, 82, 82);
@@ -265,7 +265,7 @@ line-height: 1.5;
   overflow: hidden;
   object-fit: cover;
   border-radius: 10px;
-  height: 540px;
+  max-height: 680px;
   background-color: var(--froutline);
   background-image: var(--froutline);
 }

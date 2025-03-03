@@ -50,6 +50,39 @@ if(!empty($_POST['description']))
     $result = mysqli_query($conn, $sql);
 
 }
+
+
+if (!empty($_FILES['photo'])) {
+
+    $directory = $_SERVER["DOCUMENT_ROOT"] . "/club-images/";
+    $newName = basename($club . '-' . $_FILES["photo"]["name"]);
+    $file = $directory . $newName;
+    $filetype = strtolower(pathinfo($file,PATHINFO_EXTENSION));
+    if ($_FILES["photo"]["size"] < 1200000) {
+        if(in_array($filetype, ['jpg', 'png', 'jpeg', 'gif', 'webp'])) {
+
+             
+      
+            if (move_uploaded_file($_FILES["photo"]["tmp_name"], $file)) {
+        
+            $photo = $newName;
+            $sql = "UPDATE clubs SET photo='$photo' WHERE founder='$user' AND name='$club'";
+            $result = mysqli_query($conn, $sql);
+            }
+} else {
+$state= 'error';
+$message = 'File format is not supported.';//Imp
+setResponse($state, $message);
+exit;
+}
+} else {
+$state= 'error';
+$message = 'File should be smaller than 1100kb.';//Imp
+setResponse($state, $message);
+exit;
+}
+}
+
 $state= 'success';
 $message = 'Club updated.';//Imp
 setResponse($state, $message);

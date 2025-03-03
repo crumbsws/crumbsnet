@@ -3,9 +3,13 @@
   border: none;
   
 }
-#club-content {
+.club-content {
   border: none;
   padding: 2px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;  
+  justify-content: flex-start;
 }
 
 #crumbs{

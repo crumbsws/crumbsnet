@@ -66,7 +66,7 @@ function Display(props) {
             <Link to={"/view/" + url} key={url}>
               <div className='post'>
               <div className='post-credit'>
-              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='xs' />
+              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
               <p className='email' >{name}</p>
               </div>
 
@@ -142,7 +142,7 @@ function Display(props) {
 
             <div className='contained' key={name}>
               <Link to={"/people/" + name}>
-                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='m' />
+                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='m' />
                 <p>{name}</p>
               </ Link>
             </div>
@@ -192,14 +192,14 @@ function Display(props) {
             <PopupTrigger
               content={
                 <>
-                <ProfilePicture size='m' src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo}/>
+                <ProfilePicture size='m' src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo}/>
                 <h3>{name}'s Entry</h3>
                 <p>{message}</p>
                 </>
               }
               bottom={date}>
 
-              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='s' />
+              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='s' />
             </PopupTrigger>
 
           </>

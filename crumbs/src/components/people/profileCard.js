@@ -29,7 +29,7 @@ function Profilecard(props) {
     data.map(({ name, point, description, home, relation, photo, message }) =>(
     <div className='post' id='profile'>
         <div className="center-text">
-        <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='l' />
+        <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='l' />
         <h2>{name}</h2>
         <p><Icons icon='pointSmall' /> {point}</p>
         </div>

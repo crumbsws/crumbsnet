@@ -10,6 +10,9 @@ function ClubSetup() {
   function handleClubName(e) {
     setClubName(e.target.value);
   }
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(<Loading />);
@@ -39,6 +42,8 @@ function ClubSetup() {
    
 
     <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
+
+
       <input type="text" name="name" id="name" placeholder="Enter a name to start" minLength="6" maxLength="28" onChange={handleClubName} value={clubName} required />
       <p className='result'>{message}</p>
       <input type="submit" value="Create" />

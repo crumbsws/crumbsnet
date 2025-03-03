@@ -56,7 +56,7 @@ function Reactions() {
           <>
             <div className='post' id='view'>
               <div className='post-credit'>
-                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profiles/' + photo} size='xs' />
+                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
                 <p className='email'>{name}</p>
               </div>
               <input className='slider' value={rating} type="range" style={{

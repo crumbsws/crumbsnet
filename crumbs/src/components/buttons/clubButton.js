@@ -89,7 +89,7 @@ return (
     ) : (
     <div className='post'>
     <p>Is <strong>{club}</strong> the right club for you?</p>
-    <button onClick={handleJoin}>{value}</button>
+    <button  onClick={handleJoin}>{value}</button>
     </div>
     )}
     </>
