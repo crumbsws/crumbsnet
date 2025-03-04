@@ -64,7 +64,8 @@ return (
           </div>
 
           <div className='post '>
-          <p>{description}</p>
+          <h3 className='email'>Description</h3>
+          <p className='text-description'>{description}</p>
           <p><Icons icon='pointSmall' /> {point}</p>
 
           </div>

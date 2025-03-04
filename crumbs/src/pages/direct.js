@@ -6,6 +6,8 @@ import { doSearch } from '../components/utils';
 import { socket } from '../socket';
 import Conversations from '../components/direct/conversations';
 import PageWrapper from '../components/pageWrapper';
+import { setDirectActive } from '../redux/reducers/inbox';
+import { store } from '../redux/store';
 import SocketContainer from '../components/direct/socketContainer';
 import ConversationsBar from '../components/navigation/defaultbar';
 function Direct() {
@@ -16,13 +18,21 @@ function Direct() {
 
   const userData = useSelector((state) => state.user.data);
   const user = userData[0].name;
+  const directActive = useSelector((state) => state.inbox.directActive);
   const {channel} = useParams();
 
   useEffect(() => {
       doSearch(query, type, setData)
     }, [query])
 
-    
+    useEffect(() => {
+
+      if (directActive) {
+        store.dispatch(setDirectActive());
+      }
+  
+  
+    }, [directActive])
 
 
 

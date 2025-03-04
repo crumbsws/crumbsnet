@@ -258,6 +258,10 @@ line-height: 1.5;
   font-size: 10px !important;
   font-weight: 400 !important;
 }
+.text-description {
+  font-size: .75rem !important;
+  line-height: 1.2;
+}
 
 
 .main img, video {
@@ -569,6 +573,7 @@ textarea:focus {
 }
 
 
+
 .gallery {
   width: 40%;
   margin: 5px;
@@ -627,7 +632,6 @@ textarea:focus {
   font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
   line-height: normal;
   overflow-y: hidden;
-  scrollbar-width:0px;
   color: var(--brand);
   width: 180px;
   border: 1px solid var(--froutline);
@@ -646,7 +650,7 @@ textarea:focus {
 }
 .defaultbar:hover {
 overflow-y: scroll;
-scrollbar-width: thin;
+scrollbar-width: none;
 }
 .trend {
   transition: 0.5s;

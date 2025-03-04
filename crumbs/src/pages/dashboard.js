@@ -6,6 +6,7 @@ import ClubEdit from '../components/clubs/clubEdit.js';
 import PageWrapper from '../components/pageWrapper.js';
 import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
+import ProfilePicture from '../components/profilePicture.js';
 
 function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -37,16 +38,19 @@ function Dashboard() {
             <>
             {data.length > 0 ? (
               
-              data.map(({ name, founder, description, card, point }) => (
+              data.map(({ name, founder, description, card, point, photo }) => (
                 <>
-                  <Link to={"/dashboard/" + name} key={name}>
-                    <div className='post club' id={card}>
-                      <div id='club-content'>
-                        <h1 className='decorated'>{name}</h1>
-                        <p>{description}</p>
-                      </div>
+            <Link to={"/dashboard/" + name} key={name}>
+                <div className='post club' id={card}>
+                  <div className='club-content'>
+                    <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
+                    <div>
+                    <h1 className='decorated'>{name}</h1>
+                    <p>{description}</p>
                     </div>
-                  </ Link>
+                  </div>
+                </div>
+              </ Link>
                 </>
               ))
 

@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { setDirectActive } from '../../redux/reducers/inbox';
+
 import { socket } from '../../socket';
-import { store } from '../../redux/store';
 import ConversationsSkeleton from '../skeletons/conversationsSkeleton';
 import { Shorten }  from '../utils.js';
 
@@ -12,20 +11,12 @@ function Conversations(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [lastActiveChannel, setLastActiveChannel] = useState(null);
-  const directActive = useSelector((state) => state.inbox.directActive);
   const userData = useSelector((state) => state.user.data);
   const displayLastMessage = props.displayLastMessage;
   const profileSize = props.profileSize;
   const currentChannel = useSelector((state) => state.inbox.currentChannel);
 
-  useEffect(() => {
 
-    if (directActive) {
-      store.dispatch(setDirectActive());
-    }
-
-
-  }, [directActive])
   useEffect(() => {
     fetchConversations()
   }, [])

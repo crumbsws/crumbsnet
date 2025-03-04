@@ -32,7 +32,8 @@
   }
   .welcome img{
     object-fit:scale-down;
-    width: fit-content;
+    width: auto;
+    height: auto;
   }
   .welcome h1 {
     font-size: 85px;
