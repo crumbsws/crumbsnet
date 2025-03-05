@@ -63,7 +63,7 @@ function ExploreClubs() {
                     <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
                     <div>
                     <h1 className='decorated'>{name}</h1>
-                    <p>{description}</p>
+                    <p>{Shorten(description, 50)}</p>
                     </div>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ function ExploreClubs() {
                     <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
                     <div>
                     <h1 className='decorated'>{name}</h1>
-                    <p>{description}</p>
+                    <p>{Shorten(description, 50)}</p>
                     </div>
                   </div>
                 </div>

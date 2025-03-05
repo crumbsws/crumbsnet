@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Loading from '../loading.js';
+import { Shorten } from '../utils.js';
 import ProfilePicture from '../profilePicture.js';
  function Clubcard(props) {
     const [data, setData] = useState([]);
@@ -42,7 +43,7 @@ import ProfilePicture from '../profilePicture.js';
                     <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
                     <div>
                     <h1 className='decorated'>{name}</h1>
-                    <p>{description}</p>
+                    <p>{Shorten(description, 50)}</p>
                     </div>
                   </div>
                 </div>
