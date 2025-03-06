@@ -121,6 +121,23 @@ catch(err)
 } 
 }
 
+export async function fetchConversations(setData, setLoading) {
+
+  try {
+    const response = await fetch(process.env.REACT_APP_API_URL + '/getConversations.php', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    const json = await response.json();
+    setData(json);
+    setLoading(false); 
+  } catch (error) {
+    console.log(error);
+
+
+  }
+}
+
 export async function getOtherClub(club, setData, setLoading){
   try
   {

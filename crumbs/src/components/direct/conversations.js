@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { socket } from '../../socket';
 import ConversationsSkeleton from '../skeletons/conversationsSkeleton';
-import { Shorten }  from '../utils.js';
+import { Shorten, fetchConversations }  from '../utils.js';
 
 import ProfilePicture from '../profilePicture';
 function Conversations(props) {
@@ -18,7 +18,7 @@ function Conversations(props) {
 
 
   useEffect(() => {
-    fetchConversations()
+    fetchConversations(setData, setLoading);
   }, [])
 
   useEffect(() => {
@@ -98,22 +98,7 @@ function readChannel(channel) {
 
 
 
-  async function fetchConversations() {
-
-    try {
-      const response = await fetch(process.env.REACT_APP_API_URL + '/getConversations.php', {
-        method: 'POST',
-        credentials: 'include',
-      });
-      const json = await response.json();
-      setData(json);
-      setLoading(false); 
-    } catch (error) {
-      console.log(error);
-
-
-    }
-  }
+  
   if (loading) {
 
     return (
