@@ -13,6 +13,7 @@ function Icons(props) {
       <img src={point} className="fontBig" />
     )
 
+
 };
 
 export default Icons;

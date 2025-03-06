@@ -17,9 +17,16 @@ function Clubs() {
   const [loading, setLoading] = useState(false); //edit defbar
 
 useEffect(() => {
+
+
   if (club) {
   setLoading(true);
+
+  
   getOtherClub(club, setData, setLoading);   
+  }
+  else {
+    setData([]);
   }
 
 }, [club]);

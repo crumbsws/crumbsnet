@@ -594,10 +594,7 @@ textarea:focus {
   height: calc(100vh - 80px - 14px ); /*Minus padding and border */
   color: var(--brand);
   width: 80px;
-  border: 1px solid var(--froutline);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom: none;
+  border-right: 1px solid var(--froutline);
   padding: 5px;
   text-align: center;
   overflow: hidden;
