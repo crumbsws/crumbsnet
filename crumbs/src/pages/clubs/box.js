@@ -18,7 +18,7 @@ function Box() {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      setValue(<Loading />);
+      setValue('Publishing...');
 
       const formData = new FormData();
       formData.append('note', note)

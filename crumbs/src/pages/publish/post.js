@@ -1,8 +1,9 @@
 import{ useState } from "react";
 import Loading from '../../components/loading.js';
 import Uploader from "../../components/buttons/uploader.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageWrapper from "../../components/pageWrapper.js"; 
+import BackNav from "../../components/navigation/backnav.js";
 
 function Post() {
     const [postTitle, setPostTitle] = useState('');
@@ -31,7 +32,7 @@ function Post() {
       function handlePostAccess(e){
         setPostAccess(e.target.value);
       }
-
+ 
       function handlePostPhoto(e){
         const file = e.target.files[0];
         if(file) {
@@ -45,9 +46,10 @@ function Post() {
       }
       const handleSubmit = async (e) => {
         e.preventDefault();
-        setValue(<Loading />);
+        setValue('Publishing...');
 
         const formData = new FormData();
+        formData.append('category', 'post')
         formData.append('title', postTitle)
         formData.append('body', postBody)
         formData.append('collect', postCollect)
@@ -65,12 +67,6 @@ function Post() {
           if(data.state === 'success') {
             navigate('/view/' + data.id);
           }
-          else if(data.state === 'failed1'){
-            setValue('Check your network, error code: 1');
-          }
-          else{
-            setValue('Check your network, error code: 2');        
-          }
         }catch(err){
           console.log(err);
           setValue('An error occured');
@@ -79,7 +75,8 @@ function Post() {
       }
 
     return (
-
+      <>
+  <BackNav />
   <div className='publish post'>
   <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
   <input type="text" name="title" id="title" value={postTitle} placeholder="Post title" minLength="3" maxLength="28" onChange={handlePostTitle} required />
@@ -102,6 +99,7 @@ function Post() {
   <input type="submit" value={value}/>
   </form>
   </div>
+  </>
 
   );
 };

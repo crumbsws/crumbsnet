@@ -121,6 +121,28 @@ catch(err)
 } 
 }
 
+export const getPostData = async (id, setData, setLoading) => {
+  setLoading(true)
+  try {
+    const response = await fetch(process.env.REACT_APP_API_URL + '/getPost.php', {
+      credentials: 'include',
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({
+        id: id
+      })
+    });
+    const json = await response.json();
+    setData(json);
+    setLoading(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+}
+
 export async function fetchConversations(setData, setLoading) {
 
   try {

@@ -8,6 +8,7 @@ import Comment from './interactions/comment.js';
 import ExclusiveTag from './tags/exclusiveTag.js';
 import SelfTag from './tags/selfTag.js';
 import Reaction from './interactions/reaction.js';
+import Pin from './interactions/pin.js';
 import { Linkify, isVideoFile, Shorten } from './utils.js';
 
 function Display(props) {
@@ -65,18 +66,18 @@ function Display(props) {
           <>
             <Link to={"/view/" + url} key={url}>
               <div className='post'>
-              <div className='post-credit'>
-              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
-              <p className='email' >{name}</p>
-              </div>
+                <div className='post-credit'>
+                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
+                  <p className='email' >{name}</p>
+                </div>
 
                 {title !== '' ? (
-                    <h2>{title}</h2>
+                  <h2>{title}</h2>
                 ) : (
                   <></>
                 )}
-                
-                
+
+
 
 
                 {access === 'public' ? (
@@ -84,24 +85,24 @@ function Display(props) {
                 ) : (
                   <ExclusiveTag />
                 )}
-                
+
                 {username || name !== user ? (
-                    <></>
+                  <></>
                 ) : (
                   <SelfTag />
                 )}
 
                 {conf ? (
 
-                isVideoFile(conf) ? (
-                  
-                  <video controls>
-                  <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop() } />
-                  </video>
-                  
-                ) : (
-                  <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
-                )
+                  isVideoFile(conf) ? (
+
+                    <video controls>
+                      <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop()} />
+                    </video>
+
+                  ) : (
+                    <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
+                  )
 
 
 
@@ -112,6 +113,7 @@ function Display(props) {
                 <div className='interaction-menu' >
                   <Comment />
                   <Reaction url={url} />
+                  <Pin url={url} />
                 </div>
               </div>
             </ Link>
@@ -121,17 +123,18 @@ function Display(props) {
     }
     else if (type === 'clubs') {
       return (
-        data.map(({ name, founder, description, card, point }) => (
-          <>
-            <Link to={"/clubs/" + name} key={name}>
-              <div className='post club' id={card}>
-                <div id='club-content'>
+        data.map(({ name, founder, description, card, point, photo }) => (
+          <Link to={"/clubs/" + name} key={name}>
+            <div className='post club' id={card}>
+              <div className='club-content'>
+                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
+                <div>
                   <h1 className='decorated'>{name}</h1>
-                  <p>{description}</p>
+                  <p>{Shorten(description, 50)}</p>
                 </div>
               </div>
-            </ Link>
-          </>
+            </div>
+          </ Link>
         ))
       );
     }
@@ -192,9 +195,9 @@ function Display(props) {
             <PopupTrigger
               content={
                 <>
-                <ProfilePicture size='m' src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo}/>
-                <h3>{name}'s Entry</h3>
-                <p>{message}</p>
+                  <ProfilePicture size='m' src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} />
+                  <h3>{name}'s Entry</h3>
+                  <p>{message}</p>
                 </>
               }
               bottom={date}>
@@ -208,7 +211,72 @@ function Display(props) {
       );
     }
 
+    if (type === 'pins') {
+      return (
+        data.map(({ name, title, url, body, date, conf, collect, access, photo, quote }) => (
+          <>
+            <Link to={"/view/" + url} key={url}>
+            
+              
+
+              <div className='post pin-container'>
+                <div className='post-credit'>
+                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
+                  <p className='email' >{name}</p>
+                </div>
+
+                {title !== '' ? (
+                  <h2>{title}</h2>
+                ) : (
+                  <></>
+                )}
+
+
+
+
+                {access === 'public' ? (
+                  <></>
+                ) : (
+                  <ExclusiveTag />
+                )}
+
+                {username || name !== user ? (
+                  <></>
+                ) : (
+                  <SelfTag />
+                )}
+
+                {conf ? (
+
+                  isVideoFile(conf) ? (
+
+                    <video controls>
+                      <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop()} />
+                    </video>
+
+                  ) : (
+                    <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
+                  )
+
+
+
+                ) : (
+                  <></>
+                )}
+                <p>{Shorten(Linkify(body), 120)}</p>
+                <div className='interaction-menu' >
+                  <Comment />
+                  <Reaction url={url} />
+                  <Pin url={url} />
+                </div>
+              </div>
+            </ Link>
+          </>
+        ))
+      );
   }
+
+}
 
 
 

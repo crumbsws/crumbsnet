@@ -42,7 +42,7 @@ function createProfile($conn, $user, $points){
     mysqli_query($conn, $sql);
   }
   function leaveClub($conn, $user, $club){
-    $sql = "SELECT * FROM club_user WHERE club='$club'";
+    $sql = "SELECT * FROM club_user WHERE club='$club' AND user='$user'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) === 1) {
       $sql = "DELETE FROM clubs WHERE name='$club'";

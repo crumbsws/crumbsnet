@@ -49,7 +49,7 @@ body {
 #access {
   border: none !important;
   height: 20px !important;
-  width: 85px !important;
+  width: fit-content !important;
   font-weight: bolder;
   font-family: inherit;
   }
@@ -425,6 +425,7 @@ textarea:focus {
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin-bottom: 5px;
   gap: 5px;
 }
 .interaction {
@@ -568,6 +569,12 @@ textarea:focus {
  min-height: 50px;
 
 }
+
+.pin-container {
+  border: 1px solid var(--froutline);
+  border-radius: 10px;
+}
+
 #club-container {
   height: 150px;
 }

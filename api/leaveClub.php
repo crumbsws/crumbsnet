@@ -25,7 +25,7 @@ if(!empty($data['club']) && !empty($_SESSION['user']))
     $user = $_SESSION['user'];
     leaveClub($conn, $user, $club);
     $state = 'success' ;
-    $message = 'Joined' ;
+    $message = 'Left the club'; ;
     setResponse($state, $club, $message);
     
 }

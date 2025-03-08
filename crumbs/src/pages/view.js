@@ -5,8 +5,9 @@ import Loading from '../components/loading.js';
 import Comments from '../components/comments.js';
 import ProfilePicture from '../components/profilePicture.js';
 import Reaction from '../components/interactions/reaction.js';
-import { Linkify, isVideoFile } from '../components/utils.js';
+import { Linkify, isVideoFile, getPostData } from '../components/utils.js';
 import PageWrapper from '../components/pageWrapper.js';
+import Pin from '../components/interactions/pin.js';
 
 function View() {
   const { id } = useParams();
@@ -15,33 +16,13 @@ function View() {
 
 
   useEffect(() => {
-    getPostData()
+    getPostData(id, setData, setLoading);
   }, [id])
 
 
 
 
-  const getPostData = async () => {
-    setLoading(true)
-    try {
-      const response = await fetch(process.env.REACT_APP_API_URL + '/getPost.php', {
-        credentials: 'include',
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify({
-          id: id
-        })
-      });
-      const json = await response.json();
-      setData(json);
-      setLoading(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    catch (err) {
-      console.log(err);
-    }
 
-  }
   if (loading) {
     return (
     <PageWrapper>
@@ -103,6 +84,7 @@ function View() {
               )}
 
               <div className='interaction-menu' >
+                <Pin url={url} />
                 <Reaction url={url} />
                 <Link to={"/reactions/" + url}><p className='email'>View reactions</p></Link>
               </div>

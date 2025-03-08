@@ -229,7 +229,7 @@ function joinChannel(channel) {
         <Route path="/publish/" element={<PrivateRoute><Publish /></PrivateRoute>} >
           <Route index element={<PrivateRoute><Post /></PrivateRoute>} />
           <Route path='post' element={<PrivateRoute><Post /></PrivateRoute>} />
-          <Route path='pin/:type/:id' element={<PrivateRoute><Pin /></PrivateRoute>} />
+          <Route path='pin/:type/:url' element={<PrivateRoute><Pin /></PrivateRoute>} />
         </Route>
 
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />

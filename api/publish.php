@@ -5,7 +5,7 @@ include('connector.php');
 include('config.php');
 include('library.php');
 function setResponse($state, $url){
-  $response = 
+  $response =  
   [
       'id' => $url,
       'state' => $state
@@ -13,9 +13,11 @@ function setResponse($state, $url){
   echo (json_encode($response));
 
 }
+$user = $_SESSION['user'];
+$date = date("Y-m-d h:i");
 
-
-if (isset($_POST['title']) && !empty($_POST['body']) && isset($_POST['collect']) && !empty($_SESSION['user']) && !empty($_SESSION['user'])) {
+if($_POST['category'] === 'post') {
+if (isset($_POST['title']) && !empty($_POST['body']) && isset($_POST['collect']) && !empty($user)) {
 
 $url = uniqid();
 
@@ -28,7 +30,7 @@ if (isset($_FILES['conf'])) {
         $conf = $newName;
     }
     else {
-        $state= 'failed2';
+        $state= 'error';
         setResponse($state, []);
         exit;
         }
@@ -52,11 +54,11 @@ $access = 'public';
 
 $title = mysqli_real_escape_string($conn, $_POST['title']);
 $collect = mysqli_real_escape_string($conn, $_POST['collect']);
-$user = $_SESSION['user'];
+
 
 
 $body = mysqli_real_escape_string($conn, $_POST['body']);
-$date = date("Y-m-d h:i");
+
 if(!empty($_POST['parent'])){
   $parent = mysqli_real_escape_string($conn, $_POST['parent']);
   $sql = "SELECT name, body, title FROM paths WHERE url='$parent'";
@@ -94,7 +96,50 @@ else {
 
 }
 else {
-    $state= 'failed2';
+    $state= 'error';
     setResponse($state, []);
     }
+
+} else if($_POST['category'] === 'pin') {
+    if (!empty($_POST['url']) && !empty($_POST['club']) && !empty($_POST['category']) && !empty($_SESSION['user'])) {
+        if($_POST['type'] === 'post'){
+            $club = mysqli_real_escape_string($conn, $_POST['club']);
+            $type = mysqli_real_escape_string($conn, $_POST['type']);
+            $url = mysqli_real_escape_string($conn, $_POST['url']);
+            $sql = "SELECT * FROM club_user WHERE club='$club' AND user='$user'";
+            $result = mysqli_query($conn, $sql);
+
+            if(isset($_POST['quote'])){
+                $quote = mysqli_real_escape_string($conn, $_POST['quote']);
+            }
+            else {
+                $quote = null;
+            }
+
+            if(mysqli_num_rows($result) === 1) {
+                $sql = "INSERT INTO pins (name, quote, type, url, club, date) VALUES ('$user', '$quote', '$type', '$url', '$club', '$date')";
+                if(mysqli_query($conn, $sql)){
+                    $state= 'success';
+                    
+                    setResponse($state, $url);
+                    mysqli_close($conn);
+                }
+                else {
+                    $state= 'error';
+                    setResponse($state, []);
+                } 
+            }
+            else {
+                $state= 'error';
+                setResponse($state, []);
+            }
+        }
+        else if($_POST['category'] === 'note'){
+            error_log('Not released yet');
+            exit;
+        }
+}} else {
+    $state= 'error';
+    setResponse($state, []);
+}
 ?>

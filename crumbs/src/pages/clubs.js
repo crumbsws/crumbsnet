@@ -63,14 +63,14 @@ return (
     {data.map(({ name, founder, description, point, photo }, index) => (
       <Fragment key={index}>
         <DefaultBar>
-          <div className='post '>
+          <div className='post' id='tip'>
           <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='l' />
           <h2>{Shorten(name, 12)}</h2>
           <p className='email'>Founded by {founder}</p>
 
           </div>
 
-          <div className='post '>
+          <div className='post' id='tip'>
           <h3 className='email'>Description</h3>
           <p className='text-description'>{description}</p>
           <p><Icons icon='pointSmall' /> {point}</p>
