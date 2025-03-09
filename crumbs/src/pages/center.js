@@ -29,7 +29,7 @@ function Center() {
                     </div> 
                   )
                     }
-                <Display type='posts' />
+                <Display type='posts' parent='public' />
               </PageWrapper>
             )
         

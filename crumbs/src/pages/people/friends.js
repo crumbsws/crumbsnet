@@ -38,9 +38,9 @@ function Friends() {
     </div>
   )}
 
-      <div className='post container' >
+      
         <Display type='friends' user={people} />
-      </div>
+      
 
   </>
   );

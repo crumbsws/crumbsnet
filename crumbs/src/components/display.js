@@ -8,8 +8,12 @@ import Comment from './interactions/comment.js';
 import ExclusiveTag from './tags/exclusiveTag.js';
 import SelfTag from './tags/selfTag.js';
 import Reaction from './interactions/reaction.js';
+import PinTemplate from './templates/pinTemplate.js';
 import Pin from './interactions/pin.js';
 import { Linkify, isVideoFile, Shorten } from './utils.js';
+import PostTemplate from './templates/postTemplate.js';
+import ClubTemplate from './templates/clubTemplate.js';
+import PeopleTemplate from './templates/peopleTemplate.js';
 
 function Display(props) {
 
@@ -62,95 +66,17 @@ function Display(props) {
     if (type === 'posts') {
       return (
 
-        data.map(({ name, title, url, body, date, conf, collect, access, photo }) => (
-          <>
-            <Link to={"/view/" + url} key={url}>
-              <div className='post'>
-                <div className='post-credit'>
-                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
-                  <p className='email' >{name}</p>
-                </div>
-
-                {title !== '' ? (
-                  <h2>{title}</h2>
-                ) : (
-                  <></>
-                )}
-
-
-
-
-                {access === 'public' ? (
-                  <></>
-                ) : (
-                  <ExclusiveTag />
-                )}
-
-                {username || name !== user ? (
-                  <></>
-                ) : (
-                  <SelfTag />
-                )}
-
-                {conf ? (
-
-                  isVideoFile(conf) ? (
-
-                    <video controls>
-                      <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop()} />
-                    </video>
-
-                  ) : (
-                    <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
-                  )
-
-
-
-                ) : (
-                  <></>
-                )}
-                <p>{Shorten(Linkify(body), 120)}</p>
-                <div className='interaction-menu' >
-                  <Comment />
-                  <Reaction url={url} />
-                  <Pin url={url} />
-                </div>
-              </div>
-            </ Link>
-          </>
-        ))
+        <PostTemplate data={data} user={user} />
       );
     }
     else if (type === 'clubs') {
       return (
-        data.map(({ name, founder, description, card, point, photo }) => (
-          <Link to={"/clubs/" + name} key={name}>
-            <div className='post club' id={card}>
-              <div className='club-content'>
-                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/club-images/' + photo} size='m' />
-                <div>
-                  <h1 className='decorated'>{name}</h1>
-                  <p>{Shorten(description, 50)}</p>
-                </div>
-              </div>
-            </div>
-          </ Link>
-        ))
+        <ClubTemplate data={data} />
       );
     }
     else if (type === 'friends') {
       return (
-        data.map(({ name, point, description, club, photo }) => (
-          <>
-
-            <div className='contained' key={name}>
-              <Link to={"/people/" + name}>
-                <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='m' />
-                <p>{name}</p>
-              </ Link>
-            </div>
-          </>
-        ))
+        <PeopleTemplate data={data} />
       );
     }
     else if (type === 'gossip') {
@@ -213,70 +139,19 @@ function Display(props) {
 
     if (type === 'pins') {
       return (
-        data.map(({ name, title, url, body, date, conf, collect, access, photo, quote }) => (
-          <>
-            <Link to={"/view/" + url} key={url}>
-            
-              
-
-              <div className='post pin-container'>
-                <div className='post-credit'>
-                  <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
-                  <p className='email' >{name}</p>
-                </div>
-
-                {title !== '' ? (
-                  <h2>{title}</h2>
-                ) : (
-                  <></>
-                )}
-
-
-
-
-                {access === 'public' ? (
-                  <></>
-                ) : (
-                  <ExclusiveTag />
-                )}
-
-                {username || name !== user ? (
-                  <></>
-                ) : (
-                  <SelfTag />
-                )}
-
-                {conf ? (
-
-                  isVideoFile(conf) ? (
-
-                    <video controls>
-                      <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop()} />
-                    </video>
-
-                  ) : (
-                    <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
-                  )
-
-
-
-                ) : (
-                  <></>
-                )}
-                <p>{Shorten(Linkify(body), 120)}</p>
-                <div className='interaction-menu' >
-                  <Comment />
-                  <Reaction url={url} />
-                  <Pin url={url} />
-                </div>
-              </div>
-            </ Link>
-          </>
-        ))
+        <PinTemplate data={data} user={user} />
       );
   }
 
 }
+
+
+
+
+
+ 
+
+
 
 
 

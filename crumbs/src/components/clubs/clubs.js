@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import ClubTemplate from '../templates/clubTemplate';
 import Loading from '../loading';
  function Clubs(props) {
     const [data, setData] = useState([]);
@@ -35,16 +36,8 @@ import Loading from '../loading';
     else
     {
   return (
+    <ClubTemplate data={data} />
     
-    data.map(({ name, founder, description, card, point }) =>(
-      <>
-      <Link to={"/clubs/" + name} key={name}>
-      <div className='post'>
-        <h1>{name}</h1>
-      </div>
-      </ Link>
-      </>
-    ))
 );
 } 
 }

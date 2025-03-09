@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getPostData, Shorten, Linkify, isVideoFile } from "./../../components/utils.js";
 import BackNav from "../../components/navigation/backnav.js";
 import Loading from "../../components/loading.js";
+import PostTemplate from "../../components/templates/postTemplate.js";
 
 function Pin() {
 
@@ -12,23 +13,27 @@ function Pin() {
 
   const [value, setValue] = useState('Submit');
   const [quote, setQuote] = useState('');
-  const [club, setClub] = useState(clubs[0].name);
+  const [club, setClub] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-
- 
-  const {url, type} = useParams();
+  const user = useSelector((state) => state.user.data[0].name);
+  const { url, type } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!url ) return;
+    if (!url) return;
 
     if (type === 'post') {
-    getPostData(url, setData, setLoading);
+      getPostData(url, setData, setLoading);
     }
   }, [url, type]);
+
+  useEffect(() => {
+    if (clubs && Object.values(clubs).length > 0) {
+      setClub(Object.values(clubs)[0].name);
+    }
+  }, [clubs]);
 
   const handleQuote = (e) => {
     setQuote(e.target.value);
@@ -48,108 +53,72 @@ function Pin() {
     formData.append('quote', quote)
     formData.append('url', url)
     formData.append('club', club)
-    
-    
-      try{
-          const response = await fetch(process.env.REACT_APP_API_URL + '/publish.php', {
-            credentials: 'include',
-            method: 'POST',
-            body: formData
-          })
-          const data = await response.json();
-          
 
-          if(data.state === 'success') {
-            navigate('/view/' + data.id);
-          }
-        }catch(err){
-          console.log(err);
-          setValue('An error occured');
 
-        } }
+    try {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/publish.php', {
+        credentials: 'include',
+        method: 'POST',
+        body: formData
+      })
+      const data = await response.json();
 
-  
 
-    
-    return ( 
+      if (data.state === 'success') {
+        navigate('/view/' + data.id);
+      }
+    } catch (err) {
+      console.log(err);
+      setValue('An error occured');
 
-  <>
-  <BackNav />
-<div className='publish post'>
-  <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-  <input type="text" name="quote" id="quote" value={quote} placeholder="Add context" minLength="3" maxLength="28" onChange={handleQuote} required />
-  <div>
+    }
+  }
 
-  <select onChange={handleClub} id='access'>
-  {Object.values(clubs).map(({ name, founder, description, card, photo }) => (
-            <>
-              <option value={name}>{name}</option>
-            </>
-          ))}
-            </select>
+
+  if (Object.values(clubs).length === 0) {
+    return navigate('/clubs');
+  }
+  else {
+
+
+    return (
+
+      <>
+        <BackNav />
+        <div className='publish post'>
+          <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
+            <input type="text" name="quote" id="quote" value={quote} placeholder="Add context" minLength="3" maxLength="28" onChange={handleQuote} required />
+            <div>
+
+              <select onChange={handleClub} id='access'>
+                {clubs && Object.values(clubs).map(({ name  }) => (
+                  <>
+                    <option value={name}>{name}</option>
+                  </>
+                ))}
+              </select>
             </div>
 
 
-  <div>
-  </div>
+            <div>
+            </div>
 
 
-  {data.length > 0 ? ( 
-    data.map(({ name, title, url, body, date, conf, collect, access, photo }) => (
-          <>
-            <Link to={"/view/" + url} key={url}>
-              <div className='post'>
-              
-                {title !== '' ? (
-                    <h2>{title}</h2>
-                ) : (
-                  <></>
-                )}
-                
-                
+            {data.length > 0 ? (
+              <PostTemplate data={data} user={user} />
+            ) : (<Loading />)}
 
-
-                
-                
-          
-
-                {conf ? (
-
-                isVideoFile(conf) ? (
-                  
-                  <video controls>
-                  <source src={process.env.REACT_APP_CDN_URL + '/images/' + conf} type={'video/' + conf.split('.').pop() } />
-                  </video>
-                  
-                ) : (
-                  <img src={process.env.REACT_APP_CDN_URL + '/images/' + conf} alt='' />
-                )
+            <input type="submit" value={value} />
+          </form>
 
 
 
-                ) : (
-                  <></>
-                )}
-                <p>{Shorten(Linkify(body), 120)}</p>
 
-              </div>
-            </ Link>
-          </>
-        ))
+        </div>
 
-  ) : (<Loading />) }
-
-  <input type="submit" value={value}/>
-  </form>
-
-  
-      
-  
-  </div>
-
-     </>   
-  );
-
+      </>
+    );
+  }
 }
 
 export default Pin;

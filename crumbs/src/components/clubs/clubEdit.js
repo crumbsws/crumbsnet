@@ -122,6 +122,7 @@ return (
 <option value="cardinal">Cardinal</option>
 <option value="night">Night</option>
 <option value="pacific">Pacific</option>
+<option value="green">Green</option>
 </select>
 
 <p className='email'>The theme color of the club. Displayed in the club browser.</p>

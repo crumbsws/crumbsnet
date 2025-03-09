@@ -58,7 +58,7 @@ else if($data['type'] === 'pins')
 {
     if(isset($data['club'])) {
         $club = $data['club'];
-        $sql = "SELECT paths.conf, paths.body, paths.title, paths.access, paths.name, pins.quote FROM pins INNER JOIN paths ON paths.url = pins.url WHERE pins.club='$club' ORDER BY pins.date DESC";
+        $sql = "SELECT paths.conf, paths.body, paths.title, paths.access, paths.name, pins.quote, paths.url, profile.photo as pinnerPhoto, profile.name as pinnerName FROM pins INNER JOIN paths ON paths.url = pins.url INNER JOIN profile ON profile.name = pins.name WHERE pins.club='$club' ORDER BY pins.date DESC";
     }
 }
 

@@ -3,11 +3,16 @@ import { useEffect, useState } from 'react';
 import { doSearch } from '../components/utils.js';
 import PageWrapper from '../components/pageWrapper.js';
 import Display from '../components/display.js';
+import PostTemplate from '../components/templates/postTemplate.js';
+import { useSelector } from 'react-redux';
+import PeopleTemplate from '../components/templates/peopleTemplate.js';
 function Discover() {
   const { value } = useParams();
   const [type, setType] = useState('post');
   const [data, setData] = useState([]);
   const [query, setQuery] = useState(value || "");
+const user = useSelector((state) => state.user.data[0].name);
+
   useEffect(() => {
       doSearch(query, type, setData)
     }, [query, type])
@@ -52,34 +57,9 @@ function Discover() {
         ) : (
           <>
             {type === 'people' ? (
-              <>
-                {data.map(({ name, home, relation }) => (
-                  <Link to={`/people/${name}`} key={name}>
-                    <div className='post'>
-                      <h2>{name}</h2> 
-                      <p className='email'>{home} ︱ {relation}</p>
-                    </div>
-                  </Link>
-                ))}
-              </>
+              <PeopleTemplate data={data} />
             ) : ( 
-              <>
-                {data.map(({ name, title, url, body, date, conf, collect, parent }) => (
-                  <Link to={`/view/${url}`} key={url}>
-                    <div className='post'>
-                      {title ? (
-                        <h2>{title}</h2> 
-                      ) : (
-                        <p>Reply to <strong>{parent}</strong></p>
-                      )}
-                      {conf && (
-                        <img src={process.env.REACT_APP_CDN_URL + `/images/${conf}`} alt='' />
-                      )}
-                      <p>{body}</p>
-                    </div>
-                  </Link>
-                ))}
-              </>
+             <PostTemplate data={data} user={user} />
             )}
           </>
         )}

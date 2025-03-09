@@ -42,6 +42,7 @@ function Comments(props) {
       setMessage(<Loading />);
 
       const formData = new FormData();
+      formData.append('category', 'post')
       formData.append('title', '')
       formData.append('body', postBody)
       formData.append('collect', props.collect)
@@ -78,7 +79,7 @@ function Comments(props) {
     <>
     <div className='publish post'>
     <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-    <input type="text" name="comment" onChange={handlePostBody} value={postBody} placeholder='Leave a sprinkle...' required/>
+    <input type="text" name="comment" onChange={handlePostBody} value={postBody} placeholder='Post your reply' required/>
 
     <div>
   {Uploader(displayPhoto, handlePostPhoto, removePostPhoto)}

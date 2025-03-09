@@ -35,6 +35,9 @@ if(!empty($_POST['card']))
     else if($_POST['card'] === 'pacific'){
         $card = 'pacific';
     }
+    else if($_POST['card'] === 'green'){
+        $card = 'green';
+    }
     else {
         $card = 'crumbs';
     }

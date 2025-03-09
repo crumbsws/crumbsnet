@@ -4,6 +4,9 @@
 :root {
   --bgmain: #09090b;
   --brand: #fffcf4;
+  --replysentbg: rgb(244, 244, 240);
+  --replyreceivedbg: rgb(34, 33, 33);
+
   --bgthird: #18181b;
   --froutline: #18181b;
   --email: #71717a;
@@ -14,6 +17,23 @@
   scrollbar-width: thin;
   scrollbar-color: var(--froutline) var(--bgmain);
 }
+@media (prefers-color-scheme: light) {
+  :root {
+    --bgmain: #fffcf4;
+    --brand: #09090b;
+    --replysentbg: rgb(34, 33, 33);
+    --replyreceivedbg: rgb(244, 244, 240);
+    --bgthird: #e9e9e2;
+    --froutline: #e9e9e2;
+    --email: #2f2f33;
+    --cta: rgb(0, 149, 246);
+    --dz: rgb(250, 7, 80);
+    --editorplaceholder: rgb(82, 82, 82);
+    scrollbar-color: var(--froutline) var(--bgmain);
+  }
+}
+
+
 body {
   background: var(--bgmain);
   cursor: url("images/cursor.png"), auto;
@@ -36,6 +56,9 @@ body {
 
 .mobile {
   display: none;
+}
+.computer {
+  display: block;
 }
 
 #new {
@@ -310,6 +333,7 @@ input[type="submit"]:hover, button:hover, input[type="submit"]:focus, button:foc
   transition: 0.2s;
 }
 
+
 label {
   margin: 5px;
 }
@@ -391,6 +415,7 @@ textarea:focus {
   border: 2px solid var(--brand);
   
 }
+
 /*----------------------------Beta button------------------------*/
 
 
@@ -572,7 +597,7 @@ textarea:focus {
 
 .pin-container {
   border: 1px solid var(--froutline);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 #club-container {
@@ -589,8 +614,9 @@ textarea:focus {
  .gallery:hover {
   filter: opacity(0.8);
  }
- .gallery img{
+ .gallery img, video{
   width: 100%;
+  height: 550px;
  }
 /*Media */
 .taskbar {
@@ -664,7 +690,7 @@ scrollbar-width: none;
   padding: 5px;
 }
 .trend:hover {
-  background: #0c0c0f;
+  opacity: 0.9.;
   line-height: 0.2rem;
   transition: 0.5s;
 }
@@ -776,6 +802,9 @@ display: block;
   }
 .mobile {
   display: block;
+}
+.computer {
+  display: none;
 }
 
   .bottomnav {

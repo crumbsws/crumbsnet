@@ -64,7 +64,7 @@
 
 .remove, .install{
   background: var(--froutline);
-  color: gray;
+  color: var(--email);
   border-radius: 9999px;
   height: 21px;
   width: 21px;
@@ -114,11 +114,11 @@
   }
 
   #sent{
-    background: rgb(244, 244, 240);
+    background: var(--replysentbg);
     border-left: 4px solid var(--froutline);
   }
   #received{
-    background: rgb(34, 33, 33);
+    background: var(--replyreceivedbg);
     border-left: 4px solid var(--brand);
   }
 
