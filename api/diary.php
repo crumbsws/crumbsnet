@@ -27,14 +27,14 @@ if(!empty($_POST['message']))
             addPoint($conn, $user, $amount);
         }
         else {
-            $state= 'fail';
-            $message= 'Failed';
+            $state= 'error';
+            $message= 'errored';
             setResponse($state, $message);
         }  
     }
     else {
-        $state= 'fail';
-        $message= 'Failed';
+        $state= 'error';
+        $message= 'errored';
         setResponse($state, $message);
     }  
 

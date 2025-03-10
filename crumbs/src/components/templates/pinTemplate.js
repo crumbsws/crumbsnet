@@ -16,7 +16,7 @@ const data = props.data;
     return data.map(({ name, title, url, body, date, conf, collect, access, photo, quote, pinnerPhoto, pinnerName }) => (
       <div className='post' id='tip' key={url}>
             <div className='post-credit'>
-              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + pinnerPhoto} size='xs' />
+              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + pinnerPhoto	} size='xs' />
               <p className='email'>{pinnerName}</p>
             </div>
 
@@ -25,10 +25,6 @@ const data = props.data;
 
 
           <div className='post pin-container'>
-            <div className='post-credit'>
-              <ProfilePicture src={process.env.REACT_APP_CDN_URL + '/profile-images/' + photo} size='xs' />
-              <p className='email'>{name}</p>
-            </div>
 
             {title !== '' ? (
               <h2>{title}</h2>
