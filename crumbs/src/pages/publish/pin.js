@@ -87,7 +87,7 @@ function Pin() {
         <BackNav />
         <div className='publish post'>
           <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-            <input type="text" name="quote" id="quote" value={quote} placeholder="Add context" minLength="3" maxLength="28" onChange={handleQuote} required />
+            <input type="text" name="quote" id="quote" value={quote} placeholder="Add context" minLength="3" maxLength="28" onChange={handleQuote} />
             <div>
 
               <select onChange={handleClub} id='access'>

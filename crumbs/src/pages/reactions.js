@@ -42,6 +42,7 @@ function Reactions() {
   if (loading) {
     return (
       <PageWrapper>
+        <BackNav ><p>Reactions</p></BackNav>
       <Loading />
       </PageWrapper>
 
